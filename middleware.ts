@@ -18,6 +18,7 @@ export function middleware(req: NextRequest) {
       // Rewrite live.d4f.me/slug -> live.d4f.me/preview/slug
       const previewUrl = req.nextUrl.clone();
       previewUrl.pathname = `/preview${pathname}`;
+      previewUrl.protocol = 'http:';
       return NextResponse.rewrite(previewUrl);
     }
   }

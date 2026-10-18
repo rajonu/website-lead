@@ -20,8 +20,10 @@ export function generatePersonalOutreachDraft(lead: WebsiteLead): string {
 ফোনে ওপেন করে দেখুন, সরাসরি WhatsApp বুকিং বাটনও যুক্ত করা আছে। ভালো লাগলে এটা আপনাদের নিজস্ব ডোমেইনে খুব সহজে লাইভ করে দেওয়া যাবে।
 
 ধন্যবাদ,
-রাজ | Web Developer
-WhatsApp: +8801674410695`;
+রাজ | Web Developer & Digital Solutions
+WhatsApp: +8801674410695
+Email: raj@d4f.me
+Website: https://d4f.me`;
   }
 
   if (market === 'UK') {
@@ -38,7 +40,10 @@ Have a quick look on your phone when you have a minute. If you fancy making it y
 
 Best regards,
 Raj
-Web Developer | raj@d4f.me`;
+Web Developer & Digital Solutions
+WhatsApp: +8801674410695
+Email: raj@d4f.me
+Portfolio: https://d4f.me`;
   }
 
   // Default: US
@@ -57,5 +62,8 @@ Would you be open to a quick email exchange if you'd like to make this your offi
 
 Best regards,
 Raj
-Web Developer | raj@d4f.me`;
+Web Developer & Digital Solutions
+WhatsApp: +8801674410695
+Email: raj@d4f.me
+Portfolio: https://d4f.me`;
 }
