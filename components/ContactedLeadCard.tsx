@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
 import { WebsiteLead } from '@/lib/types/lead';
 import { 
   Send, 
@@ -14,14 +16,19 @@ import {
   Sparkles, 
   ChevronDown, 
   ChevronUp,
-  Trash2
+  Trash2,
+  RotateCcw
 } from 'lucide-react';
 
 export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
+  const router = useRouter();
   const [stage, setStage] = useState(lead.lifecycle);
   const [updating, setUpdating] = useState(false);
+  const [undoing, setUndoing] = useState(false);
+  const [isMovedToQueue, setIsMovedToQueue] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
+
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [showFullHistory, setShowFullHistory] = useState(false);
 
@@ -65,6 +72,36 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
     }
   };
 
+  const handleUndoToQueue = async () => {
+    setUndoing(true);
+    try {
+      const res = await fetch(`/api/leads/${lead.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          lifecycle: 'review',
+          humanReview: {
+            decision: 'pending',
+          },
+          sales: {
+            ...lead.sales,
+            stage: 'none',
+          },
+          outreach: {
+            ...lead.outreach,
+            events: [],
+          },
+        }),
+      });
+      if (res.ok) {
+        setIsMovedToQueue(true);
+        router.refresh();
+      }
+    } finally {
+      setUndoing(false);
+    }
+  };
+
   const handleDelete = async () => {
     setIsDeleting(true);
     try {
@@ -78,6 +115,20 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
     }
   };
 
+  if (isMovedToQueue) {
+    return (
+      <div className="bg-sky-50 border border-sky-200 rounded-xl p-4 text-xs text-sky-850 flex items-center justify-between">
+        <div className="flex items-center gap-2 text-sky-900">
+          <RotateCcw className="w-4 h-4 text-sky-600" />
+          <span>&ldquo;{lead.name}&rdquo; has been moved back to the Pending Review Queue!</span>
+        </div>
+        <a href="/recommendations?tab=queue" className="text-xs font-bold text-sky-700 hover:underline">
+          Go to Pending Queue →
+        </a>
+      </div>
+    );
+  }
+
   if (isDeleted) {
     return (
       <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs text-slate-500 italic flex items-center justify-between">
@@ -85,6 +136,7 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
       </div>
     );
   }
+
 
   return (
     <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs hover:shadow-md transition-shadow space-y-4">
@@ -185,7 +237,18 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
           </a>
 
           <button
+            onClick={handleUndoToQueue}
+            disabled={undoing}
+            className="px-2.5 py-1.5 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 rounded-lg font-semibold transition-colors flex items-center gap-1.5 cursor-pointer"
+            title="Undo contacted status and return this lead to the Pending Review Queue"
+          >
+            <RotateCcw className={`w-3.5 h-3.5 ${undoing ? 'animate-spin' : ''}`} />
+            <span>{undoing ? 'Moving...' : 'Undo to Queue'}</span>
+          </button>
+
+          <button
             onClick={() => setShowDeleteConfirm(true)}
+
             disabled={isDeleting}
             className="px-2.5 py-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg font-medium transition-colors flex items-center gap-1 cursor-pointer"
             title="Permanently delete this demo site & lead"
