@@ -1,0 +1,80 @@
+{
+  "id": "lead_ny_barber_001",
+  "slug": "crown-heights-barbershop",
+  "name": "Crown Heights Master Barbershop",
+  "category": "Barber Shop",
+  "rating": 4.9,
+  "reviewCount": 184,
+  "address": {
+    "full": "742 Franklin Ave, Brooklyn, NY 11238, United States",
+    "city": "Brooklyn",
+    "state": "NY",
+    "country": "United States",
+    "postalCode": "11238"
+  },
+  "contact": {
+    "phone": "+1-718-555-0199",
+    "whatsapp": "+17185550199",
+    "email": "crownheightsbarbers@example.com"
+  },
+  "googlePlaceId": "ChIJb_example_place_id",
+  "photos": [
+    "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=800&q=80"
+  ],
+  "topReviews": [
+    {
+      "author": "Marcus Vance",
+      "rating": 5,
+      "relativeTime": "2 weeks ago",
+      "text": "Best skin fade in Brooklyn! Super clean vibe, friendly barbers, and always on schedule. Won't go anywhere else."
+    },
+    {
+      "author": "David Chen",
+      "rating": 5,
+      "relativeTime": "a month ago",
+      "text": "Professional hot towel shave and beard trim. Felt like a king walking out. 10/10 recommend."
+    },
+    {
+      "author": "Jamal Williams",
+      "rating": 5,
+      "relativeTime": "2 months ago",
+      "text": "Great music, great energy, and masters of their craft. Solid 5 stars all the way."
+    }
+  ],
+  "aiEnriched": {
+    "tagline": "Precision Cuts & Classic Shaves in Brooklyn",
+    "heroDescription": "Experience Brooklyn's top-rated barbering experience. Rated 4.9 stars by 180+ loyal locals. Walk in today or call to book your appointment.",
+    "aboutText": "Crown Heights Master Barbershop blends timeless grooming craftsmanship with modern styling. Whether you need a crisp fade, scissor cut, or traditional hot lather shave, our master barbers ensure you leave looking your absolute best.",
+    "services": [
+      {
+        "title": "Signature Haircut & Fade",
+        "description": "Customized haircuts tailored to your head shape, hair texture, and personal style.",
+        "icon": "scissors"
+      },
+      {
+        "title": "Beard Sculpting & Trim",
+        "description": "Precision line-ups, trimming, conditioning oil treatment, and razor finish.",
+        "icon": "razor"
+      },
+      {
+        "title": "Hot Towel Straight Razor Shave",
+        "description": "Traditional hot towel treatment with pre-shave oils and smooth straight razor finish.",
+        "icon": "flame"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Do I need an appointment or do you accept walk-ins?",
+        "answer": "We welcome walk-ins every day! However, on Friday and Saturday, booking ahead by phone ensures minimal wait time."
+      },
+      {
+        "question": "What payment methods do you accept?",
+        "answer": "We accept Cash, Apple Pay, Google Pay, and all major Credit/Debit cards."
+      }
+    ]
+  },
+  "status": "preview_generated",
+  "customDomain": null
+}

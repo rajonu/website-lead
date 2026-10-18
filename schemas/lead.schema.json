@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BusinessLead",
+  "type": "object",
+  "required": [
+    "id",
+    "slug",
+    "name",
+    "category",
+    "rating",
+    "reviewCount",
+    "contact",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the lead"
+    },
+    "slug": {
+      "type": "string",
+      "description": "URL-friendly slug for dynamic preview (e.g. 'tonys-pizzeria-brooklyn')"
+    },
+    "name": {
+      "type": "string",
+      "description": "Official business name from Google Business Profile"
+    },
+    "category": {
+      "type": "string",
+      "description": "Primary category (e.g. 'Barber Shop', 'Dental Clinic', 'Plumbing Service')"
+    },
+    "rating": {
+      "type": "number",
+      "minimum": 1.0,
+      "maximum": 5.0
+    },
+    "reviewCount": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "address": {
+      "type": "object",
+      "properties": {
+        "full": { "type": "string" },
+        "city": { "type": "string" },
+        "state": { "type": "string" },
+        "country": { "type": "string" },
+        "postalCode": { "type": "string" }
+      }
+    },
+    "contact": {
+      "type": "object",
+      "required": ["phone"],
+      "properties": {
+        "phone": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "email": { "type": "string" }
+      }
+    },
+    "googlePlaceId": {
+      "type": "string"
+    },
+    "photos": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "topReviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "author": { "type": "string" },
+          "rating": { "type": "number" },
+          "relativeTime": { "type": "string" },
+          "text": { "type": "string" }
+        }
+      }
+    },
+    "aiEnriched": {
+      "type": "object",
+      "properties": {
+        "tagline": { "type": "string" },
+        "heroDescription": { "type": "string" },
+        "aboutText": { "type": "string" },
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "title": { "type": "string" },
+              "description": { "type": "string" },
+              "icon": { "type": "string" }
+            }
+          }
+        },
+        "faqs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "question": { "type": "string" },
+              "answer": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["scraped", "enriched", "preview_generated", "contacted", "replied", "converted", "rejected"],
+      "default": "scraped"
+    },
+    "customDomain": {
+      "type": "string",
+      "description": "Mapped custom domain once client converts (e.g. 'tonyspizzeriany.com')"
+    }
+  }
+}
