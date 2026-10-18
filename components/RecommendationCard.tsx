@@ -1,8 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { WebsiteLead, OutreachEvent } from '@/lib/types/lead';
-import { getEmailSubject } from '@/lib/ai/outreach';
+import { 
+  getEmailSubject, 
+  splitBodyAndSignature, 
+  formatEmailPreviewHtml 
+} from '@/lib/ai/outreach';
 import { 
   Star, 
   MapPin, 
@@ -10,6 +15,7 @@ import {
   Mail, 
   ExternalLink, 
   CheckCircle, 
+  CheckCircle2,
   XCircle, 
   Clock, 
   Send, 
@@ -18,11 +24,18 @@ import {
   MessageSquare,
   AlertCircle,
   ShieldCheck,
-  History
+  History,
+  Eye,
+  FileText,
+  Sparkles
 } from 'lucide-react';
 
 export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
-  const [draft, setDraft] = useState(lead.outreach?.draft || '');
+  const isBd = lead.experiment?.market === 'BD' || lead.location.country.includes('Bangladesh');
+  const initialSplit = splitBodyAndSignature(lead.outreach?.draft || '', isBd);
+  
+  const [messageBody, setMessageBody] = useState(initialSplit.body);
+  const [signature] = useState(initialSplit.signature);
   const [isEditingDraft, setIsEditingDraft] = useState(false);
   const [status, setStatus] = useState<string>(
     lead.lifecycle === 'contacted' ? 'contacted' : lead.humanReview?.decision || 'pending'
@@ -40,9 +53,12 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
   const [isDryRun, setIsDryRun] = useState(true); // Default to true for safe local testing
   const [sendingEmail, setSendingEmail] = useState(false);
   const [emailError, setEmailError] = useState<string | null>(null);
-  const [emailSuccessNote, setEmailSuccessNote] = useState<string | null>(null);
+  const [modalTab, setModalTab] = useState<'compose' | 'preview'>('compose');
+  const [sentSuccessData, setSentSuccessData] = useState<{ messageId: string; dryRun: boolean } | null>(null);
   const [events, setEvents] = useState<OutreachEvent[]>(lead.outreach?.events || []);
   const [showEvents, setShowEvents] = useState(false);
+
+  const fullDraft = `${messageBody.trim()}\n\n${signature}`;
 
   const handleApprove = async () => {
     setLoading(true);
@@ -58,7 +74,7 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
           },
           outreach: {
             ...lead.outreach,
-            draft,
+            draft: fullDraft,
             events: [
               ...(lead.outreach?.events || []),
               {
@@ -106,7 +122,6 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
   const handleSendBrevoEmail = async () => {
     setSendingEmail(true);
     setEmailError(null);
-    setEmailSuccessNote(null);
 
     try {
       const res = await fetch(`/api/leads/${lead.id}/send-email`, {
@@ -115,7 +130,7 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
         body: JSON.stringify({
           to: emailTo,
           subject: emailSubject,
-          body: draft,
+          body: fullDraft,
           confirmed: true,
           dryRun: isDryRun,
         }),
@@ -129,19 +144,14 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
       }
 
       setStatus('contacted');
-      const note = data.dryRun
-        ? `Simulation successful [DRY RUN: ${data.messageId}]`
-        : `Email delivered via Brevo [${data.messageId}]`;
-      setEmailSuccessNote(note);
+      setSentSuccessData({
+        messageId: data.messageId,
+        dryRun: Boolean(data.dryRun),
+      });
 
       if (data.data?.outreach?.events) {
         setEvents(data.data.outreach.events);
       }
-
-      setTimeout(() => {
-        setShowEmailModal(false);
-        setEmailSuccessNote(null);
-      }, 1800);
     } catch {
       setEmailError('Network communication error with server.');
     } finally {
@@ -150,7 +160,7 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
   };
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(draft);
+    navigator.clipboard.writeText(fullDraft);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -280,33 +290,49 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsEditingDraft(!isEditingDraft)}
-              className="text-xs text-slate-600 hover:text-slate-900 font-medium flex items-center gap-1"
+              className="text-xs text-slate-600 hover:text-slate-900 font-medium flex items-center gap-1 cursor-pointer"
             >
               <Edit3 className="w-3 h-3" />
-              <span>{isEditingDraft ? 'Done' : 'Edit Draft'}</span>
+              <span>{isEditingDraft ? 'Done Editing' : 'Edit Pitch'}</span>
             </button>
             <button
               onClick={copyToClipboard}
-              className="text-xs text-sky-600 hover:text-sky-700 font-medium flex items-center gap-1"
+              className="text-xs text-sky-600 hover:text-sky-700 font-medium flex items-center gap-1 cursor-pointer"
             >
               <Copy className="w-3 h-3" />
-              <span>{copied ? 'Copied!' : 'Copy Text'}</span>
+              <span>{copied ? 'Copied Full Draft!' : 'Copy Text'}</span>
             </button>
           </div>
         </div>
 
         {isEditingDraft ? (
-          <textarea
-            value={draft}
-            onChange={(e) => setDraft(e.target.value)}
-            rows={6}
-            className="w-full text-xs font-mono p-3 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none"
-          />
+          <div className="space-y-1.5">
+            <label className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
+              Edit Message Pitch (Professional signature is attached cleanly below):
+            </label>
+            <textarea
+              value={messageBody}
+              onChange={(e) => setMessageBody(e.target.value)}
+              rows={6}
+              className="w-full text-xs font-sans p-3 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none leading-relaxed"
+            />
+          </div>
         ) : (
-          <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg text-xs font-mono text-slate-700 whitespace-pre-wrap leading-relaxed">
-            {draft}
+          <div className="p-3 bg-slate-50 border border-slate-200 rounded-lg text-xs font-sans text-slate-700 whitespace-pre-wrap leading-relaxed">
+            {messageBody}
           </div>
         )}
+
+        {/* Clean Signature Preview Pill */}
+        <div className="px-3 py-2 bg-slate-100/70 border border-slate-200 rounded-lg flex items-center justify-between text-[11px] text-slate-600">
+          <div className="flex items-center gap-2">
+            <span className="font-semibold text-slate-700">Signature:</span>
+            <span>Raj Syful — Senior Web Developer (Top Rated Plus | www.d4f.me | WhatsApp)</span>
+          </div>
+          <span className="text-emerald-700 font-medium bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
+            Deduplicated & Clean
+          </span>
+        </div>
       </div>
 
       {/* Human Actions Gate */}
@@ -316,7 +342,7 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
             <button
               onClick={handleApprove}
               disabled={loading}
-              className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow-sm transition-colors flex items-center gap-1.5"
+              className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow-sm transition-colors flex items-center gap-1.5 cursor-pointer"
             >
               <CheckCircle className="w-4 h-4" />
               <span>Approve for Personal Outreach</span>
@@ -336,7 +362,7 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
               {emailContact && (
                 <button
                   onClick={() => setShowEmailModal(true)}
-                  className="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-bold shadow-xs transition-colors flex items-center gap-1.5"
+                  className="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-bold shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>Send via Brevo</span>
@@ -346,7 +372,7 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
               {/* Mailto Fallback Option (Always preserved) */}
               {emailContact && (
                 <a
-                  href={`mailto:${emailContact}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(draft)}`}
+                  href={`mailto:${emailContact}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(fullDraft)}`}
                   className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1"
                   title="Open draft in your local email client (fallback)"
                 >
@@ -358,7 +384,7 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
               {/* WhatsApp Button */}
               {whatsappContact && (
                 <a
-                  href={`https://wa.me/${whatsappContact.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(draft)}`}
+                  href={`https://wa.me/${whatsappContact.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(fullDraft)}`}
                   target="_blank"
                   rel="noreferrer"
                   className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow-xs transition-colors flex items-center gap-1"
@@ -373,7 +399,7 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
           <button
             onClick={() => setShowSkipModal(true)}
             disabled={loading}
-            className="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5"
+            className="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer"
           >
             <XCircle className="w-4 h-4 text-slate-500" />
             <span>Skip Candidate</span>
@@ -384,7 +410,7 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
           {events.length > 0 && (
             <button
               onClick={() => setShowEvents(!showEvents)}
-              className="text-xs text-slate-500 hover:text-slate-800 flex items-center gap-1 font-medium"
+              className="text-xs text-slate-500 hover:text-slate-800 flex items-center gap-1 font-medium cursor-pointer"
             >
               <History className="w-3.5 h-3.5" />
               <span>History ({events.length})</span>
@@ -429,122 +455,246 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
       {/* Brevo Review & Confirmation Modal */}
       {showEmailModal && (
         <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl max-w-xl w-full p-6 shadow-2xl space-y-4 border border-slate-200 animate-in fade-in duration-150">
+          <div className="bg-white rounded-xl max-w-xl w-full p-6 shadow-2xl space-y-4 border border-slate-200 animate-in fade-in duration-150 max-h-[92vh] overflow-y-auto">
             {/* Modal Header */}
             <div className="flex items-start justify-between border-b border-slate-100 pb-3">
               <div>
                 <h4 className="font-bold text-slate-900 text-base flex items-center gap-2">
                   <Send className="w-4 h-4 text-indigo-600" />
-                  <span>Review & Confirm Transactional Email</span>
+                  <span>Review & Send Email via Brevo</span>
                 </h4>
                 <p className="text-xs text-slate-500 mt-0.5">
-                  Sending 1 personal email from <strong className="text-slate-700">Raj &lt;raj@d4f.me&gt;</strong> via Brevo API
+                  Sender: <strong className="text-slate-800">Raj Syful &lt;raj@d4f.me&gt;</strong> (Client replies arrive at <strong className="text-slate-800">raj@d4f.me</strong>)
                 </p>
               </div>
               <button
                 onClick={() => {
                   setShowEmailModal(false);
                   setEmailError(null);
-                  setEmailSuccessNote(null);
+                  setSentSuccessData(null);
                 }}
-                className="text-slate-400 hover:text-slate-600 p-1 rounded-lg"
+                className="text-slate-400 hover:text-slate-600 p-1 rounded-lg cursor-pointer"
               >
                 <XCircle className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Error & Success Banners */}
+            {/* Error Banner */}
             {emailError && (
               <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-xs text-red-700 flex items-start gap-2">
                 <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
                 <span>{emailError}</span>
               </div>
             )}
-            {emailSuccessNote && (
-              <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-lg text-xs text-emerald-800 flex items-start gap-2">
-                <CheckCircle className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
-                <span>{emailSuccessNote}</span>
+
+            {/* Success State Card */}
+            {sentSuccessData ? (
+              <div className="p-5 bg-emerald-50 border border-emerald-200 rounded-xl space-y-3">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-6 h-6 text-emerald-600 flex-shrink-0 mt-0.5" />
+                  <div className="space-y-1">
+                    <h5 className="font-bold text-emerald-950 text-sm">
+                      {sentSuccessData.dryRun ? 'Simulation Succeeded [DRY RUN]' : 'Email Dispatched via Brevo!'}
+                    </h5>
+                    <p className="text-xs text-emerald-800">
+                      {sentSuccessData.dryRun
+                        ? `Dry-run validation successful. Simulated message ID: ${sentSuccessData.messageId}`
+                        : `Successfully delivered to ${emailTo}. Brevo message ID: ${sentSuccessData.messageId}`}
+                    </p>
+                    <p className="text-[11px] text-emerald-700 pt-1 font-medium">
+                      💡 When the prospect replies, the email will land directly in your <strong>raj@d4f.me</strong> inbox.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 pt-3 border-t border-emerald-200">
+                  <Link
+                    href="/recommendations?tab=sent"
+                    className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition-colors cursor-pointer"
+                  >
+                    View in Sent & Contacted History →
+                  </Link>
+                  <button
+                    onClick={() => {
+                      setShowEmailModal(false);
+                      setSentSuccessData(null);
+                    }}
+                    className="px-3.5 py-1.5 bg-white border border-emerald-300 text-emerald-800 hover:bg-emerald-100/60 rounded-lg text-xs font-semibold cursor-pointer"
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
+            ) : (
+              <>
+                {/* Mode Tabs */}
+                <div className="flex items-center gap-1 border-b border-slate-200 pb-2 text-xs">
+                  <button
+                    type="button"
+                    onClick={() => setModalTab('compose')}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold transition-colors cursor-pointer ${
+                      modalTab === 'compose'
+                        ? 'bg-indigo-600 text-white shadow-xs'
+                        : 'text-slate-600 hover:bg-slate-100'
+                    }`}
+                  >
+                    <FileText className="w-3.5 h-3.5" />
+                    <span>Compose Message</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setModalTab('preview')}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold transition-colors cursor-pointer ${
+                      modalTab === 'preview'
+                        ? 'bg-indigo-600 text-white shadow-xs'
+                        : 'text-slate-600 hover:bg-slate-100'
+                    }`}
+                  >
+                    <Eye className="w-3.5 h-3.5" />
+                    <span>Live Email Preview</span>
+                  </button>
+                </div>
+
+                {modalTab === 'compose' ? (
+                  <div className="space-y-3.5">
+                    {/* Recipient */}
+                    <div className="space-y-1">
+                      <div className="flex items-center justify-between">
+                        <label className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
+                          Recipient Email
+                        </label>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setEmailTo('rajsyfyl@gmail.com');
+                            setEmailSubject(`[TEST] Website preview for ${lead.name}`);
+                            setIsDryRun(false); // Enable live send so it delivers to Gmail
+                          }}
+                          className="text-[11px] font-semibold text-amber-900 bg-amber-100 hover:bg-amber-200 border border-amber-300 px-2 py-0.5 rounded transition-colors flex items-center gap-1 cursor-pointer"
+                          title="Fill recipient with your Gmail to test live delivery"
+                        >
+                          <Sparkles className="w-3 h-3 text-amber-600" />
+                          <span>⚡ Test on Myself (rajsyfyl@gmail.com)</span>
+                        </button>
+                      </div>
+                      <input
+                        type="email"
+                        value={emailTo}
+                        onChange={(e) => setEmailTo(e.target.value)}
+                        placeholder="owner@business.com"
+                        className="w-full text-xs font-mono p-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                      />
+                      {emailTo === 'rajsyfyl@gmail.com' && (
+                        <p className="text-[11px] text-amber-800 bg-amber-50 p-2 rounded border border-amber-200 font-medium">
+                          🔔 Test mode active: A live email will be delivered to your Gmail (rajsyfyl@gmail.com).
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Subject */}
+                    <div className="space-y-1">
+                      <label className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
+                        Email Subject
+                      </label>
+                      <input
+                        type="text"
+                        value={emailSubject}
+                        onChange={(e) => setEmailSubject(e.target.value)}
+                        className="w-full text-xs p-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none font-medium"
+                      />
+                    </div>
+
+                    {/* Message Body */}
+                    <div className="space-y-1">
+                      <label className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
+                        Email Pitch (Editable)
+                      </label>
+                      <textarea
+                        value={messageBody}
+                        onChange={(e) => setMessageBody(e.target.value)}
+                        rows={6}
+                        className="w-full text-xs font-sans p-3 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none leading-relaxed"
+                      />
+                    </div>
+
+                    {/* Clean Signature Preview Box */}
+                    <div className="bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-xs space-y-1">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                        Attached Professional Signature (Deduplicated):
+                      </span>
+                      <div className="text-[11px] font-mono text-slate-600 whitespace-pre-wrap bg-white p-2 rounded border border-slate-200">
+                        {signature}
+                      </div>
+                    </div>
+
+                    {/* Dry Run Toggle */}
+                    <div className="bg-amber-50/70 border border-amber-200 rounded-lg p-3 text-xs space-y-1.5">
+                      <label className="flex items-center gap-2 cursor-pointer font-semibold text-amber-900">
+                        <input
+                          type="checkbox"
+                          checked={isDryRun}
+                          onChange={(e) => setIsDryRun(e.target.checked)}
+                          className="rounded border-amber-400 text-amber-600 focus:ring-amber-500 h-4 w-4"
+                        />
+                        <ShieldCheck className="w-4 h-4 text-amber-700" />
+                        <span>Dry-run simulation mode (Simulates send without dispatching real email)</span>
+                      </label>
+                      <p className="text-[11px] text-amber-800 leading-normal pl-6">
+                        {isDryRun
+                          ? '✅ Dry-run is ON: Safe simulation. Uncheck if you want to send a real email via Brevo.'
+                          : '⚠️ Live send is ON: A real transactional email will be dispatched via Brevo.'}
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  /* Live Preview Tab */
+                  <div className="space-y-3">
+                    <div className="bg-slate-100 p-2.5 rounded-lg text-xs space-y-1 font-mono text-slate-700">
+                      <div><strong>From:</strong> Raj Syful &lt;raj@d4f.me&gt;</div>
+                      <div><strong>To:</strong> {emailTo || '(Recipient Email)'}</div>
+                      <div><strong>Subject:</strong> {emailSubject}</div>
+                    </div>
+
+                    <div className="border border-slate-200 rounded-lg p-4 bg-white shadow-xs max-h-72 overflow-y-auto">
+                      <div
+                        className="text-xs leading-relaxed text-slate-800 whitespace-pre-wrap font-sans"
+                        dangerouslySetInnerHTML={{
+                          __html: formatEmailPreviewHtml(fullDraft),
+                        }}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* Action Buttons */}
+                <div className="flex items-center justify-between pt-3 border-t border-slate-100">
+                  <button
+                    onClick={() => {
+                      setShowEmailModal(false);
+                      setEmailError(null);
+                    }}
+                    disabled={sendingEmail}
+                    className="px-3.5 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={handleSendBrevoEmail}
+                    disabled={sendingEmail}
+                    className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-bold text-xs rounded-lg shadow-sm transition-colors flex items-center gap-2 cursor-pointer"
+                  >
+                    <Send className="w-3.5 h-3.5" />
+                    <span>
+                      {sendingEmail
+                        ? 'Sending...'
+                        : isDryRun
+                        ? 'Confirm & Simulate Send'
+                        : `Confirm & Send to ${emailTo === 'rajsyfyl@gmail.com' ? 'Myself' : 'Recipient'}`}
+                    </span>
+                  </button>
+                </div>
+              </>
             )}
-
-            {/* Recipient */}
-            <div className="space-y-1">
-              <label className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
-                Recipient Email
-              </label>
-              <input
-                type="email"
-                value={emailTo}
-                onChange={(e) => setEmailTo(e.target.value)}
-                placeholder="owner@business.com"
-                className="w-full text-xs font-mono p-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-              />
-            </div>
-
-            {/* Subject */}
-            <div className="space-y-1">
-              <label className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
-                Email Subject
-              </label>
-              <input
-                type="text"
-                value={emailSubject}
-                onChange={(e) => setEmailSubject(e.target.value)}
-                className="w-full text-xs p-2.5 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none font-medium"
-              />
-            </div>
-
-            {/* Message Body */}
-            <div className="space-y-1">
-              <label className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
-                Email Body (Editable)
-              </label>
-              <textarea
-                value={draft}
-                onChange={(e) => setDraft(e.target.value)}
-                rows={7}
-                className="w-full text-xs font-mono p-3 bg-white border border-slate-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none leading-relaxed"
-              />
-            </div>
-
-            {/* Dry Run / Safety Simulation Toggle */}
-            <div className="bg-amber-50/70 border border-amber-200 rounded-lg p-3 text-xs space-y-1.5">
-              <label className="flex items-center gap-2 cursor-pointer font-semibold text-amber-900">
-                <input
-                  type="checkbox"
-                  checked={isDryRun}
-                  onChange={(e) => setIsDryRun(e.target.checked)}
-                  className="rounded border-amber-400 text-amber-600 focus:ring-amber-500 h-4 w-4"
-                />
-                <ShieldCheck className="w-4 h-4 text-amber-700" />
-                <span>Dry-run simulation mode (Recommended for dev & testing)</span>
-              </label>
-              <p className="text-[11px] text-amber-800 leading-normal pl-6">
-                When enabled, validates inputs and records outreach events without contacting the live Brevo API or dispatching real emails.
-              </p>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex items-center justify-between pt-2 border-t border-slate-100">
-              <button
-                onClick={() => {
-                  setShowEmailModal(false);
-                  setEmailError(null);
-                }}
-                disabled={sendingEmail}
-                className="px-3.5 py-2 text-xs font-medium text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleSendBrevoEmail}
-                disabled={sendingEmail}
-                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-bold text-xs rounded-lg shadow-sm transition-colors flex items-center gap-2"
-              >
-                <Send className="w-3.5 h-3.5" />
-                <span>{sendingEmail ? 'Sending...' : isDryRun ? 'Confirm & Simulate Send' : 'Confirm & Send 1 Email'}</span>
-              </button>
-            </div>
           </div>
         </div>
       )}
@@ -569,13 +719,13 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
             <div className="flex justify-end gap-2 pt-2">
               <button
                 onClick={() => setShowSkipModal(false)}
-                className="px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-100 rounded"
+                className="px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-100 rounded cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSkip}
-                className="px-3 py-1.5 text-xs bg-red-600 hover:bg-red-700 text-white font-semibold rounded"
+                className="px-3 py-1.5 text-xs bg-red-600 hover:bg-red-700 text-white font-semibold rounded cursor-pointer"
               >
                 Confirm Skip
               </button>
@@ -586,4 +736,3 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
     </div>
   );
 }
-

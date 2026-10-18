@@ -186,9 +186,10 @@ export class BrevoService {
     }
 
     const isDryRun =
-      params.dryRun === true ||
-      process.env.BREVO_DRY_RUN === 'true' ||
-      process.env.NODE_ENV === 'test';
+      params.dryRun !== undefined
+        ? params.dryRun
+        : process.env.BREVO_DRY_RUN === 'true';
+
 
     // In dry-run mode: simulate send safely without calling Brevo API
     if (isDryRun) {

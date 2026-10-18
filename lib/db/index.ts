@@ -4,8 +4,13 @@ import { WebsiteLead, LifecycleStage } from '@/lib/types/lead';
 import { initialSeedLeads } from './seed-data';
 import { logger } from '@/lib/logger';
 
-const DATA_DIR = path.join(process.cwd(), 'data');
+const DATA_DIR =
+  process.env.DATA_DIR ||
+  (fs.existsSync('/home/raj/website-lead/data')
+    ? '/home/raj/website-lead/data'
+    : path.join(process.cwd(), 'data'));
 const LEADS_FILE = path.join(DATA_DIR, 'leads.json');
+
 
 // Ensure data directory exists
 function ensureDataFile(): void {
@@ -117,6 +122,18 @@ export class LeadRepository {
       .sort((a, b) => (b.qualification?.score ?? 0) - (a.qualification?.score ?? 0))
       .slice(0, limit);
   }
+
+  static async getContactedLeads(): Promise<WebsiteLead[]> {
+    const leads = this.readAll();
+    return leads
+      .filter((l) => ['contacted', 'replied', 'interested', 'client'].includes(l.lifecycle) || (l.outreach?.events && l.outreach.events.length > 0))
+      .sort((a, b) => {
+        const dateA = a.outreach?.events?.[a.outreach.events.length - 1]?.at || a.updatedAt;
+        const dateB = b.outreach?.events?.[b.outreach.events.length - 1]?.at || b.updatedAt;
+        return new Date(dateB).getTime() - new Date(dateA).getTime();
+      });
+  }
+
 
   static async getFunnelMetrics(marketFilter?: string) {
     const leads = await this.getAllLeads(marketFilter ? { market: marketFilter } : undefined);

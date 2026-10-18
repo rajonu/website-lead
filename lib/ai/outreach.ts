@@ -1,25 +1,19 @@
 import { WebsiteLead } from '@/lib/types/lead';
 
 export const RAJ_OFFICIAL_SIGNATURE = `Best Regards,
-Raj Syful
-Senior Web Developer,
-[Top Rated Plus Freelancer](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488) [Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)
------------------------------------------------------------------------------------------------------
-Ⓦ [www.d4f.me](https://d4f.me/) / Skype: raj_onu / ⓔ [raj@d4f.me](mailto:raj@d4f.me)
-G-Chat: [rajsyful](mailto:rajsyfyl@gmail.com) +8801674410695 ([Whatsapp](https://wa.me/8801674410695) / [Telegram](https://telegram.me/rajsyful))
-Ⓣ +8801719647717 ⓛ [Linkedin](https://www.linkedin.com/in/syful-i-70788581/)
-----------------------------------------------------------------------------------------------------
+Raj Syful — Senior Web Developer
+[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)
+----------------------------------------------------------------------
+🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)
+📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)
 A Passionate ♡ Web-Developer`;
 
 export const RAJ_OFFICIAL_SIGNATURE_BD = `ধন্যবাদ ও শুভেচ্ছা,
-Raj Syful
-Senior Web Developer,
-[Top Rated Plus Freelancer](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488) [Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)
------------------------------------------------------------------------------------------------------
-Ⓦ [www.d4f.me](https://d4f.me/) / Skype: raj_onu / ⓔ [raj@d4f.me](mailto:raj@d4f.me)
-G-Chat: [rajsyful](mailto:rajsyfyl@gmail.com) +8801674410695 ([Whatsapp](https://wa.me/8801674410695) / [Telegram](https://telegram.me/rajsyful))
-Ⓣ +8801719647717 ⓛ [Linkedin](https://www.linkedin.com/in/syful-i-70788581/)
-----------------------------------------------------------------------------------------------------
+Raj Syful — Senior Web Developer
+[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)
+----------------------------------------------------------------------
+🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)
+📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)
 A Passionate ♡ Web-Developer`;
 
 export function generatePersonalOutreachDraft(lead: WebsiteLead): string {
@@ -84,3 +78,59 @@ export function getEmailSubject(lead: WebsiteLead): string {
   }
   return `Website preview for ${lead.name}`;
 }
+
+export function splitBodyAndSignature(draft: string, isBd = false): { body: string; signature: string } {
+  const sigMarker = isBd ? 'ধন্যবাদ ও শুভেচ্ছা,' : 'Best Regards,';
+  const defaultSig = isBd ? RAJ_OFFICIAL_SIGNATURE_BD : RAJ_OFFICIAL_SIGNATURE;
+
+  if (draft.includes(sigMarker)) {
+    const parts = draft.split(sigMarker);
+    return {
+      body: parts[0].trim(),
+      signature: defaultSig,
+    };
+  }
+
+  if (draft.includes('Best Regards,')) {
+    const parts = draft.split('Best Regards,');
+    return {
+      body: parts[0].trim(),
+      signature: RAJ_OFFICIAL_SIGNATURE,
+    };
+  }
+
+  if (draft.includes('ধন্যবাদ ও শুভেচ্ছা,')) {
+    const parts = draft.split('ধন্যবাদ ও শুভেচ্ছা,');
+    return {
+      body: parts[0].trim(),
+      signature: RAJ_OFFICIAL_SIGNATURE_BD,
+    };
+  }
+
+  return {
+    body: draft.trim(),
+    signature: defaultSig,
+  };
+}
+
+export function formatEmailPreviewHtml(textContent: string): string {
+  let safe = textContent
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+
+  // Convert dashed divider lines into styled hr
+  safe = safe.replace(/^-{5,}$/gm, '<hr style="border: none; border-top: 1px dashed #cbd5e1; margin: 14px 0;" />');
+
+  // Convert markdown links [Label](url) into clickable styled <a> tags
+  safe = safe.replace(
+    /\[([^\]]+)\]\((https?:\/\/[^\s)]+|mailto:[^\s)]+)\)/g,
+    '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: #0284c7; font-weight: 600; text-decoration: underline;">$1</a>'
+  );
+
+  return safe;
+}
+
+
