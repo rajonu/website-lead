@@ -156,7 +156,7 @@ export const initialSeedLeads: WebsiteLead[] = [
     outreach: {
       suppressed: false,
       recommendedChannel: "email",
-      draft: "Hi Apex Comfort team,\n\nI was looking at local HVAC specialists in Dallas and noticed your 4.9-star rating with over 140 reviews on Google Maps. Congratulations on building such a strong reputation!\n\nI noticed that your Google profile doesn't have an official website linked, which means mobile customers might hesitate before calling.\n\nTo show what a clean mobile site would look like for you, I put together a quick preview loaded with your top reviews and services:\n👉 https://lead.d4f.me/preview/example-comfort-hvac-dallas\n\nIf you like it, I'd be happy to set it up on your own domain. No obligation at all.\n\nBest regards,\nRaj\nWeb Developer | raj@d4f.me",
+      draft: "Hi Apex Comfort team,\n\nI was looking at local HVAC specialists in Dallas and noticed your 4.9-star rating with over 140 reviews on Google Maps. Congratulations on building such a strong reputation!\n\nI noticed that your Google profile doesn't have an official website linked, which means mobile customers might hesitate before calling.\n\nTo show what a clean mobile site would look like for you, I put together a quick preview loaded with your top reviews and services:\n👉 https://live.d4f.me/preview/example-comfort-hvac-dallas\n\nIf you like it, I'd be happy to set it up on your own domain. No obligation at all.\n\nBest regards,\nRaj\nWeb Developer | raj@d4f.me",
       events: []
     },
     sales: {
@@ -310,7 +310,7 @@ export const initialSeedLeads: WebsiteLead[] = [
     outreach: {
       suppressed: false,
       recommendedChannel: "email",
-      draft: "Hi Manchester Rapid Plumbing team,\n\nSaw your 4.8★ rating on Google Maps in Manchester. Really impressive reputation!\n\nNoticed you don't have a website listed, so I designed a clean mobile landing page for you with tap-to-call buttons for urgent boiler breakdowns:\n👉 https://lead.d4f.me/preview/manchester-rapid-plumbing\n\nTake a look on your phone when you have a moment!\n\nCheers,\nRaj | raj@d4f.me",
+      draft: "Hi Manchester Rapid Plumbing team,\n\nSaw your 4.8★ rating on Google Maps in Manchester. Really impressive reputation!\n\nNoticed you don't have a website listed, so I designed a clean mobile landing page for you with tap-to-call buttons for urgent boiler breakdowns:\n👉 https://live.d4f.me/preview/manchester-rapid-plumbing\n\nTake a look on your phone when you have a moment!\n\nCheers,\nRaj | raj@d4f.me",
       events: [
         {
           channel: "email",
@@ -480,7 +480,7 @@ export const initialSeedLeads: WebsiteLead[] = [
     outreach: {
       suppressed: false,
       recommendedChannel: "whatsapp",
-      draft: "আসসালামু আলাইকুম Glow Lounge টিম! 🌸\n\nগুগল ম্যাপসে বনানীতে আপনাদের পার্লারের ২১৫+ দুর্দান্ত রিভিউ এবং ৪.৭★ রেটিং দেখে খুব ভালো লাগলো।\n\nলক্ষ্য করলাম আপনাদের সুন্দর একটি ফেসবুক পেজ থাকলেও গুগলে কোনো অফিসিয়াল ওয়েবসাইট লিংক করা নেই। ফলে অনেক কাস্টমার সার্ভিস লিস্ট ও প্যাকেজ দেখতে গিয়ে মিস করে যেতে পারেন।\n\nআপনাদের ক্লায়েন্ট রিভিউ ও সার্ভিসগুলো দিয়ে আমরা সুন্দর একটি মোবাইল ওয়েবসাইট ডেমো বানিয়েছি:\n👉 https://lead.d4f.me/preview/glow-lounge-salon-banani\n\nফোনে ওপেন করে দেখুন, সরাসরি WhatsApp বুকিং বাটনও এড করা আছে। ভালো লাগলে এটা আপনাদের নিজস্ব ডোমেইনে লাইভ করে দেওয়া যাবে।\n\nধন্যবাদ,\nরাজ | Web Developer\nWhatsApp: +8801700000000",
+      draft: "আসসালামু আলাইকুম Glow Lounge টিম! 🌸\n\nগুগল ম্যাপসে বনানীতে আপনাদের পার্লারের ২১৫+ দুর্দান্ত রিভিউ এবং ৪.৭★ রেটিং দেখে খুব ভালো লাগলো।\n\nলক্ষ্য করলাম আপনাদের সুন্দর একটি ফেসবুক পেজ থাকলেও গুগলে কোনো অফিসিয়াল ওয়েবসাইট লিংক করা নেই। ফলে অনেক কাস্টমার সার্ভিস লিস্ট ও প্যাকেজ দেখতে গিয়ে মিস করে যেতে পারেন।\n\nআপনাদের ক্লায়েন্ট রিভিউ ও সার্ভিসগুলো দিয়ে আমরা সুন্দর একটি মোবাইল ওয়েবসাইট ডেমো বানিয়েছি:\n👉 https://live.d4f.me/preview/glow-lounge-salon-banani\n\nফোনে ওপেন করে দেখুন, সরাসরি WhatsApp বুকিং বাটনও এড করা আছে। ভালো লাগলে এটা আপনাদের নিজস্ব ডোমেইনে লাইভ করে দেওয়া যাবে।\n\nধন্যবাদ,\nরাজ | Web Developer\nWhatsApp: +8801674410695",
       events: []
     },
     sales: {

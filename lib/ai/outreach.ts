@@ -5,7 +5,7 @@ export function generatePersonalOutreachDraft(lead: WebsiteLead): string {
   const isBd = market === 'BD' || market.includes('Bangladesh');
   const rating = lead.businessSignals?.rating || 4.8;
   const reviews = lead.businessSignals?.reviewCount || 30;
-  const previewUrl = `https://lead.d4f.me/preview/${lead.slug}`;
+  const previewUrl = `https://live.d4f.me/preview/${lead.slug}`;
 
   if (isBd) {
     return `আসসালামু আলাইকুম ${lead.name} টিম! 🌸
@@ -21,7 +21,7 @@ export function generatePersonalOutreachDraft(lead: WebsiteLead): string {
 
 ধন্যবাদ,
 রাজ | Web Developer
-WhatsApp: +8801700000000`;
+WhatsApp: +8801674410695`;
   }
 
   if (market === 'UK') {
