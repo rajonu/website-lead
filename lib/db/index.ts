@@ -114,6 +114,17 @@ export class LeadRepository {
     return updated;
   }
 
+  static async deleteLead(id: string): Promise<boolean> {
+    const leads = this.readAll();
+    const index = leads.findIndex((l) => l.id === id);
+    if (index === -1) return false;
+
+    const [removed] = leads.splice(index, 1);
+    this.writeAll(leads);
+    logger.info('Lead deleted', { id, name: removed?.name });
+    return true;
+  }
+
   static async getDailyRecommendations(limit = 5): Promise<WebsiteLead[]> {
     const leads = this.readAll();
     // Return leads with high scores that are ready for review or newly qualified
@@ -126,13 +137,14 @@ export class LeadRepository {
   static async getContactedLeads(): Promise<WebsiteLead[]> {
     const leads = this.readAll();
     return leads
-      .filter((l) => ['contacted', 'replied', 'interested', 'client'].includes(l.lifecycle) || (l.outreach?.events && l.outreach.events.length > 0))
+      .filter((l) => ['contacted', 'replied', 'interested', 'client'].includes(l.lifecycle) && (l.outreach?.events && l.outreach.events.some((e) => e.type === 'sent')))
       .sort((a, b) => {
         const dateA = a.outreach?.events?.[a.outreach.events.length - 1]?.at || a.updatedAt;
         const dateB = b.outreach?.events?.[b.outreach.events.length - 1]?.at || b.updatedAt;
         return new Date(dateB).getTime() - new Date(dateA).getTime();
       });
   }
+
 
 
   static async getFunnelMetrics(marketFilter?: string) {

@@ -27,7 +27,8 @@ import {
   History,
   Eye,
   FileText,
-  Sparkles
+  Sparkles,
+  Trash2
 } from 'lucide-react';
 
 export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
@@ -42,8 +43,12 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
   );
   const [skipReason, setSkipReason] = useState('');
   const [showSkipModal, setShowSkipModal] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+
 
   // Brevo Transactional Email Modal State
   const initialEmail = lead.contacts.find((c) => c.channel === 'email')?.value || '';
@@ -164,6 +169,28 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  const handleDelete = async () => {
+    setIsDeleting(true);
+    try {
+      const res = await fetch(`/api/leads/${lead.id}`, { method: 'DELETE' });
+      if (res.ok) {
+        setIsDeleted(true);
+      }
+    } finally {
+      setIsDeleting(false);
+      setShowDeleteConfirm(false);
+    }
+  };
+
+  if (isDeleted) {
+    return (
+      <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs text-slate-500 italic flex items-center justify-between">
+        <span>Lead &ldquo;{lead.name}&rdquo; and demo site were permanently deleted.</span>
+      </div>
+    );
+  }
+
 
   if (status === 'skipped') {
     return (
@@ -398,13 +425,24 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
 
           <button
             onClick={() => setShowSkipModal(true)}
-            disabled={loading}
+            disabled={loading || isDeleting}
             className="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1.5 cursor-pointer"
           >
             <XCircle className="w-4 h-4 text-slate-500" />
             <span>Skip Candidate</span>
           </button>
+
+          <button
+            onClick={() => setShowDeleteConfirm(true)}
+            disabled={loading || isDeleting}
+            className="px-2.5 py-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg text-xs font-medium transition-colors flex items-center gap-1 cursor-pointer"
+            title="Permanently delete this demo site & lead"
+          >
+            <Trash2 className="w-3.5 h-3.5" />
+            <span>Delete Demo</span>
+          </button>
         </div>
+
 
         <div className="flex items-center gap-3">
           {events.length > 0 && (
@@ -733,6 +771,36 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
           </div>
         </div>
       )}
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl max-w-sm w-full p-5 shadow-xl space-y-3 border border-slate-200">
+            <h4 className="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <Trash2 className="w-4 h-4 text-red-600" />
+              <span>Delete Demo Site &amp; Lead?</span>
+            </h4>
+            <p className="text-xs text-slate-600 leading-normal">
+              Are you sure you want to delete <strong>{lead.name}</strong> and remove its demo site (<code>/preview/{lead.slug}</code>)? This cannot be undone.
+            </p>
+            <div className="flex justify-end gap-2 pt-2 border-t border-slate-100">
+              <button
+                onClick={() => setShowDeleteConfirm(false)}
+                className="px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-100 rounded-lg cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDelete}
+                disabled={isDeleting}
+                className="px-3 py-1.5 text-xs bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white font-bold rounded-lg cursor-pointer"
+              >
+                {isDeleting ? 'Deleting...' : 'Confirm Delete'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
+

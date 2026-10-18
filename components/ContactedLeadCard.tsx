@@ -10,15 +10,19 @@ import {
   CheckCircle2, 
   Clock, 
   Mail, 
-  MessageSquare,
-  Sparkles,
-  ChevronDown,
-  ChevronUp
+  MessageSquare, 
+  Sparkles, 
+  ChevronDown, 
+  ChevronUp,
+  Trash2
 } from 'lucide-react';
 
 export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
   const [stage, setStage] = useState(lead.lifecycle);
   const [updating, setUpdating] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [showFullHistory, setShowFullHistory] = useState(false);
 
   const events = lead.outreach?.events || [];
@@ -60,6 +64,27 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
       setUpdating(false);
     }
   };
+
+  const handleDelete = async () => {
+    setIsDeleting(true);
+    try {
+      const res = await fetch(`/api/leads/${lead.id}`, { method: 'DELETE' });
+      if (res.ok) {
+        setIsDeleted(true);
+      }
+    } finally {
+      setIsDeleting(false);
+      setShowDeleteConfirm(false);
+    }
+  };
+
+  if (isDeleted) {
+    return (
+      <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 text-xs text-slate-500 italic flex items-center justify-between">
+        <span>Lead &ldquo;{lead.name}&rdquo; and demo site were permanently deleted.</span>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white rounded-xl border border-slate-200 p-5 shadow-xs hover:shadow-md transition-shadow space-y-4">
@@ -139,7 +164,7 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
             <button
               onClick={handleMarkReplied}
               disabled={updating}
-              className="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white rounded-lg font-bold shadow-xs transition-colors flex items-center gap-1.5"
+              className="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white rounded-lg font-bold shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer"
             >
               <MessageSquare className="w-3.5 h-3.5" />
               <span>Mark as Client Replied</span>
@@ -158,12 +183,22 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
             <Send className="w-3.5 h-3.5 text-slate-500" />
             <span>Send Follow-up</span>
           </a>
+
+          <button
+            onClick={() => setShowDeleteConfirm(true)}
+            disabled={isDeleting}
+            className="px-2.5 py-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg font-medium transition-colors flex items-center gap-1 cursor-pointer"
+            title="Permanently delete this demo site & lead"
+          >
+            <Trash2 className="w-3.5 h-3.5" />
+            <span>Delete Demo</span>
+          </button>
         </div>
 
         {events.length > 0 && (
           <button
             onClick={() => setShowFullHistory(!showFullHistory)}
-            className="text-slate-500 hover:text-slate-800 flex items-center gap-1 font-medium text-[11px]"
+            className="text-slate-500 hover:text-slate-800 flex items-center gap-1 font-medium text-[11px] cursor-pointer"
           >
             <span>Activity Log ({events.length})</span>
             {showFullHistory ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
@@ -190,6 +225,36 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
               )}
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl max-w-sm w-full p-5 shadow-xl space-y-3 border border-slate-200">
+            <h4 className="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <Trash2 className="w-4 h-4 text-red-600" />
+              <span>Delete Demo Site &amp; Lead?</span>
+            </h4>
+            <p className="text-xs text-slate-600 leading-normal">
+              Are you sure you want to delete <strong>{lead.name}</strong> and remove its demo site (<code>/preview/{lead.slug}</code>)? This cannot be undone.
+            </p>
+            <div className="flex justify-end gap-2 pt-2 border-t border-slate-100">
+              <button
+                onClick={() => setShowDeleteConfirm(false)}
+                className="px-3 py-1.5 text-xs text-slate-600 hover:bg-slate-100 rounded-lg cursor-pointer"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDelete}
+                disabled={isDeleting}
+                className="px-3 py-1.5 text-xs bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white font-bold rounded-lg cursor-pointer"
+              >
+                {isDeleting ? 'Deleting...' : 'Confirm Delete'}
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

@@ -38,3 +38,22 @@ export async function PATCH(
     return NextResponse.json({ success: false, error: 'Failed to update lead' }, { status: 500 });
   }
 }
+
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params;
+    const deleted = await LeadRepository.deleteLead(id);
+    if (!deleted) {
+      return NextResponse.json({ success: false, error: 'Lead not found' }, { status: 404 });
+    }
+
+    return NextResponse.json({ success: true, message: 'Lead and demo site deleted successfully' });
+  } catch (err) {
+    logger.error('API DELETE /leads/[id] error', err);
+    return NextResponse.json({ success: false, error: 'Failed to delete lead' }, { status: 500 });
+  }
+}
+

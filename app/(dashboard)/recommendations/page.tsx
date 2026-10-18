@@ -1,6 +1,7 @@
 import { LeadRepository } from '@/lib/db';
 import RecommendationCard from '@/components/RecommendationCard';
 import ContactedLeadCard from '@/components/ContactedLeadCard';
+import ScanLeadsModal from '@/components/ScanLeadsModal';
 import { Sparkles, ShieldCheck, ArrowLeft, Send, CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -34,11 +35,15 @@ export default async function RecommendationsPage({
           </p>
         </div>
 
-        <div className="flex items-center gap-2 px-3 py-1.5 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-800 font-medium">
-          <ShieldCheck className="w-4 h-4 text-amber-600" />
-          <span>Human Approval Gate Active</span>
+        <div className="flex items-center gap-2.5">
+          <ScanLeadsModal />
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-amber-50 rounded-lg border border-amber-200 text-xs text-amber-800 font-medium">
+            <ShieldCheck className="w-4 h-4 text-amber-600" />
+            <span>Human Gate</span>
+          </div>
         </div>
       </div>
+
 
       {/* Tabs Navigation */}
       <div className="flex items-center gap-2 border-b border-slate-200">
