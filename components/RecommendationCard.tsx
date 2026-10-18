@@ -250,8 +250,33 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
               <span>Approve for Personal Outreach</span>
             </button>
           ) : (
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-semibold text-emerald-700">Ready to send manually from your inbox!</span>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1.5 rounded-lg border border-emerald-200 flex items-center gap-1">
+                <CheckCircle className="w-4 h-4 text-emerald-600" />
+                Approved & In Pipeline
+              </span>
+
+              {lead.contacts.find((c) => c.channel === 'email')?.value && (
+                <a
+                  href={`mailto:${lead.contacts.find((c) => c.channel === 'email')?.value}?subject=${encodeURIComponent(`Website preview for ${lead.name}`)}&body=${encodeURIComponent(draft)}`}
+                  className="px-3.5 py-1.5 bg-sky-600 hover:bg-sky-700 text-white rounded-lg text-xs font-bold shadow-xs transition-colors flex items-center gap-1"
+                >
+                  <Mail className="w-3.5 h-3.5" />
+                  <span>Send via Email Client</span>
+                </a>
+              )}
+
+              {lead.contacts.find((c) => c.channel === 'whatsapp' || c.channel === 'phone')?.value && (
+                <a
+                  href={`https://wa.me/${(lead.contacts.find((c) => c.channel === 'whatsapp')?.value || lead.contacts.find((c) => c.channel === 'phone')?.value || '').replace(/[^0-9]/g, '')}?text=${encodeURIComponent(draft)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow-xs transition-colors flex items-center gap-1"
+                >
+                  <MessageSquare className="w-3.5 h-3.5" />
+                  <span>Send via WhatsApp</span>
+                </a>
+              )}
             </div>
           )}
 
