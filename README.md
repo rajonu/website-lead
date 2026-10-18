@@ -1,96 +1,290 @@
-# 🌐 Website Lead Engine (Pre-Built Speculative Outreach Pipeline)
+# 🌐 Website Lead Engine — Acquisition, Demo & Retention Blueprint
 
-> **Automated Lead Finding, Instant Landing Page Generation & Value-First Outreach for Google Business Profiles.**
+> Find qualified local businesses without strong websites, create useful pre-built previews, reach decision-makers with value-first outreach, convert them to recurring plans, and retain them through measurable ongoing service.
 
----
+## 1. Core Business Model
 
-## 📖 Overview (প্রজেক্ট পরিচিতি)
+This project is a micro-agency / SaaS-assisted service pipeline. The product is not simply “a website”; the recurring offer is a managed web presence: hosting, SSL, domain assistance, edits, lead/contact features, analytics, reliability and ongoing improvements.
 
-**Website Lead Engine** হলো একটি স্বয়ংক্রিয় মাইক্রো-এজেন্সি / SaaS পাইপলাইন। এটি বিশ্বব্যাপী গুগল ম্যাপস (Google Business Profile) থেকে এমন সব সফল লোকাল বিজনেস খুঁজে বের করে যাদের চমৎকার রিভিউ ও রেটিং আছে কিন্তু কোনো অফিসিয়াল ওয়েবসাইট নেই।
-
-এরপর সিস্টেমটি স্বয়ংক্রিয়ভাবে তাদের ফটো, রিভিউ এবং সার্ভিস ডাটা নিয়ে সেকেন্ডের মধ্যে একটি আধুনিক মোবাইল-রেসপন্সিভ ওয়ান-পেজ ওয়েবসাইট ডেমো জেনারেট করে। অবশেষে তাদেরকে হোয়াটসঅ্যাপ অথবা কোল্ড ইমেইলের মাধ্যমে প্রিভিউ পাঠিয়ে ডোমেইন ও রিকারিং হোস্টিং সাবস্ক্রিপশনে কনভার্ট করে।
-
----
-
-## ⚡ Key Value Proposition: The "Pre-Built Demo" Advantage
-
-| সাধারণ কোল্ড আউটরিচ | ভ্যালু-ফার্স্ট স্পেকুলেটিভ আউটরিচ (আমাদের মডেল) |
-| :--- | :--- |
-| *"আপনাদের কি কোনো ওয়েবসাইট লাগবে?"* | *"আপনাদের ৪৮+ ফাইভ-স্টার রিভিউ দেখে আমরা অলরেডি এই সুন্দর ওয়েবসাইটটি বানিয়ে ফেলেছি: [ডেমো লিংক]"* |
-| ক্লায়েন্টকে কাজ দিতে হয় (ছবি, কন্টেন্ট, মিটিং) | জিরো এফোর্ট — ওয়েবসাইট অলরেডি তৈরি ও লাইভ |
-| গড় রেসপন্স রেট: **১% - ২%** | গড় রেসপন্স রেট: **১৫% - ২৫%** |
-
----
-
-## 🔄 End-to-End Workflow Pipeline
+Primary workflow:
 
 ```mermaid
 flowchart LR
-    A[📍 Google Maps Scraper] -->|Filter: No Website & 20+ Reviews| B[🧠 AI Enrichment]
-    B -->|Gemini Flash Generates Copy| C[⚡ Dynamic Preview Engine]
-    C -->|Next.js / Cloudflare: demo.site/slug| D[📲 Multi-Channel Outreach]
-    D -->|WhatsApp / Cold Email| E[🤝 Client Closes]
-    E -->|Stripe $19/mo| F[🌐 Custom Domain Live]
+ A[Lead Discovery] --> B[Qualification]
+ B --> C[Data Enrichment]
+ C --> D[Pre-built Preview]
+ D --> E[Human QA]
+ E --> F[Personalized Outreach]
+ F --> G[Follow-up]
+ G --> H[Conversion]
+ H --> I[Domain + Production Site]
+ I --> J[Maintenance + Retention]
+ J --> K[Referral / Upsell]
 ```
 
----
+## 2. Lead Qualification — Quality Before Volume
 
-## 📂 Repository Structure
+Prioritize businesses where a website can plausibly create business value.
+
+Store and score:
+- business name, category, city/country and Google Business Profile URL
+- rating and review count
+- website status: none / broken / weak / adequate
+- phone and publicly listed contact channels
+- business hours, services, photos and review themes
+- likely decision-maker/contact route when legitimately available
+- lead source and timestamp
+- outreach consent/suppression status
+- qualification score and reason
+
+Suggested scoring signals:
+- no website or clearly weak/outdated website
+- healthy review volume and recent activity
+- service category where calls, bookings, quotes or visits matter
+- usable business photos/content
+- reachable public business contact
+- evidence the business is active
+
+Do not treat an arbitrary review threshold as universal. Test thresholds by niche and geography.
+
+## 3. AI Enrichment & Preview Generation
+
+AI may generate:
+- concise hero proposition
+- services summary/cards
+- review/theme summaries
+- FAQ drafts
+- calls-to-action
+- contact/location sections
+- SEO title/description drafts
+
+Rules:
+- never invent services, awards, prices, testimonials or credentials
+- retain provenance for factual business data
+- flag uncertain generated claims for human review
+- run a QA gate before outreach
+
+Preview URLs can follow a structure such as `preview.example.com/{slug}`. The demo should be fast, mobile-first and clearly presented as a preview until accepted by the business.
+
+## 4. Outreach System
+
+The outreach strategy is “show useful work first,” not generic bulk pitching.
+
+Sequence to test:
+1. Initial personalized message: identify the business and explain that a preview was prepared.
+2. Provide the preview link and one concrete reason it may help (calls, bookings, quote requests, directions, menu/services, etc.).
+3. Low-friction CTA: ask whether they want it published/customized rather than forcing a meeting.
+4. Follow-up 1 after a tested delay.
+5. Follow-up 2 with a useful observation or improvement, not merely “checking in.”
+6. Stop after the configured sequence and honor opt-outs/suppression.
+
+Channels can include compliant cold email, WhatsApp where appropriate/allowed, phone/manual follow-up, and local referrals/partnerships. Channel rules, consent requirements and anti-spam/privacy obligations must be checked for each target country before scaling.
+
+Track by campaign/channel:
+- delivered
+- preview visits
+- replies
+- positive replies
+- qualified conversations
+- conversions
+- unsubscribes/complaints
+- acquisition cost
+- time-to-close
+
+No response-rate claim should be presented as fact until our own campaign data supports it.
+
+## 5. Pricing — Test, Don’t Guess
+
+Start with simple packages and validate willingness-to-pay by niche and market.
+
+### Starter
+- one-page managed site
+- SSL + hosting
+- contact/call/WhatsApp CTA
+- basic edits/support allowance
+
+### Growth
+- everything in Starter
+- custom domain management/assistance
+- analytics/reporting
+- additional sections or conversion features
+- higher edit/support allowance
+
+### Premium / Local Growth
+- everything in Growth
+- booking/quote integrations where applicable
+- ongoing conversion/SEO improvements within a clearly defined scope
+- priority support
+
+Test monthly vs annual billing and optional setup fees. Do not hard-code `$19–$29`, margin percentages, or cost assumptions as universal truths. Maintain a cost model containing domain, infrastructure, API/enrichment, outreach, payment processing, support labor, refunds and taxes/fees where applicable.
+
+Core unit economics:
+
+`Gross Margin = Revenue - Direct Service Costs`
+
+`Contribution Margin = Revenue - Direct Service Costs - Variable Support/Acquisition Costs`
+
+`CAC = Sales + Outreach Spend / New Paying Customers`
+
+Track retention/churn before making LTV claims.
+
+## 6. Conversion Flow
+
+Recommended sales flow:
+
+`Preview → Interested reply → Small customization request → Checkout/approval → Domain connection → Production publish → Welcome/onboarding`
+
+Reduce friction:
+- preview already works
+- business owner can request corrections before paying
+- transparent scope and pricing
+- simple checkout
+- explicit ownership/domain/cancellation terms
+- fast production activation
+
+## 7. Retention — The Main Business Engine
+
+Recurring revenue only works when recurring value is visible.
+
+Provide:
+- uptime/SSL/hosting management
+- backups/versioning where appropriate
+- security/platform updates
+- a defined number/scope of content edits
+- contact/form monitoring
+- analytics or simple monthly/quarterly performance summary
+- domain renewal reminders/management according to plan
+- periodic conversion/content improvements for higher tiers
+
+Retention workflow:
+- onboarding confirmation
+- early post-launch check
+- periodic performance/update touchpoint
+- renewal reminder where needed
+- cancellation feedback and export/handover policy
+
+Track:
+- monthly logo churn
+- revenue churn
+- support time per account
+- expansion/upgrade revenue
+- referrals
+- failed payments
+
+## 8. Referral & Expansion
+
+After the customer has received demonstrable value, request a referral or testimonial. Possible upsells should be relevant rather than automatic: additional pages, booking/quote workflows, additional locations, business email, content updates, analytics, or local-search work with an explicit scope.
+
+## 9. Technical Architecture
+
+Candidate stack (validate before implementation):
+- Lead collection: compliant data provider/API or carefully designed collection workflow
+- Enrichment: Gemini or another model with structured output
+- Site engine: Next.js + Tailwind or an equivalent multi-tenant renderer
+- Hosting/CDN/custom domains: Cloudflare-compatible architecture
+- Database/CRM: PostgreSQL/Supabase or equivalent
+- Outreach: provider selected by target market and compliance requirements
+- Billing: Stripe/Lemon Squeezy or market-appropriate alternative
+- Observability: errors, delivery events, preview visits, conversions and account health
+
+Separate business/site data from generated presentation content so templates can change without re-scraping the lead.
+
+## 10. Minimum Data Model
+
+A lead/customer record should cover:
+- identity/location/category
+- source/provenance
+- contact methods
+- qualification score
+- enrichment payload
+- preview slug/version/status
+- outreach events and suppression state
+- replies/sales stage
+- subscription/customer status
+- domain/deployment state
+- maintenance requests
+- analytics/account-health metrics
+
+See `schemas/lead.schema.json` for the current schema; expand it as implementation begins.
+
+## 11. Execution Roadmap
+
+### Phase 0 — Validation
+- choose 1–2 niches and 1 initial geography
+- manually qualify a small lead cohort
+- create previews
+- manually QA and outreach
+- record every funnel event
+- validate objections, pricing and willingness-to-pay
+
+### Phase 1 — MVP Automation
+- lead import/qualification
+- enrichment pipeline
+- preview renderer
+- internal lead dashboard
+- outreach event tracking
+
+### Phase 2 — Sales & Provisioning
+- checkout/subscriptions
+- custom-domain provisioning
+- onboarding/correction workflow
+- customer/account state
+
+### Phase 3 — Retention Operations
+- maintenance queue
+- analytics/reporting
+- renewal/payment-failure handling
+- referral/upgrade workflow
+
+### Phase 4 — Scale
+- template library by niche
+- multi-market compliance/configuration
+- campaign experiments
+- automated QA where safe
+- unit-economics dashboard
+
+## 12. Experiments Required Before Scaling
+
+Measure rather than assume:
+- niche conversion rate
+- no-website vs weak-website leads
+- preview style/template
+- email vs other permitted channels
+- CTA wording
+- follow-up cadence
+- monthly vs annual pricing
+- setup fee vs no setup fee
+- plan packaging
+- support workload
+- churn and reasons
+
+Use randomized or clearly separated cohorts when practical so changes can be evaluated rather than guessed.
+
+## 13. Guardrails
+
+- Do not fabricate business facts in AI-generated pages.
+- Do not imply endorsement/ownership of a business before authorization.
+- Respect opt-outs and maintain suppression records.
+- Review privacy, marketing, platform and messaging rules for every market/channel.
+- Protect API keys and customer data.
+- Add rate limits, retries, idempotency and audit logs to automation.
+- Keep a human review step until quality metrics justify reducing it.
+
+## Repository
 
 ```text
 website-lead/
-├── README.md                     # Master project overview & blueprint
-├── .gitignore                    # Standard ignore rules
+├── README.md
 ├── docs/
-│   ├── ARCHITECTURE.md           # Deep-dive technical architecture & Cloudflare SaaS setup
-│   ├── OUTREACH_STRATEGY.md      # High-converting WhatsApp & Cold Email scripts, pricing
-│   └── ROADMAP.md                # 4-Phase execution plan and milestones
+│   ├── ARCHITECTURE.md
+│   ├── OUTREACH_STRATEGY.md
+│   └── ROADMAP.md
 ├── schemas/
-│   └── lead.schema.json          # Standard JSON schema for scraped & enriched leads
+│   └── lead.schema.json
 └── examples/
-    └── sample-lead.json          # Complete sample lead ready for preview rendering
+    └── sample-lead.json
 ```
 
----
+## Next Build Priority
 
-## 🛠️ Technology Stack
-
-* **Lead Scraping:** Python (Playwright) / Apify / Outscraper Google Maps Scraper API.
-* **AI Enrichment:** Google Gemini 1.5/2.0 Flash (for fast hero copy, service cards, FAQ generation).
-* **Multi-Tenant Website Engine:** Next.js 15 (App Router) + Tailwind CSS + Lucide Icons.
-* **Hosting & CDN:** Cloudflare Pages (Free global edge caching with dynamic routing).
-* **Custom Domain Automation:** Cloudflare for SaaS (Custom Hostnames with automatic SSL).
-* **Database & CRM:** Supabase (PostgreSQL) for leads, statuses, and site configurations.
-* **Outreach Delivery:** WhatsApp Cloud API / Evolution API (for non-US) & Instantly.ai / Resend (for US/Canada cold email).
-* **Billing & Subscriptions:** Stripe / Lemon Squeezy recurring payments ($19 - $29/month).
-
----
-
-## 💼 Business & Monetization Model
-
-### The Micro-SaaS Subscription Formula:
-* **Initial Setup Fee:** **$0** (Free setup minimizes friction).
-* **Subscription Fee:** **$19 – $29 / month** or **$199 / year** (includes custom domain, hosting, SSL, and monthly updates).
-* **Margin:** Cost per site is ~$0.80/month (Domain ~$10/yr + Free Cloudflare hosting). Net margin is **>90%**.
-* **Target Scale:** 100 retained local businesses = **$1,900 - $2,900 / month MRR**.
-
----
-
-## 🚀 Quick Start Guide
-
-### 1. Inspect Lead Schema & Sample Data
-Review the JSON structure used by the preview generator:
-```bash
-cat schemas/lead.schema.json
-cat examples/sample-lead.json
-```
-
-### 2. Read Architectural & Outreach Documentation
-* [Technical Architecture](file:///docs/ARCHITECTURE.md)
-* [Outreach Copywriting & Scripts](file:///docs/OUTREACH_STRATEGY.md)
-* [Execution Roadmap](file:///docs/ROADMAP.md)
-
----
-
-## 📄 License
-MIT License. Created for high-performance programmatic agency automation.
+Before building a large scraper, complete a manual validation loop for one niche and geography. The first software milestone should make that loop faster and measurable: lead qualification → preview → QA → outreach tracking → conversion → maintenance.
