@@ -1,99 +1,277 @@
-# System Architecture & Technical Design
+# Website Lead Engine — System Architecture Blueprint
 
-This document details the complete end-to-end technical pipeline for the **Website Lead Engine** (Automated Speculative Web Design & Outreach).
+## Architecture Goal
+A simple internal, pipeline-first application that can run initially on Raspberry Pi and later migrate to a VPS without redesign. It discovers businesses, researches and scores them, generates previews for strong opportunities, surfaces only the best prospects to Raj, supports human-approved personal outreach, and manages converted clients through maintenance and retention.
 
----
-
-## 1. High-Level Architecture Diagram
+## End-to-End Flow
 
 ```mermaid
-flowchart TD
-    subgraph Data Acquisition
-        GM[Google Maps / Places] -->|Scrape queries: niche + city| SCRAPER[Lead Scraper Service]
-        SCRAPER -->|Filter: website == null & reviews >= 20| RAW_LEADS[(Raw Leads DB)]
-    end
-
-    subgraph Processing & AI Enrichment
-        RAW_LEADS --> ENRICH[Enrichment Worker]
-        ENRICH -->|Fetch reviews, photos, hours| PLACES_DATA[Place Metadata]
-        ENRICH -->|Generate Taglines, Copy, Services, FAQs| LLM[Gemini 1.5/2.0 Flash]
-        LLM & PLACES_DATA --> PROCESSED_LEAD[(Supabase / Postgres DB)]
-    end
-
-    subgraph Preview & Rendering Engine
-        PROCESSED_LEAD --> NEXTJS[Next.js Dynamic Multi-Tenant Engine]
-        NEXTJS -->|SSR / Edge Cache| PREVIEW[preview.leadagency.com/:slug]
-        PUPPETEER[Headless Browser Worker] -->|Render & Screenshot preview| SNAPSHOTS[PNG / WebP Previews]
-    end
-
-    subgraph Outreach Engine
-        PROCESSED_LEAD & SNAPSHOTS --> DISPATCH[Outreach Dispatcher]
-        DISPATCH -->|UK / EU / LatAm / UAE| WA[WhatsApp API / Baileys]
-        DISPATCH -->|USA / Canada| EMAIL[Cold Email / SMS]
-        WA & EMAIL --> CLIENT[Business Owner]
-    end
-
-    subgraph Conversion & Live Provisioning
-        CLIENT -->|Agrees / Subscribes| STRIPE[Stripe / Lemon Squeezy]
-        STRIPE -->|Webhook: payment.success| CF_SAAS[Cloudflare for SaaS API]
-        CF_SAAS -->|Auto-SSL & DNS Routing| CUSTOM_DOMAIN[clientbusiness.com]
-    end
+flowchart LR
+  A[Market Config] --> B[Lead Provider Adapter]
+  B --> C[Normalize + Deduplicate]
+  C --> D[Research Queue]
+  D --> E[Website Audit]
+  D --> F[Public Contact Enrichment]
+  D --> G[Business Signals]
+  E --> H[AI Qualification]
+  F --> H
+  G --> H
+  H --> I{Score / Policy}
+  I -->|Low| J[Archive / Revisit]
+  I -->|High| K[Preview Generator]
+  K --> L[Human Review Queue]
+  L -->|Skip| J
+  L -->|Approve| M[Personal Outreach Draft]
+  M --> N[Human Send / Approved Send]
+  N --> O[Reply + Sales Pipeline]
+  O -->|Won| P[Production Provisioning]
+  P --> Q[Maintenance + Retention]
+  Q --> R[Referral / Upsell]
 ```
 
----
+## Deployment Model
 
-## 2. Core Subsystems
+### Development
+- PC/Mac for coding, testing and local development.
+- GitHub is source of truth.
+- Docker keeps environments portable.
 
-### Subsystem A: Lead Scraper & Filter
-* **Source:** Google Maps via Playwright/Puppeteer or third-party scraping APIs (Outscraper, Apify Google Maps Scraper).
-* **Target Criteria:**
-  - `has_website == false`
-  - `user_ratings_total >= 20` (minimum 20 reviews guarantees active business)
-  - `rating >= 4.0` (high social proof to showcase)
-  - `formatted_phone_number != null`
-* **Output:** JSON object matching `schemas/lead.schema.json`.
+### Initial production/validation
+- Raspberry Pi.
+- Docker Compose/services.
+- Cloudflare Tunnel for secure dashboard access without exposing router ports.
+- Monitor CPU, RAM, disk, temperature and worker concurrency because the Pi already runs other services.
+- Heavy external AI work should use APIs rather than local model inference.
 
----
+### Scale production
+Move application/workers to a VPS when resource use, reliability, customer traffic or operational importance warrants it. The application must use environment configuration and portable containers so this is migration, not a rewrite.
 
-### Subsystem B: AI Content Enrichment Engine
-* **Goal:** Turn raw Google Maps data into full landing page copy in under 3 seconds.
-* **Model:** Gemini 1.5/2.0 Flash (high speed, cost-effective).
-* **Prompts generated:**
-  1. *Hero Tagline & Subtitle:* Highlighting high rating and customer satisfaction.
-  2. *Services Cards:* 3-4 standard services inferenced from business category and positive review mentions.
-  3. *About Section:* Short, engaging story of the business.
-  4. *Customer Testimonial Highlights:* Selecting top 3 authentic 5-star quotes.
-  5. *FAQ Section:* 2-3 standard questions (walk-in policies, payment modes, business hours).
+## Logical Components
 
----
+### 1. Web/Admin Application
+Responsibilities:
+- authentication
+- dashboard
+- pipeline board
+- lead detail/research view
+- daily recommendations
+- preview review
+- approve/skip/hold
+- outreach drafts/events
+- reply/sales state
+- customer maintenance queue
+- settings/market configuration
 
-### Subsystem C: Multi-Tenant Landing Page Preview Engine
-Instead of creating individual HTML files or separate hosting instances for every business:
-* **Architecture:** Single Next.js (App Router) or Astro codebase deployed on **Cloudflare Pages** or **Vercel Edge**.
-* **Dynamic Route:** `/preview/[slug]`
-* **Workflow:**
-  1. When `/preview/crown-heights-barbershop` is accessed, the edge function fetches the JSON payload from Supabase.
-  2. Renders a modern responsive landing page instantly using predefined industry themes (Service, Food & Dining, Health & Beauty).
-  3. Automatically injects the business's actual Google reviews, photos, business hours, and click-to-call button.
-* **Hosting Cost:** **$0 to negligible** (Cloudflare Pages free tier provides unlimited requests).
+UI must remain minimal and mobile-friendly.
 
----
+### 2. Provider Adapter Layer
+Never couple downstream code to one discovery provider.
 
-### Subsystem D: Dynamic Custom Domain Mapping (Post-Sale)
-When a client subscribes and wants their own `.com` or `.co.uk`:
-* **Cloudflare for SaaS (Custom Hostnames):**
-  - Allows you to route external domains (e.g., `www.crownheightsbarbershop.com`) directly to your master Next.js application with automatic SSL generation.
-  - Middleware checks `req.headers.get("host")`. If host matches a verified custom domain, it renders that specific client's page directly at root `/` instead of `/preview/[slug]`.
-  - Zero manual server configuration needed per client.
+Canonical interface concept:
+- `searchBusinesses(marketConfig)`
+- `getBusiness(providerId)`
+- `getAvailableBusinessSignals(providerId)`
 
----
+Adapters may include approved Places/business APIs, licensed providers and manual CSV/JSON import.
 
-### Subsystem E: Multi-Channel Outreach Dispatcher
-* **WhatsApp Strategy (UK, EU, LatAm, Gulf, APAC):**
-  - High open rates (85–95%).
-  - Deliver message with personalized thumbnail / GIF showing their live preview.
-  - Humanized delays (45–120s random interval) and phone number warm-up to prevent spam bans.
-* **Cold Email & SMS Strategy (USA, Canada):**
-  - In the US, unsolicited commercial WhatsApp messages are less customary and face stricter anti-spam flags.
-  - Dedicated sending domains with DKIM/SPF/DMARC configured via Instantly.ai / Smartlead.
-  - Personalized subject line referencing their exact Google review count.
+Every external fact stores provenance, provider and retrieval timestamp where practical.
+
+### 3. Normalization & Deduplication
+Create a canonical business identity from provider IDs plus normalized name, location, domain, phone and other stable signals. Merge repeated discoveries rather than creating duplicate leads.
+
+### 4. Background Job System
+Jobs should include:
+- discovery
+- normalization/dedupe
+- research
+- website audit
+- contact enrichment
+- scoring
+- preview generation
+- screenshots
+- follow-up reminders
+- analytics aggregation
+- maintenance checks
+
+Requirements:
+- idempotency
+- retry/backoff
+- concurrency limits
+- job status/error logging
+- independently enable/disable stages
+- avoid resource spikes on Raspberry Pi
+
+### 5. Research & Website Audit
+Research combines sourced business information and website observations.
+
+Website states:
+- none
+- unreachable/broken
+- weak
+- adequate
+- strong
+
+Audit signals may include mobile usability, clarity of CTA/contact path, obvious stale/broken content, performance indicators, conversion usefulness and whether the site adequately represents the business. Do not claim subjective weaknesses as facts without recording the evidence/observation.
+
+### 6. Contact Enrichment
+Store only legitimate/public business contact routes needed for the workflow:
+- email
+- phone
+- published WhatsApp
+- website contact form
+- public business social profiles
+- decision-maker route when legitimately/publicly available
+
+Each method has source, confidence/status and last verification timestamp where possible.
+
+### 7. AI Qualification Engine
+AI receives structured sourced facts and audit observations and returns structured output:
+- score 0–100
+- confidence
+- recommendation
+- positive factors
+- penalties
+- why a website improvement could matter
+- recommended outreach channel
+- recommended outreach angle
+
+Scoring weights must be configurable. AI cannot fabricate missing facts.
+
+### 8. Daily Recommendation Engine
+The system may research many businesses but intentionally limits Raj's daily action queue to a small number of excellent candidates, initially around 2–5/day.
+
+Ranking should consider score, confidence, novelty, contactability, demo readiness and experiment allocation.
+
+### 9. Preview/Site Renderer
+Single multi-tenant renderer backed by structured data.
+
+Responsibilities:
+- `/preview/[slug]`
+- niche template selection
+- factual copy/assets
+- preview banner/state
+- mobile-first design
+- CTA based on business type
+- preview versioning
+- screenshot/thumbnail generation
+
+Keep factual source data separate from generated presentation content.
+
+### 10. Human QA Gate
+Before outreach, Raj sees:
+- score/reasons
+- evidence/provenance
+- website audit
+- contacts
+- preview
+- suggested message
+
+Actions:
+- approve
+- edit message
+- skip + reason
+- hold
+- request regeneration/correction
+
+No Phase-1 outreach bypasses this gate.
+
+### 11. Outreach Module
+Initial design is personal outreach, not bulk sending.
+
+Default sender identity: dedicated personal-style mailbox on `d4f.me`, such as `raj@d4f.me`, configured with appropriate domain email authentication.
+
+Store channels generically:
+- email
+- WhatsApp
+- phone
+- LinkedIn
+- Facebook/Instagram
+- contact form
+- SMS where appropriate
+
+Email is initial primary channel. The application creates personalized drafts and logs manual/approved sends. Suppression and opt-out state is global for a lead/contact identity.
+
+### 12. Reply/Sales CRM
+Lightweight stages:
+`contacted → replied → interested → changes_requested → proposal → won/lost/follow_up_later`
+
+Capture objections, requested changes, next action, pricing and outcome so experiments can learn from real data.
+
+### 13. Billing & Provisioning
+After willingness-to-pay is validated, integrate billing and automate:
+- customer creation
+- subscription/payment state
+- domain mapping
+- SSL
+- production publication
+- onboarding
+
+Keep preview deployment and customer production deployment distinct.
+
+### 14. Maintenance & Retention
+Operational queues include:
+- uptime/site health
+- SSL/domain status
+- edit requests
+- form/contact health
+- renewal/payment issues
+- periodic performance updates
+- customer health
+- referral/upgrade opportunities
+
+## Suggested Data Domains
+Rather than one giant table, implementation can evolve toward:
+- `markets`
+- `lead_sources`
+- `businesses`
+- `business_facts`
+- `website_audits`
+- `contacts`
+- `qualification_runs`
+- `previews`
+- `review_decisions`
+- `outreach_events`
+- `conversations/replies`
+- `sales_opportunities`
+- `customers`
+- `subscriptions`
+- `domains/deployments`
+- `maintenance_tasks`
+- `analytics_events`
+- `jobs`
+- `audit_log`
+
+The JSON lead schema can act as the canonical interchange/aggregate representation even if the relational database is normalized.
+
+## Security & Reliability
+- secrets only server-side/environment secret storage
+- authenticated admin dashboard
+- Cloudflare Tunnel for initial remote access
+- least-privilege provider/API credentials
+- webhook signature verification
+- backups
+- structured logs
+- health endpoint
+- retry/backoff
+- idempotency keys
+- rate limiting
+- audit log for important state changes
+- no sensitive data in normal logs
+
+## Observability
+Dashboard/system metrics should include:
+- leads discovered/researched/qualified
+- recommendation count
+- research/AI/provider failures
+- preview generation failures
+- outreach/reply/conversion funnel
+- retention/customer health
+- queue depth/job duration
+- Raspberry Pi CPU/RAM/disk during initial hosting
+
+## Architecture Rule
+Do not optimize for maximum automation first. Optimize for a reliable measurable loop:
+
+`discover → research → score → recommend → preview → human approve → personal outreach → reply → convert → retain`
+
+Every future automation must preserve that loop's data quality, compliance and observability.
