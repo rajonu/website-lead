@@ -1,118 +1,232 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "BusinessLead",
+  "title": "WebsiteLead",
+  "description": "Canonical aggregate/interchange record for a researched business prospect and its lifecycle.",
   "type": "object",
-  "required": [
-    "id",
-    "slug",
-    "name",
-    "category",
-    "rating",
-    "reviewCount",
-    "contact",
-    "status"
-  ],
+  "required": ["id", "name", "category", "location", "lifecycle", "createdAt", "updatedAt"],
   "properties": {
-    "id": {
-      "type": "string",
-      "description": "Unique identifier for the lead"
-    },
-    "slug": {
-      "type": "string",
-      "description": "URL-friendly slug for dynamic preview (e.g. 'tonys-pizzeria-brooklyn')"
-    },
-    "name": {
-      "type": "string",
-      "description": "Official business name from Google Business Profile"
-    },
-    "category": {
-      "type": "string",
-      "description": "Primary category (e.g. 'Barber Shop', 'Dental Clinic', 'Plumbing Service')"
-    },
-    "rating": {
-      "type": "number",
-      "minimum": 1.0,
-      "maximum": 5.0
-    },
-    "reviewCount": {
-      "type": "integer",
-      "minimum": 0
-    },
-    "address": {
+    "id": { "type": "string" },
+    "slug": { "type": "string" },
+    "name": { "type": "string" },
+    "category": { "type": "string" },
+    "location": {
       "type": "object",
+      "required": ["country"],
       "properties": {
         "full": { "type": "string" },
         "city": { "type": "string" },
-        "state": { "type": "string" },
+        "stateRegion": { "type": "string" },
         "country": { "type": "string" },
-        "postalCode": { "type": "string" }
-      }
+        "postalCode": { "type": "string" },
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" }
+      },
+      "additionalProperties": false
     },
-    "contact": {
-      "type": "object",
-      "required": ["phone"],
-      "properties": {
-        "phone": { "type": "string" },
-        "whatsapp": { "type": "string" },
-        "email": { "type": "string" }
-      }
-    },
-    "googlePlaceId": {
-      "type": "string"
-    },
-    "photos": {
+    "sources": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": {
+        "type": "object",
+        "required": ["provider", "retrievedAt"],
+        "properties": {
+          "provider": { "type": "string" },
+          "providerId": { "type": "string" },
+          "url": { "type": "string" },
+          "retrievedAt": { "type": "string", "format": "date-time" },
+          "notes": { "type": "string" }
+        }
+      }
     },
-    "topReviews": {
+    "businessSignals": {
+      "type": "object",
+      "properties": {
+        "rating": { "type": "number", "minimum": 0, "maximum": 5 },
+        "reviewCount": { "type": "integer", "minimum": 0 },
+        "activeConfidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "hours": { "type": "object" },
+        "observations": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "website": {
+      "type": "object",
+      "properties": {
+        "url": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["unknown", "none", "broken", "weak", "adequate", "strong"]
+        },
+        "auditedAt": { "type": "string", "format": "date-time" },
+        "observations": { "type": "array", "items": { "type": "string" } },
+        "opportunities": { "type": "array", "items": { "type": "string" } },
+        "evidence": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "contacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["channel", "value"],
+        "properties": {
+          "channel": {
+            "type": "string",
+            "enum": ["email", "phone", "whatsapp", "linkedin", "facebook", "instagram", "contact_form", "sms", "other"]
+          },
+          "value": { "type": "string" },
+          "label": { "type": "string" },
+          "source": { "type": "string" },
+          "publicBusinessContact": { "type": "boolean" },
+          "verifiedAt": { "type": "string", "format": "date-time" },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    },
+    "assets": {
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
-          "author": { "type": "string" },
-          "rating": { "type": "number" },
-          "relativeTime": { "type": "string" },
-          "text": { "type": "string" }
+          "type": { "type": "string", "enum": ["photo", "logo", "other"] },
+          "url": { "type": "string" },
+          "source": { "type": "string" },
+          "usageNotes": { "type": "string" }
         }
       }
     },
-    "aiEnriched": {
+    "research": {
       "type": "object",
       "properties": {
-        "tagline": { "type": "string" },
-        "heroDescription": { "type": "string" },
-        "aboutText": { "type": "string" },
-        "services": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "title": { "type": "string" },
-              "description": { "type": "string" },
-              "icon": { "type": "string" }
-            }
-          }
+        "summary": { "type": "string" },
+        "customerJourney": { "type": "string" },
+        "conversionOpportunity": { "type": "string" },
+        "uncertainties": { "type": "array", "items": { "type": "string" } },
+        "lastResearchedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "qualification": {
+      "type": "object",
+      "properties": {
+        "score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "recommendation": {
+          "type": "string",
+          "enum": ["unknown", "reject", "low", "medium", "high", "priority"]
         },
-        "faqs": {
+        "positiveFactors": { "type": "array", "items": { "type": "string" } },
+        "penalties": { "type": "array", "items": { "type": "string" } },
+        "reason": { "type": "string" },
+        "recommendedChannel": { "type": "string" },
+        "outreachAngle": { "type": "string" },
+        "scoredAt": { "type": "string", "format": "date-time" },
+        "scoringVersion": { "type": "string" }
+      }
+    },
+    "generatedSite": {
+      "type": "object",
+      "properties": {
+        "template": { "type": "string" },
+        "hero": { "type": "object" },
+        "services": { "type": "array", "items": { "type": "object" } },
+        "about": { "type": "string" },
+        "faqs": { "type": "array", "items": { "type": "object" } },
+        "cta": { "type": "object" },
+        "generatedAt": { "type": "string", "format": "date-time" },
+        "generationVersion": { "type": "string" }
+      }
+    },
+    "preview": {
+      "type": "object",
+      "properties": {
+        "slug": { "type": "string" },
+        "url": { "type": "string" },
+        "screenshotUrl": { "type": "string" },
+        "version": { "type": "integer", "minimum": 1 },
+        "status": { "type": "string", "enum": ["none", "queued", "generated", "qa_required", "approved", "rejected"] },
+        "generatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "humanReview": {
+      "type": "object",
+      "properties": {
+        "decision": { "type": "string", "enum": ["pending", "approved", "skipped", "held", "needs_changes"] },
+        "reason": { "type": "string" },
+        "notes": { "type": "string" },
+        "reviewedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "outreach": {
+      "type": "object",
+      "properties": {
+        "suppressed": { "type": "boolean", "default": false },
+        "suppressionReason": { "type": "string" },
+        "recommendedChannel": { "type": "string" },
+        "draft": { "type": "string" },
+        "events": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "question": { "type": "string" },
-              "answer": { "type": "string" }
+              "channel": { "type": "string" },
+              "type": { "type": "string", "enum": ["drafted", "approved", "sent", "delivered", "failed", "follow_up", "reply", "opt_out", "complaint"] },
+              "at": { "type": "string", "format": "date-time" },
+              "notes": { "type": "string" }
             }
           }
         }
       }
     },
-    "status": {
-      "type": "string",
-      "enum": ["scraped", "enriched", "preview_generated", "contacted", "replied", "converted", "rejected"],
-      "default": "scraped"
+    "sales": {
+      "type": "object",
+      "properties": {
+        "stage": {
+          "type": "string",
+          "enum": ["none", "contacted", "replied", "interested", "changes_requested", "proposal", "won", "lost", "follow_up_later"]
+        },
+        "replySummary": { "type": "string" },
+        "objections": { "type": "array", "items": { "type": "string" } },
+        "nextAction": { "type": "string" },
+        "nextActionAt": { "type": "string", "format": "date-time" },
+        "lostReason": { "type": "string" },
+        "quotedPlan": { "type": "string" },
+        "quotedPrice": { "type": "number", "minimum": 0 },
+        "currency": { "type": "string" }
+      }
     },
-    "customDomain": {
+    "customer": {
+      "type": "object",
+      "properties": {
+        "isCustomer": { "type": "boolean", "default": false },
+        "customerSince": { "type": "string", "format": "date-time" },
+        "plan": { "type": "string" },
+        "billingStatus": { "type": "string" },
+        "customDomain": { "type": "string" },
+        "deploymentStatus": { "type": "string" },
+        "accountHealth": { "type": "string", "enum": ["unknown", "healthy", "attention", "at_risk"] }
+      }
+    },
+    "maintenance": {
+      "type": "object",
+      "properties": {
+        "lastHealthCheckAt": { "type": "string", "format": "date-time" },
+        "nextReviewAt": { "type": "string", "format": "date-time" },
+        "openTasks": { "type": "array", "items": { "type": "string" } },
+        "domainRenewalAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "lifecycle": {
       "type": "string",
-      "description": "Mapped custom domain once client converts (e.g. 'tonyspizzeriany.com')"
-    }
-  }
+      "enum": ["new", "researching", "qualified", "high_score", "demo_ready", "review", "approved", "contacted", "replied", "interested", "client", "maintenance", "archived", "rejected"]
+    },
+    "experiment": {
+      "type": "object",
+      "properties": {
+        "market": { "type": "string" },
+        "niche": { "type": "string" },
+        "cohort": { "type": "string" },
+        "variant": { "type": "string" }
+      }
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
 }
