@@ -1,0 +1,44 @@
+{
+  "name": "website-lead",
+  "version": "1.0.0",
+  "description": "> Find qualified local businesses without strong websites, create useful pre-built previews, reach decision-makers with value-first outreach, convert them to recurring plans, and retain them through measurable ongoing service.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "example": "examples"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "discover": "node scripts/discover.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rajonu/website-lead.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rajonu/website-lead/issues"
+  },
+  "homepage": "https://github.com/rajonu/website-lead#readme",
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.59.0",
+    "next": "^16.4.2",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tailwind-merge": "^3.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "autoprefixer": "^10.6.1",
+    "postcss": "^8.5.30",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^7.0.2"
+  }
+}

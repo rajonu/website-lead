@@ -1,0 +1,578 @@
+import { WebsiteLead } from '@/lib/types/lead';
+
+export const initialSeedLeads: WebsiteLead[] = [
+  {
+    id: "lead_dallas_hvac_001",
+    slug: "example-comfort-hvac-dallas",
+    name: "Apex Comfort HVAC Solutions",
+    category: "HVAC Contractor",
+    location: {
+      full: "4821 Alpha Rd, Dallas, TX 75244",
+      city: "Dallas",
+      stateRegion: "TX",
+      country: "United States",
+      postalCode: "75244"
+    },
+    sources: [
+      {
+        provider: "google-places-approved",
+        providerId: "ChIJ_apex_comfort_dallas",
+        retrievedAt: "2026-10-18T09:00:00Z",
+        notes: "Retrieved via Places search query 'HVAC in Dallas TX'"
+      }
+    ],
+    businessSignals: {
+      rating: 4.9,
+      reviewCount: 142,
+      activeConfidence: 0.95,
+      hours: {
+        "Monday-Friday": "07:00 - 19:00",
+        "Saturday": "08:00 - 16:00",
+        "Sunday": "Emergency Only"
+      },
+      observations: [
+        "Highly active customer reviews praising same-day emergency AC repair",
+        "Over 140 genuine reviews with 4.9 average rating"
+      ]
+    },
+    website: {
+      status: "none",
+      auditedAt: "2026-10-18T09:15:00Z",
+      observations: [
+        "No website URL linked on Google Business Profile",
+        "Customers repeatedly comment asking for direct appointment booking"
+      ],
+      opportunities: [
+        "Instant emergency call button for summer AC breakdowns",
+        "Online quote request form with clear service pricing transparency"
+      ],
+      evidence: ["Direct place audit confirmed website field empty"]
+    },
+    contacts: [
+      {
+        channel: "email",
+        value: "dispatch@apexcomfortdallas.com",
+        label: "Public Business Inquiries",
+        source: "Public business listing",
+        publicBusinessContact: true,
+        verifiedAt: "2026-10-18T09:20:00Z",
+        confidence: 0.9
+      },
+      {
+        channel: "phone",
+        value: "+1-214-555-0182",
+        label: "Office & Dispatch Phone",
+        source: "Google Business Profile",
+        publicBusinessContact: true,
+        verifiedAt: "2026-10-18T09:20:00Z",
+        confidence: 0.99
+      }
+    ],
+    assets: [
+      {
+        type: "photo",
+        url: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1200&q=80",
+        source: "Google Places Photo",
+        usageNotes: "Technician van and certified equipment"
+      }
+    ],
+    research: {
+      summary: "Premier residential and light commercial HVAC specialist operating across Dallas-Fort Worth metro.",
+      customerJourney: "Homeowners search on Google Maps during sudden AC/heating failures, needing instant phone contact or same-day booking.",
+      conversionOpportunity: "A high-speed mobile one-page site with tap-to-call and emergency badge will directly convert map visitors into high-ticket service calls.",
+      uncertainties: [],
+      lastResearchedAt: "2026-10-18T09:25:00Z"
+    },
+    qualification: {
+      score: 94,
+      confidence: 0.92,
+      recommendation: "priority",
+      positiveFactors: [
+        "No existing website despite 142 reviews",
+        "High average rating (4.9/5.0)",
+        "High-ticket emergency home service niche (HVAC)",
+        "Direct email and phone available"
+      ],
+      penalties: [],
+      reason: "Top-tier opportunity: high review count in high-ticket US trade niche with zero web presence.",
+      recommendedChannel: "email",
+      outreachAngle: "Highlight mobile call-to-action for summer emergency AC calls.",
+      scoredAt: "2026-10-18T09:30:00Z",
+      scoringVersion: "v1.2-us"
+    },
+    generatedSite: {
+      template: "home-services",
+      hero: {
+        headline: "Fast, Reliable Heating & AC Repair in Dallas",
+        subheadline: "Trusted by 140+ Dallas homeowners with a 4.9-star rating. Available for same-day service and 24/7 emergencies.",
+        badge: "★ 4.9 Rated Dallas HVAC Specialists",
+        callToActionText: "Call for Emergency Service"
+      },
+      services: [
+        {
+          title: "Emergency AC Repair & Diagnostics",
+          description: "Rapid diagnostics, refrigerant leak repair, compressor replacement, and airflow balancing.",
+          icon: "wind"
+        },
+        {
+          title: "Complete System Replacement",
+          description: "High-efficiency heat pumps and central AC installations with comprehensive warranties.",
+          icon: "shield"
+        },
+        {
+          title: "Seasonal Tune-Up & Maintenance",
+          description: "Comprehensive 24-point check to prevent costly breakdowns and lower summer electric bills.",
+          icon: "wrench"
+        }
+      ],
+      about: "Apex Comfort HVAC Solutions has provided transparent, top-tier heating and air conditioning services across Dallas for over 8 years. Our certified technicians arrive fully equipped to resolve your heating or cooling emergencies on the spot.",
+      faqs: [
+        {
+          question: "Do you offer emergency weekend service?",
+          answer: "Yes, our emergency response crew is on standby 24/7 throughout Dallas-Fort Worth."
+        },
+        {
+          question: "How quickly can a technician arrive?",
+          answer: "For emergency cooling and heating outages, we strive to arrive within 60 to 90 minutes."
+        }
+      ],
+      cta: {
+        type: "call_and_quote",
+        primaryPhone: "+1-214-555-0182"
+      },
+      generatedAt: "2026-10-18T09:35:00Z",
+      generationVersion: "v1.0"
+    },
+    preview: {
+      slug: "example-comfort-hvac-dallas",
+      url: "/preview/example-comfort-hvac-dallas",
+      version: 1,
+      status: "qa_required",
+      generatedAt: "2026-10-18T09:36:00Z"
+    },
+    humanReview: {
+      decision: "pending"
+    },
+    outreach: {
+      suppressed: false,
+      recommendedChannel: "email",
+      draft: "Hi Apex Comfort team,\n\nI was looking at local HVAC specialists in Dallas and noticed your 4.9-star rating with over 140 reviews on Google Maps. Congratulations on building such a strong reputation!\n\nI noticed that your Google profile doesn't have an official website linked, which means mobile customers might hesitate before calling.\n\nTo show what a clean mobile site would look like for you, I put together a quick preview loaded with your top reviews and services:\n👉 https://lead.d4f.me/preview/example-comfort-hvac-dallas\n\nIf you like it, I'd be happy to set it up on your own domain. No obligation at all.\n\nBest regards,\nRaj\nWeb Developer | raj@d4f.me",
+      events: []
+    },
+    sales: {
+      stage: "none",
+      objections: [],
+      quotedPlan: "Growth Managed Plan",
+      quotedPrice: 99,
+      currency: "USD"
+    },
+    customer: {
+      isCustomer: false,
+      accountHealth: "unknown"
+    },
+    maintenance: {
+      openTasks: []
+    },
+    lifecycle: "review",
+    experiment: {
+      market: "US",
+      niche: "HVAC",
+      cohort: "us-dfw-batch1",
+      variant: "personal-email"
+    },
+    createdAt: "2026-10-18T09:00:00Z",
+    updatedAt: "2026-10-18T09:36:00Z"
+  },
+  {
+    id: "lead_mcr_plumbing_002",
+    slug: "manchester-rapid-plumbing",
+    name: "Manchester Rapid Plumbing & Heating",
+    category: "Plumbing Service",
+    location: {
+      full: "142 Deansgate, Manchester M3 2QS",
+      city: "Manchester",
+      stateRegion: "Greater Manchester",
+      country: "United Kingdom",
+      postalCode: "M3 2QS"
+    },
+    sources: [
+      {
+        provider: "places-uk-adapter",
+        providerId: "ChIJ_mcr_rapid_plumb",
+        retrievedAt: "2026-10-18T08:00:00Z"
+      }
+    ],
+    businessSignals: {
+      rating: 4.8,
+      reviewCount: 88,
+      activeConfidence: 0.9,
+      hours: { "Monday-Sunday": "24 Hours Emergency" },
+      observations: ["Active Gas Safe certified mentions in recent client feedback"]
+    },
+    website: {
+      status: "none",
+      auditedAt: "2026-10-18T08:10:00Z",
+      observations: ["Zero web domain configured"],
+      opportunities: ["Gas Safe verification badge, tap-to-call emergency leak response"]
+    },
+    contacts: [
+      {
+        channel: "phone",
+        value: "+44 161 555 0194",
+        label: "24/7 Hotline",
+        publicBusinessContact: true,
+        verifiedAt: "2026-10-18T08:15:00Z"
+      },
+      {
+        channel: "email",
+        value: "enquiries@manchesterrapidplumbing.co.uk",
+        label: "Direct Email",
+        publicBusinessContact: true,
+        verifiedAt: "2026-10-18T08:15:00Z"
+      }
+    ],
+    assets: [
+      {
+        type: "photo",
+        url: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=80"
+      }
+    ],
+    research: {
+      summary: "High-reputation emergency plumbing and boiler repair service in central Manchester.",
+      customerJourney: "Instant urgent searches for burst pipes, unblocking, and boiler breakdowns.",
+      conversionOpportunity: "Emergency one-click call CTA with prominent Gas Safe registration proof."
+    },
+    qualification: {
+      score: 91,
+      confidence: 0.9,
+      recommendation: "high",
+      positiveFactors: [
+        "Uncontested local trade presence",
+        "88 positive reviews with no website",
+        "High urgency niche in Manchester"
+      ],
+      penalties: [],
+      reason: "High score UK trade lead; excellent fit for value-first personal email.",
+      recommendedChannel: "email",
+      outreachAngle: "Highlight boiler repair and burst pipe emergency call conversions.",
+      scoredAt: "2026-10-18T08:20:00Z",
+      scoringVersion: "v1.2-uk"
+    },
+    generatedSite: {
+      template: "home-services",
+      hero: {
+        headline: "Emergency Plumbers & Heating Engineers in Manchester",
+        subheadline: "On-call 24 hours across Greater Manchester. 4.8★ rated with over 80 verified reviews.",
+        badge: "★ Manchester's Trusted 24/7 Plumbers",
+        callToActionText: "Call Now for Immediate Dispatch"
+      },
+      services: [
+        {
+          title: "Burst Pipe & Leak Repair",
+          description: "Rapid isolation and repair of leaking water pipes, radiators, and fixtures.",
+          icon: "droplet"
+        },
+        {
+          title: "Boiler Servicing & Repair",
+          description: "Certified Gas Safe engineers resolving heating faults and pilot light failures.",
+          icon: "flame"
+        },
+        {
+          title: "Drain Unblocking & Clearance",
+          description: "High-pressure jetting and modern CCTV inspections for blocked drains.",
+          icon: "wrench"
+        }
+      ],
+      about: "Manchester Rapid Plumbing & Heating provides fast, reliable, and transparent plumbing services to homes and businesses across Manchester and Salford.",
+      faqs: [
+        {
+          question: "What is your typical arrival time in Manchester?",
+          answer: "We aim to be at your door within 45 to 60 minutes for urgent leaks."
+        }
+      ],
+      cta: {
+        type: "call_and_quote",
+        primaryPhone: "+44 161 555 0194"
+      },
+      generatedAt: "2026-10-18T08:30:00Z"
+    },
+    preview: {
+      slug: "manchester-rapid-plumbing",
+      url: "/preview/manchester-rapid-plumbing",
+      version: 1,
+      status: "approved",
+      generatedAt: "2026-10-18T08:35:00Z"
+    },
+    humanReview: {
+      decision: "approved",
+      reviewedAt: "2026-10-18T10:00:00Z"
+    },
+    outreach: {
+      suppressed: false,
+      recommendedChannel: "email",
+      draft: "Hi Manchester Rapid Plumbing team,\n\nSaw your 4.8★ rating on Google Maps in Manchester. Really impressive reputation!\n\nNoticed you don't have a website listed, so I designed a clean mobile landing page for you with tap-to-call buttons for urgent boiler breakdowns:\n👉 https://lead.d4f.me/preview/manchester-rapid-plumbing\n\nTake a look on your phone when you have a moment!\n\nCheers,\nRaj | raj@d4f.me",
+      events: [
+        {
+          channel: "email",
+          type: "drafted",
+          at: "2026-10-18T10:05:00Z"
+        }
+      ]
+    },
+    sales: {
+      stage: "contacted",
+      quotedPlan: "UK Starter Managed",
+      quotedPrice: 49,
+      currency: "GBP"
+    },
+    customer: {
+      isCustomer: false
+    },
+    lifecycle: "contacted",
+    experiment: {
+      market: "UK",
+      niche: "Plumbing",
+      cohort: "uk-mcr-batch1",
+      variant: "personal-email"
+    },
+    createdAt: "2026-10-18T08:00:00Z",
+    updatedAt: "2026-10-18T10:05:00Z"
+  },
+  {
+    id: "lead_dhaka_salon_003",
+    slug: "glow-lounge-salon-banani",
+    name: "Glow Lounge Ladies Beauty & Spa",
+    category: "Beauty Salon & Spa",
+    location: {
+      full: "House 42, Road 11, Block D, Banani, Dhaka 1213",
+      city: "Dhaka",
+      stateRegion: "Dhaka",
+      country: "Bangladesh",
+      postalCode: "1213"
+    },
+    sources: [
+      {
+        provider: "manual-import-dhaka",
+        providerId: "bd_dhk_banani_042",
+        retrievedAt: "2026-10-18T07:30:00Z",
+        notes: "Dhaka Banani active lifestyle hub"
+      }
+    ],
+    businessSignals: {
+      rating: 4.7,
+      reviewCount: 215,
+      activeConfidence: 0.98,
+      hours: { "Everyday": "10:30 AM - 08:30 PM" },
+      observations: [
+        "Massive social following on Facebook & Instagram",
+        "Over 200 Google reviews with high praise for bridal makeup and skin treatments"
+      ]
+    },
+    website: {
+      status: "none",
+      auditedAt: "2026-10-18T07:45:00Z",
+      observations: [
+        "Business relies entirely on Facebook page and WhatsApp",
+        "No official website or organized rate card catalog on Google"
+      ],
+      opportunities: [
+        "Official branded domain with WhatsApp appointment booking",
+        "Organized service catalog for bridal packages, hair spa, and facials",
+        "Google search direct destination"
+      ]
+    },
+    contacts: [
+      {
+        channel: "whatsapp",
+        value: "+8801711009988",
+        label: "Official Booking WhatsApp",
+        publicBusinessContact: true,
+        verifiedAt: "2026-10-18T07:50:00Z"
+      },
+      {
+        channel: "phone",
+        value: "+8801711009988",
+        label: "Front Desk Hotline",
+        publicBusinessContact: true,
+        verifiedAt: "2026-10-18T07:50:00Z"
+      }
+    ],
+    assets: [
+      {
+        type: "photo",
+        url: "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=80"
+      }
+    ],
+    research: {
+      summary: "Popular premium beauty salon and bridal care studio in Banani Road 11, Dhaka.",
+      customerJourney: "Clients discover on Instagram/Facebook or Google Maps and want to see the service catalog and book directly via WhatsApp.",
+      conversionOpportunity: "A fast, glamorous Bangla-English landing page that presents their bridal packages and connects directly to WhatsApp booking."
+    },
+    qualification: {
+      score: 96,
+      confidence: 0.95,
+      recommendation: "priority",
+      positiveFactors: [
+        "215+ reviews in Dhaka's premier commercial hub (Banani)",
+        "Strong active WhatsApp and Facebook presence but no owned web home",
+        "High average client transaction value (bridal/party packages)"
+      ],
+      penalties: [],
+      reason: "Prime Bangladesh opportunity: Facebook-first business needing an owned web catalog with direct WhatsApp appointment conversion.",
+      recommendedChannel: "whatsapp",
+      outreachAngle: "Bilingual Bangla/English message showcasing instant WhatsApp booking catalog.",
+      scoredAt: "2026-10-18T08:00:00Z",
+      scoringVersion: "v1.0-bd"
+    },
+    generatedSite: {
+      template: "social-to-web-bd",
+      hero: {
+        headline: "বনানী'র প্রিমিয়াম বিউটি কেয়ার ও ব্রাইডাল লাউঞ্জ",
+        subheadline: "২০০+ ক্লায়েন্ট রিভিউ ও ৪.৭★ রেটিং। ব্রাইডাল মেকওভার, হেয়ার ট্রিটমেন্ট এবং প্রিমিয়াম স্পা সার্ভিসে আপনার বিশ্বস্ত ঠিকানা।",
+        badge: "★ Banani Road 11 Top Rated Salon",
+        callToActionText: "WhatsApp-এ বুকিং করুন"
+      },
+      services: [
+        {
+          title: "Exclusive Bridal Makeover",
+          description: "এইচডি ও এয়ারব্রাশ ব্রাইডাল মেকআপ, প্রি-ব্রাইডাল স্কিন কেয়ার ও স্টাইলিং প্যাকেজ।",
+          icon: "sparkles"
+        },
+        {
+          title: "Hair Care & Keratin Treatment",
+          description: "অর্গানিক হেয়ার স্পা, প্রোটিন ট্রিটমেন্ট, রিবন্ডিং ও ট্রেন্ডি হেয়ার কাট।",
+          icon: "scissors"
+        },
+        {
+          title: "Skin Glow & Hydra Facial",
+          description: "ডিপ ক্লিনিং হাইড্রা ফেসিয়াল ও অ্যান্টি-এজিং স্কিন রেজুভেনেশন থেরাপি।",
+          icon: "heart"
+        }
+      ],
+      about: "Glow Lounge Ladies Beauty & Spa বনানী রোড ১১-এ নারীদের জন্য একটি আরামদায়ক ও আধুনিক গ্রুমিং স্পেস। অভিজ্ঞ বিউটিশিয়ান ও আন্তর্জাতিক ব্র্যান্ডের পণ্যের সাহায্যে আমরা দিচ্ছি সেরা প্রিমিয়াম সেবা।",
+      faqs: [
+        {
+          question: "ব্রাইডাল মেকআপের জন্য কত দিন আগে বুক করতে হয়?",
+          answer: "বিবাহের পিক সিজনে কমপক্ষে ২-৩ সপ্তাহ আগে WhatsApp-এ স্লট নিশ্চিত করার অনুরোধ করা হচ্ছে।"
+        },
+        {
+          question: "আপনারা কি ক্রেডিট কার্ড ও বিকাশ পেমেন্ট নেন?",
+          answer: "হ্যাঁ, আমরা ক্যাশ, ভিসা, মাস্টারকার্ড এবং বিকাশ/নগদ পেমেন্ট গ্রহণ করি।"
+        }
+      ],
+      cta: {
+        type: "whatsapp_booking",
+        primaryWhatsApp: "+8801711009988",
+        primaryPhone: "+8801711009988"
+      },
+      generatedAt: "2026-10-18T08:10:00Z"
+    },
+    preview: {
+      slug: "glow-lounge-salon-banani",
+      url: "/preview/glow-lounge-salon-banani",
+      version: 1,
+      status: "qa_required",
+      generatedAt: "2026-10-18T08:12:00Z"
+    },
+    humanReview: {
+      decision: "pending"
+    },
+    outreach: {
+      suppressed: false,
+      recommendedChannel: "whatsapp",
+      draft: "আসসালামু আলাইকুম Glow Lounge টিম! 🌸\n\nগুগল ম্যাপসে বনানীতে আপনাদের পার্লারের ২১৫+ দুর্দান্ত রিভিউ এবং ৪.৭★ রেটিং দেখে খুব ভালো লাগলো।\n\nলক্ষ্য করলাম আপনাদের সুন্দর একটি ফেসবুক পেজ থাকলেও গুগলে কোনো অফিসিয়াল ওয়েবসাইট লিংক করা নেই। ফলে অনেক কাস্টমার সার্ভিস লিস্ট ও প্যাকেজ দেখতে গিয়ে মিস করে যেতে পারেন।\n\nআপনাদের ক্লায়েন্ট রিভিউ ও সার্ভিসগুলো দিয়ে আমরা সুন্দর একটি মোবাইল ওয়েবসাইট ডেমো বানিয়েছি:\n👉 https://lead.d4f.me/preview/glow-lounge-salon-banani\n\nফোনে ওপেন করে দেখুন, সরাসরি WhatsApp বুকিং বাটনও এড করা আছে। ভালো লাগলে এটা আপনাদের নিজস্ব ডোমেইনে লাইভ করে দেওয়া যাবে।\n\nধন্যবাদ,\nরাজ | Web Developer\nWhatsApp: +8801700000000",
+      events: []
+    },
+    sales: {
+      stage: "none",
+      objections: [],
+      quotedPlan: "Dhaka Local Business Managed",
+      quotedPrice: 2500,
+      currency: "BDT"
+    },
+    customer: {
+      isCustomer: false
+    },
+    lifecycle: "review",
+    experiment: {
+      market: "BD",
+      niche: "Beauty Salon",
+      cohort: "bd-dhaka-banani",
+      variant: "whatsapp-bilingual"
+    },
+    createdAt: "2026-10-18T07:30:00Z",
+    updatedAt: "2026-10-18T08:12:00Z"
+  },
+  {
+    id: "lead_dhaka_dental_006",
+    slug: "dhanmondi-smile-dental-care",
+    name: "Dhanmondi Smile Dental Care",
+    category: "Dental Clinic",
+    location: {
+      full: "House 28, Road 2, Dhanmondi, Dhaka 1205",
+      city: "Dhaka",
+      stateRegion: "Dhaka",
+      country: "Bangladesh",
+      postalCode: "1205"
+    },
+    sources: [
+      {
+        provider: "manual-import-dhaka",
+        providerId: "bd_dhk_dhan_019",
+        retrievedAt: "2026-10-10T10:00:00Z"
+      }
+    ],
+    businessSignals: {
+      rating: 4.9,
+      reviewCount: 94,
+      activeConfidence: 0.99
+    },
+    website: {
+      status: "adequate",
+      url: "https://dhanmondismiledental.com"
+    },
+    contacts: [
+      {
+        channel: "phone",
+        value: "+8801811223344",
+        publicBusinessContact: true
+      }
+    ],
+    assets: [],
+    research: {
+      summary: "Modern dental studio in Dhanmondi."
+    },
+    qualification: {
+      score: 90,
+      confidence: 0.92,
+      recommendation: "high"
+    },
+    sales: {
+      stage: "won",
+      quotedPlan: "Dhaka Managed Pro",
+      quotedPrice: 3500,
+      currency: "BDT"
+    },
+    customer: {
+      isCustomer: true,
+      customerSince: "2026-10-15T12:00:00Z",
+      plan: "Dhaka Managed Pro (3,500 BDT/mo)",
+      billingStatus: "active",
+      customDomain: "dhanmondismiledental.com",
+      deploymentStatus: "live",
+      accountHealth: "healthy"
+    },
+    maintenance: {
+      lastHealthCheckAt: "2026-10-18T06:00:00Z",
+      nextReviewAt: "2026-11-15T00:00:00Z",
+      openTasks: ["Add Friday morning updated consultation hours"]
+    },
+    lifecycle: "maintenance",
+    experiment: {
+      market: "BD",
+      niche: "Dental Clinic"
+    },
+    createdAt: "2026-10-10T10:00:00Z",
+    updatedAt: "2026-10-18T06:00:00Z"
+  }
+];
