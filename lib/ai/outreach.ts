@@ -67,3 +67,13 @@ WhatsApp: +8801674410695
 Email: raj@d4f.me
 Portfolio: https://d4f.me`;
 }
+
+export function getEmailSubject(lead: WebsiteLead): string {
+  const market = lead.experiment?.market || lead.location.country;
+  const isBd = market === 'BD' || market.includes('Bangladesh');
+  if (isBd) {
+    return `${lead.name}-এর জন্য একটি আধুনিক ওয়েবসাইট প্রিভিউ`;
+  }
+  return `Website preview for ${lead.name}`;
+}
+
