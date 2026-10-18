@@ -1,5 +1,27 @@
 import { WebsiteLead } from '@/lib/types/lead';
 
+export const RAJ_OFFICIAL_SIGNATURE = `Best Regards,
+Raj Syful
+Senior Web Developer,
+[Top Rated Plus Freelancer](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488) [Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)
+-----------------------------------------------------------------------------------------------------
+Ⓦ [www.d4f.me](https://d4f.me/) / Skype: raj_onu / ⓔ [raj@d4f.me](mailto:raj@d4f.me)
+G-Chat: [rajsyful](mailto:rajsyfyl@gmail.com) +8801674410695 ([Whatsapp](https://wa.me/8801674410695) / [Telegram](https://telegram.me/rajsyful))
+Ⓣ +8801719647717 ⓛ [Linkedin](https://www.linkedin.com/in/syful-i-70788581/)
+----------------------------------------------------------------------------------------------------
+A Passionate ♡ Web-Developer`;
+
+export const RAJ_OFFICIAL_SIGNATURE_BD = `ধন্যবাদ ও শুভেচ্ছা,
+Raj Syful
+Senior Web Developer,
+[Top Rated Plus Freelancer](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488) [Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)
+-----------------------------------------------------------------------------------------------------
+Ⓦ [www.d4f.me](https://d4f.me/) / Skype: raj_onu / ⓔ [raj@d4f.me](mailto:raj@d4f.me)
+G-Chat: [rajsyful](mailto:rajsyfyl@gmail.com) +8801674410695 ([Whatsapp](https://wa.me/8801674410695) / [Telegram](https://telegram.me/rajsyful))
+Ⓣ +8801719647717 ⓛ [Linkedin](https://www.linkedin.com/in/syful-i-70788581/)
+----------------------------------------------------------------------------------------------------
+A Passionate ♡ Web-Developer`;
+
 export function generatePersonalOutreachDraft(lead: WebsiteLead): string {
   const market = lead.experiment?.market || lead.location.country;
   const isBd = market === 'BD' || market.includes('Bangladesh');
@@ -19,11 +41,7 @@ export function generatePersonalOutreachDraft(lead: WebsiteLead): string {
 
 ফোনে ওপেন করে দেখুন, সরাসরি WhatsApp বুকিং বাটনও যুক্ত করা আছে। ভালো লাগলে এটা আপনাদের নিজস্ব ডোমেইনে খুব সহজে লাইভ করে দেওয়া যাবে।
 
-ধন্যবাদ,
-রাজ | Web Developer & Digital Solutions
-WhatsApp: +8801674410695
-Email: raj@d4f.me
-Website: https://d4f.me`;
+${RAJ_OFFICIAL_SIGNATURE_BD}`;
   }
 
   if (market === 'UK') {
@@ -38,12 +56,7 @@ I went ahead and designed a clean, mobile-first one-page preview for you with in
 
 Have a quick look on your phone when you have a minute. If you fancy making it your official site, I'd be happy to set it up on your own domain. No obligation at all!
 
-Best regards,
-Raj
-Web Developer & Digital Solutions
-WhatsApp: +8801674410695
-Email: raj@d4f.me
-Portfolio: https://d4f.me`;
+${RAJ_OFFICIAL_SIGNATURE}`;
   }
 
   // Default: US
@@ -60,12 +73,7 @@ You can claim this website on your own custom domain whenever you'd like.
 
 Would you be open to a quick email exchange if you'd like to make this your official web home?
 
-Best regards,
-Raj
-Web Developer & Digital Solutions
-WhatsApp: +8801674410695
-Email: raj@d4f.me
-Portfolio: https://d4f.me`;
+${RAJ_OFFICIAL_SIGNATURE}`;
 }
 
 export function getEmailSubject(lead: WebsiteLead): string {
@@ -76,4 +84,3 @@ export function getEmailSubject(lead: WebsiteLead): string {
   }
   return `Website preview for ${lead.name}`;
 }
-

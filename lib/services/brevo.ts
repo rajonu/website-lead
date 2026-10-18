@@ -17,9 +17,10 @@ export interface SendEmailResult {
 }
 
 export const SENDER_CONFIG = {
-  name: 'Raj',
+  name: 'Raj Syful',
   email: 'raj@d4f.me',
 } as const;
+
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -82,6 +83,44 @@ function escapeHtml(text: string): string {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
+}
+
+export function renderTransactionalEmailHtml(textContent: string): string {
+  // 1. Escape HTML special characters
+  let safe = textContent
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+
+  // 2. Convert dashed divider lines (e.g. ----- or -------) into styled dividers
+  safe = safe.replace(/^-{5,}$/gm, '<hr style="border: none; border-top: 1px dashed #cbd5e1; margin: 16px 0;" />');
+
+  // 3. Convert markdown links [Label](url) into clickable styled <a> tags
+  safe = safe.replace(
+    /\[([^\]]+)\]\((https?:\/\/[^\s)]+|mailto:[^\s)]+)\)/g,
+    '<a href="$2" target="_blank" rel="noopener noreferrer" style="color: #0284c7; font-weight: 600; text-decoration: underline;">$1</a>'
+  );
+
+  // 4. Convert standalone bare URLs (not already in href attributes) into clickable links
+  safe = safe.replace(
+    /(?<!href=")(https?:\/\/[a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=]+)/g,
+    '<a href="$1" target="_blank" rel="noopener noreferrer" style="color: #0284c7; font-weight: 600; text-decoration: underline;">$1</a>'
+  );
+
+  return `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 24px; background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1e293b;">
+  <div style="max-width: 620px; margin: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 28px; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+    <div style="font-size: 14px; line-height: 1.7; color: #1e293b; white-space: pre-wrap;">${safe}</div>
+  </div>
+</body>
+</html>`;
 }
 
 function sanitizeErrorMessage(msg: string): string {
@@ -177,10 +216,8 @@ export class BrevoService {
     }
 
     const htmlContent =
-      params.htmlContent ||
-      `<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #1e293b; white-space: pre-wrap;">${escapeHtml(
-        params.textContent.trim()
-      )}</div>`;
+      params.htmlContent || renderTransactionalEmailHtml(params.textContent.trim());
+
 
     const payload = {
       sender: {
