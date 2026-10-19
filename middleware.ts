@@ -23,12 +23,15 @@ export function middleware(req: NextRequest) {
     }
   }
 
+  const isLocalhost = host.includes('localhost') || host.includes('127.0.0.1');
+
   // 2. Allow all public routes without authentication
   const isPublicRoute =
     pathname.startsWith('/preview') ||
     pathname === '/login' ||
     pathname.startsWith('/api/auth') ||
     pathname === '/api/health' ||
+    (isLocalhost && pathname.startsWith('/api/autopilot')) ||
     pathname.startsWith('/_next') ||
     pathname === '/favicon.ico' ||
     pathname === '/robots.txt';
@@ -47,6 +50,9 @@ export function middleware(req: NextRequest) {
   // 3. For all internal dashboard routes: enforce password authentication
   const authCookie = req.cookies.get(AUTH_COOKIE_NAME)?.value;
   if (authCookie !== AUTH_TOKEN_VALUE) {
+    if (pathname.startsWith('/api/')) {
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+    }
     const loginUrl = new URL('/login', req.url);
     return NextResponse.redirect(loginUrl);
   }
