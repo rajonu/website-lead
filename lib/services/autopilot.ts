@@ -196,6 +196,27 @@ export class AutopilotService {
           });
 
           state.emailsSent += 1;
+        } else if (whatsappContact) {
+          // If email domain has no mail server, fall back automatically to WhatsApp outreach
+          cycleAction = 'whatsapp_queued';
+          actionDetails = `Email skipped (${sendResult.error}). Saved to WhatsApp Queue for Raj (${whatsappContact}).`;
+          await LeadRepository.updateLead(newLead.id, {
+            lifecycle: 'review',
+            outreach: {
+              ...newLead.outreach,
+              recommendedChannel: 'whatsapp',
+              events: [
+                ...(newLead.outreach?.events || []),
+                {
+                  channel: 'whatsapp',
+                  type: 'drafted',
+                  at: new Date().toISOString(),
+                  notes: `Autopilot routed to WhatsApp dispatch (${whatsappContact}) because email domain has no MX records`,
+                },
+              ],
+            },
+          });
+          state.whatsappQueued += 1;
         } else {
           cycleAction = 'error';
           actionDetails = `Failed sending email to ${emailContact}: ${sendResult.error}`;

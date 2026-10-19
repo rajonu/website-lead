@@ -1,3 +1,4 @@
+import dns from 'dns/promises';
 import { logger } from '@/lib/logger';
 
 export interface SendEmailParams {
@@ -205,6 +206,27 @@ export class BrevoService {
         messageId: mockMessageId,
         dryRun: true,
       };
+    }
+
+    // Verify recipient domain has active MX records before sending to prevent bounces
+    const domain = params.toEmail.split('@')[1]?.toLowerCase().trim();
+    if (domain) {
+      try {
+        const mxRecords = await dns.resolveMx(domain);
+        if (!mxRecords || mxRecords.length === 0) {
+          logger.warn('Recipient domain has no active MX records. Aborting send to protect sender reputation.', { domain });
+          return {
+            success: false,
+            error: `Domain "${domain}" has no active mail server (MX records). Contact this prospect via WhatsApp or phone instead.`,
+          };
+        }
+      } catch (err: unknown) {
+        logger.warn('DNS MX lookup failed for domain, aborting to prevent bounce', { domain, error: String(err) });
+        return {
+          success: false,
+          error: `Domain "${domain}" does not exist or has no active mail servers. Contact this prospect via WhatsApp or phone instead.`,
+        };
+      }
     }
 
     const resolvedKey = resolveBrevoApiKey();
