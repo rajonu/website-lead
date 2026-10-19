@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { WebsiteLead } from '@/lib/types/lead';
+import { generateWhatsAppTemplate } from '@/lib/ai/outreach';
 import { 
   Send, 
   MapPin, 
@@ -399,15 +400,49 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
 
             <div className="flex items-center gap-2 shrink-0">
               {whatsappContact && (
+                <a
+                  href={`https://wa.me/${whatsappContact.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(generateWhatsAppTemplate(lead))}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={async () => {
+                    await fetch(`/api/leads/${lead.id}`, {
+                      method: 'PATCH',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        outreach: {
+                          ...lead.outreach,
+                          recommendedChannel: 'whatsapp',
+                          events: [
+                            ...events,
+                            {
+                              channel: 'whatsapp',
+                              type: 'sent',
+                              at: new Date().toISOString(),
+                              notes: `Sent 1-click WhatsApp message to ${whatsappContact}`,
+                            },
+                          ],
+                        },
+                      }),
+                    }).catch(() => {});
+                  }}
+                  className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded shadow-xs transition-colors flex items-center gap-1 cursor-pointer"
+                  title="Open WhatsApp chat with prefilled tailored pitch"
+                >
+                  <MessageSquare className="w-3 h-3" />
+                  <span>WhatsApp (1-Click)</span>
+                </a>
+              )}
+
+              {whatsappContact && (
                 <button
                   type="button"
                   onClick={handleSwitchToWhatsApp}
                   disabled={updating}
-                  className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded shadow-xs transition-colors flex items-center gap-1 cursor-pointer"
-                  title="Move to WhatsApp outreach queue"
+                  className="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 font-semibold rounded shadow-xs transition-colors flex items-center gap-1 cursor-pointer"
+                  title="Move to WhatsApp outreach queue in Recommendations"
                 >
                   <PhoneCall className="w-3 h-3" />
-                  <span>Switch to WhatsApp</span>
+                  <span>Move to Queue</span>
                 </button>
               )}
 
@@ -483,6 +518,19 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
               <Sparkles className="w-3.5 h-3.5 text-purple-600" />
               Conversation Active
             </span>
+          )}
+
+          {whatsappContact && (
+            <a
+              href={`https://wa.me/${whatsappContact.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(generateWhatsAppTemplate(lead))}`}
+              target="_blank"
+              rel="noreferrer"
+              className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold shadow-xs transition-colors flex items-center gap-1 cursor-pointer"
+              title="Open WhatsApp chat with prefilled pitch"
+            >
+              <MessageSquare className="w-3.5 h-3.5" />
+              <span>WhatsApp (1-Click)</span>
+            </a>
           )}
 
           <a

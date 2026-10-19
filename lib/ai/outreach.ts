@@ -133,4 +133,43 @@ export function formatEmailPreviewHtml(textContent: string): string {
   return safe;
 }
 
+/**
+ * Generates a short, high-converting, personalized WhatsApp outreach message.
+ * Optimized specifically for chat readability on mobile.
+ */
+export function generateWhatsAppTemplate(lead: WebsiteLead): string {
+  const market = lead.experiment?.market || lead.location?.country || '';
+  const isBd = market === 'BD' || market.includes('Bangladesh');
+  const city = lead.location?.city || '';
+  const rating = lead.businessSignals?.rating || 4.9;
+  const previewUrl = `https://live.d4f.me/${lead.slug}`;
+
+  if (isBd) {
+    return `আসসালামু আলাইকুম ${lead.name} টিম,
+
+গুগল ম্যাপসে ${city ? city + '-তে ' : ''}আপনাদের দারুণ রিভিউ (${rating}★) দেখে যোগাযোগ করলাম।
+
+লক্ষ্য করলাম অনলাইনে সরাসরি বুকিং নেওয়ার জন্য আপনাদের কোনো মোবাইল ওয়েবসাইট নেই। তাই আপনাদের জন্য একটি ফ্রি লাইভ ডেমো বানিয়েছি:
+👉 ${previewUrl}
+
+ফোনে যেকোনো সময় একটু দেখে নিবেন। আপনাদের ব্যবসার জন্য এটি কাজে লাগাতে চাইলে বা কোনো পরিবর্তন চাইলে জানাবেন!
+
+ধন্যবাদ,
+Raj Syful — Senior Web Developer (https://d4f.me)`;
+  }
+
+  return `Hi ${lead.name} team,
+
+I saw your great reviews on Google Maps${city ? ' in ' + city : ''} (${rating}★) and noticed you don't have a mobile site for booking yet.
+
+So I built a free live demo preview for you:
+👉 ${previewUrl}
+
+Take a look on your phone whenever you have a minute! If you'd like to use this for your business or customize anything, feel free to reply here.
+
+Best regards,
+Raj Syful — Senior Web Developer (https://d4f.me)`;
+}
+
+
 

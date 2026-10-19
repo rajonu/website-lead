@@ -6,7 +6,8 @@ import { WebsiteLead, OutreachEvent } from '@/lib/types/lead';
 import { 
   getEmailSubject, 
   splitBodyAndSignature, 
-  formatEmailPreviewHtml 
+  formatEmailPreviewHtml,
+  generateWhatsAppTemplate
 } from '@/lib/ai/outreach';
 import { 
   Star, 
@@ -465,10 +466,38 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
               {/* WhatsApp Button */}
               {whatsappContact && (
                 <a
-                  href={`https://wa.me/${whatsappContact.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(fullDraft)}`}
+                  href={`https://wa.me/${whatsappContact.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(generateWhatsAppTemplate(lead))}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow-xs transition-colors flex items-center gap-1"
+                  onClick={async () => {
+                    await fetch(`/api/leads/${lead.id}`, {
+                      method: 'PATCH',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        lifecycle: 'contacted',
+                        sales: {
+                          ...lead.sales,
+                          stage: 'contacted',
+                          nextAction: 'Monitor WhatsApp reply',
+                        },
+                        outreach: {
+                          ...lead.outreach,
+                          events: [
+                            ...(lead.outreach?.events || []),
+                            {
+                              channel: 'whatsapp',
+                              type: 'sent',
+                              at: new Date().toISOString(),
+                              notes: `Sent 1-click personal WhatsApp message to ${whatsappContact}`,
+                            },
+                          ],
+                        },
+                      }),
+                    }).catch(() => {});
+                    setStatus('contacted');
+                  }}
+                  className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold shadow-xs transition-colors flex items-center gap-1.5"
+                  title="Open WhatsApp with short mobile-ready message"
                 >
                   <MessageSquare className="w-3.5 h-3.5" />
                   <span>Send via WhatsApp</span>
