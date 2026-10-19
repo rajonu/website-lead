@@ -21,51 +21,51 @@
     },
     {
       "id": "log_1792411203237",
-      "timestamp": "2026-10-19T12:00:03.237Z",
+      "timestamp": "2026-10-19T12:18:41.987Z",
       "market": "UK",
       "action": "email_sent",
       "leadName": "Sheffield Premier Emergency Plumber",
       "leadSlug": "sheffield-premier-emergency-plumber",
       "recipient": "enquiries@sheffieldpremieremergencyplumber.co.uk",
-      "messageId": "<dry-run-1792411202976@d4f.me>",
-      "details": "Automated email sent to enquiries@sheffieldpremieremergencyplumber.co.uk [DRY RUN]. Message ID: <dry-run-1792411202976@d4f.me>",
-      "dryRun": true
+      "messageId": "<202610191218.24139670629@smtp-relay.mailin.fr>",
+      "details": "Automated email sent to enquiries@sheffieldpremieremergencyplumber.co.uk. Message ID: <202610191218.24139670629@smtp-relay.mailin.fr>",
+      "dryRun": false
     },
     {
       "id": "log_1792410979562",
-      "timestamp": "2026-10-19T11:56:19.562Z",
+      "timestamp": "2026-10-19T12:18:42.806Z",
       "market": "UK",
       "action": "email_sent",
       "leadName": "Birmingham Apex Emergency Plumber",
       "leadSlug": "birmingham-apex-emergency-plumber",
       "recipient": "enquiries@birminghamapexemergencyplumber.co.uk",
-      "messageId": "<dry-run-1792410979557@d4f.me>",
-      "details": "Automated email sent to enquiries@birminghamapexemergencyplumber.co.uk [DRY RUN]. Message ID: <dry-run-1792410979557@d4f.me>",
-      "dryRun": true
+      "messageId": "<202610191218.26576601561@smtp-relay.mailin.fr>",
+      "details": "Automated email sent to enquiries@birminghamapexemergencyplumber.co.uk. Message ID: <202610191218.26576601561@smtp-relay.mailin.fr>",
+      "dryRun": false
     },
     {
       "id": "log_1792410800423",
-      "timestamp": "2026-10-19T11:53:20.423Z",
+      "timestamp": "2026-10-19T12:18:43.209Z",
       "market": "US",
       "action": "email_sent",
       "leadName": "Austin Vanguard Electrician & Repairs",
       "leadSlug": "austin-vanguard-electrician",
       "recipient": "service@austinvanguardelectrician.com",
-      "messageId": "<dry-run-1792410800418@d4f.me>",
-      "details": "Automated email sent to service@austinvanguardelectrician.com [DRY RUN]. Message ID: <dry-run-1792410800418@d4f.me>",
-      "dryRun": true
+      "messageId": "<202610191218.71862937964@smtp-relay.mailin.fr>",
+      "details": "Automated email sent to service@austinvanguardelectrician.com. Message ID: <202610191218.71862937964@smtp-relay.mailin.fr>",
+      "dryRun": false
     },
     {
       "id": "log_1792410697412",
-      "timestamp": "2026-10-19T11:51:37.412Z",
+      "timestamp": "2026-10-19T12:18:43.527Z",
       "market": "US",
       "action": "email_sent",
       "leadName": "Orlando Benchmark Roofing & Repairs",
       "leadSlug": "orlando-benchmark-roofing",
       "recipient": "service@orlandobenchmarkroofing.com",
-      "messageId": "<dry-run-1792410697408@d4f.me>",
-      "details": "Automated email sent to service@orlandobenchmarkroofing.com [DRY RUN]. Message ID: <dry-run-1792410697408@d4f.me>",
-      "dryRun": true
+      "messageId": "<202610191218.82797396947@smtp-relay.mailin.fr>",
+      "details": "Automated email sent to service@orlandobenchmarkroofing.com. Message ID: <202610191218.82797396947@smtp-relay.mailin.fr>",
+      "dryRun": false
     }
   ],
   "lastRunAt": "2026-10-19T12:00:39.279Z",

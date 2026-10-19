@@ -397,6 +397,15 @@ export default function AutopilotCard() {
                       <ExternalLink className="w-2.5 h-2.5" />
                     </a>
                   )}
+                  {log.dryRun && log.action === 'email_sent' && (
+                    <a
+                      href="/recommendations?tab=sent"
+                      className="text-[10px] text-amber-300 hover:text-amber-200 underline font-semibold flex items-center gap-0.5"
+                      title="View in Sent History to dispatch live"
+                    >
+                      <span>Send Live →</span>
+                    </a>
+                  )}
                 </div>
               </div>
             ))

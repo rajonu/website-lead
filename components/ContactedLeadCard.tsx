@@ -57,11 +57,49 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
 
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [showFullHistory, setShowFullHistory] = useState(false);
+  const [sendingLive, setSendingLive] = useState(false);
+  const [liveSendNotice, setLiveSendNotice] = useState<string | null>(null);
+  const [isLiveSentSuccess, setIsLiveSentSuccess] = useState(false);
 
   const events = lead.outreach?.events || [];
   const latestSentEvent = [...events].reverse().find((e) => e.type === 'sent');
   const recipientEmail = lead.contacts.find((c) => c.channel === 'email')?.value || 'N/A';
-  const isDryRun = latestSentEvent?.notes?.includes('[DRY RUN]');
+  const isDryRun = (latestSentEvent?.notes?.includes('[DRY RUN]') || false) && !isLiveSentSuccess;
+
+  const handleSendLiveNow = async () => {
+    setSendingLive(true);
+    setLiveSendNotice(null);
+    try {
+      const email = lead.contacts.find((c) => c.channel === 'email')?.value;
+      if (!email) {
+        setLiveSendNotice('No email contact found for this lead');
+        return;
+      }
+      const res = await fetch(`/api/leads/${lead.id}/send-email`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: email,
+          subject: `Website preview for ${lead.name}`,
+          body: lead.outreach?.draft || '',
+          confirmed: true,
+          dryRun: false,
+        }),
+      });
+      const data = await res.json().catch(() => null);
+      if (res.ok && data?.success) {
+        setIsLiveSentSuccess(true);
+        setLiveSendNotice(`Delivered live via Brevo! Message ID: ${data.messageId}`);
+        router.refresh();
+      } else {
+        setLiveSendNotice(`Delivery failed: ${data?.error || 'Unknown error'}`);
+      }
+    } catch {
+      setLiveSendNotice('Network error dispatching live email');
+    } finally {
+      setSendingLive(false);
+    }
+  };
 
   const handleMarkReplied = async () => {
     setUpdating(true);
@@ -259,9 +297,36 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
         )}
       </div>
 
+      {liveSendNotice && (
+        <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs px-3.5 py-2 rounded-lg font-medium flex items-center justify-between">
+          <div className="flex items-center gap-1.5">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+            <span>{liveSendNotice}</span>
+          </div>
+          <button
+            onClick={() => setLiveSendNotice(null)}
+            className="text-emerald-600 hover:text-emerald-800 text-[11px] font-bold ml-2"
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
       {/* Actions & History Accordion */}
       <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-100 text-xs">
         <div className="flex items-center gap-2">
+          {isDryRun && (
+            <button
+              onClick={handleSendLiveNow}
+              disabled={sendingLive}
+              className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 text-white rounded-lg font-bold shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer"
+              title="Send real live email via Brevo immediately"
+            >
+              <Send className={`w-3.5 h-3.5 ${sendingLive ? 'animate-spin' : ''}`} />
+              <span>{sendingLive ? 'Sending Live...' : 'Send Live Email Now'}</span>
+            </button>
+          )}
+
           {stage !== 'replied' ? (
             <button
               onClick={handleMarkReplied}
