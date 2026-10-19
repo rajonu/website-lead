@@ -9,6 +9,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -49,17 +50,27 @@ if (!fs.existsSync(EXPORTS_DIR)) {
 }
 
 const apiToken = process.env.CLOUDFLARE_API_TOKEN?.trim();
-const accountId = process.env.CLOUDFLARE_ACCOUNT_ID?.trim();
-const namespaceId = process.env.CLOUDFLARE_KV_NAMESPACE_ID?.trim();
+const accountId = process.env.CLOUDFLARE_ACCOUNT_ID?.trim() || 'f7b63a9b274f43bd60919b91973a0d90';
+const namespaceId = process.env.CLOUDFLARE_KV_NAMESPACE_ID?.trim() || '778255635eb04c86a8b646bf4d578c9b';
 const edgeDomain = process.env.CLOUDFLARE_EDGE_DOMAIN?.trim() || 'live.d4f.me';
 
-const isCloudflareConfigured = Boolean(apiToken && accountId && namespaceId);
+let useWranglerCli = false;
+if (!apiToken) {
+  try {
+    execSync('npx wrangler whoami', { stdio: 'ignore', env: { ...process.env, CLOUDFLARE_ACCOUNT_ID: accountId } });
+    useWranglerCli = true;
+  } catch {
+    useWranglerCli = false;
+  }
+}
+
+const isCloudflareConfigured = Boolean(apiToken && accountId && namespaceId) || useWranglerCli;
 
 console.log('⚡ Website Lead Edge Sync & Static Site Publisher');
 console.log('==================================================');
 console.log(`📁 Local Data Directory:   ${DATA_DIR}`);
 console.log(`🌐 Target Edge Domain:     ${edgeDomain}`);
-console.log(`☁️  Cloudflare KV Status:    ${isCloudflareConfigured ? '✅ Configured & Ready' : '⚠️  Local Export Only (Set CLOUDFLARE_API_TOKEN in .env.local)'}\n`);
+console.log(`☁️  Cloudflare KV Status:    ${isCloudflareConfigured ? (apiToken ? '✅ API Token Authenticated' : '✅ Wrangler CLI Authenticated') : '⚠️  Local Export Only'}\n`);
 
 if (!fs.existsSync(LEADS_FILE)) {
   console.error(`❌ Data file not found: ${LEADS_FILE}`);
@@ -371,21 +382,54 @@ for (const lead of targets) {
   if (isCloudflareConfigured) {
     try {
       const kvKey = `site:${lead.slug}`;
-      const kvUrl = `https://api.cloudflare.com/client/v4/accounts/${accountId}/storage/kv/namespaces/${namespaceId}/values/${encodeURIComponent(kvKey)}`;
+      if (apiToken) {
+        const kvUrl = `https://api.cloudflare.com/client/v4/accounts/${accountId}/storage/kv/namespaces/${namespaceId}/values/${encodeURIComponent(kvKey)}`;
 
-      const res = await fetch(kvUrl, {
-        method: 'PUT',
-        headers: {
-          Authorization: `Bearer ${apiToken}`,
-          'Content-Type': 'text/html; charset=utf-8',
-        },
-        body: html,
-      });
+        const res = await fetch(kvUrl, {
+          method: 'PUT',
+          headers: {
+            Authorization: `Bearer ${apiToken}`,
+            'Content-Type': 'text/html; charset=utf-8',
+          },
+          body: html,
+        });
 
-      if (res.ok) {
+        if (res.ok) {
+          cloudflareSuccess = true;
+        } else {
+          process.stdout.write(`⚠️  KV Upload HTTP ${res.status}\n`);
+        }
+      } else if (useWranglerCli) {
+        // Upload via authenticated Wrangler CLI
+        const cmd = `npx wrangler kv key put --remote --namespace-id=${namespaceId} "${kvKey}" --path="${exportPath}"`;
+        execSync(cmd, { stdio: 'ignore', env: { ...process.env, CLOUDFLARE_ACCOUNT_ID: accountId } });
         cloudflareSuccess = true;
+      }
+
+      if (cloudflareSuccess) {
         successCount++;
         process.stdout.write(`✅ Edge Synced (https://${edgeDomain}/${lead.slug})\n`);
+
+        // If client has custom domain, also map domain:<customDomain> -> lead.slug
+        const customDomain = lead.customer?.customDomain?.trim();
+        if (customDomain) {
+          if (apiToken) {
+            const domainKey = `domain:${customDomain.toLowerCase()}`;
+            const domainUrl = `https://api.cloudflare.com/client/v4/accounts/${accountId}/storage/kv/namespaces/${namespaceId}/values/${encodeURIComponent(domainKey)}`;
+            await fetch(domainUrl, {
+              method: 'PUT',
+              headers: { Authorization: `Bearer ${apiToken}`, 'Content-Type': 'text/plain' },
+              body: lead.slug,
+            }).catch(() => {});
+          } else if (useWranglerCli) {
+            try {
+              execSync(`npx wrangler kv key put --remote --namespace-id=${namespaceId} "domain:${customDomain.toLowerCase()}" "${lead.slug}"`, {
+                stdio: 'ignore',
+                env: { ...process.env, CLOUDFLARE_ACCOUNT_ID: accountId },
+              });
+            } catch {}
+          }
+        }
 
         // Update in-memory lead record
         lead.cloudflareDeployment = {
@@ -395,8 +439,6 @@ for (const lead of targets) {
           status: 'synced',
           kvKey,
         };
-      } else {
-        process.stdout.write(`⚠️  KV Upload HTTP ${res.status}\n`);
       }
     } catch (err) {
       process.stdout.write(`❌ KV Upload Error: ${err.message}\n`);

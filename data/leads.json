@@ -1,5 +1,940 @@
 [
   {
+    "id": "lead_bd_1792381797843_850",
+    "slug": "dhanmondi-care-diagnostic-center",
+    "name": "Dhanmondi Care Diagnostic & Ultrasound",
+    "category": "Diagnostic Center",
+    "location": {
+      "full": "House 34, Road 9/A, Dhanmondi, Dhaka 1209",
+      "city": "Dhaka",
+      "country": "Bangladesh",
+      "postalCode": "1209"
+    },
+    "sources": [
+      {
+        "provider": "places-discovery-engine",
+        "retrievedAt": "2026-10-19T03:49:57.843Z",
+        "notes": "Automated scan: high-ranking business with empty website on Google Maps (Dhaka)"
+      }
+    ],
+    "businessSignals": {
+      "rating": 4.8,
+      "reviewCount": 62,
+      "activeConfidence": 0.95
+    },
+    "website": {
+      "status": "none",
+      "auditedAt": "2026-10-19T03:49:57.843Z",
+      "observations": [
+        "No official website linked to Google Business listing"
+      ],
+      "opportunities": [
+        "Mobile one-page website with direct call / WhatsApp action"
+      ]
+    },
+    "contacts": [
+      {
+        "channel": "email",
+        "value": "info@dhanmondicarediagnostic.com",
+        "label": "Official Desk",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T03:49:57.843Z",
+        "confidence": 0.95
+      },
+      {
+        "channel": "phone",
+        "value": "+8801711550211",
+        "label": "Hotline",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T03:49:57.843Z",
+        "confidence": 0.95
+      },
+      {
+        "channel": "whatsapp",
+        "value": "+8801711550211",
+        "label": "WhatsApp Reports",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T03:49:57.843Z",
+        "confidence": 0.95
+      }
+    ],
+    "assets": [],
+    "qualification": {
+      "score": 91,
+      "confidence": 0.92,
+      "recommendation": "priority",
+      "reason": "Dhaka diagnostic clinic with 60+ reviews but no website on Google Business Profile.",
+      "recommendedChannel": "whatsapp",
+      "outreachAngle": "WhatsApp report delivery & home sample collection booking.",
+      "scoredAt": "2026-10-19T03:49:57.843Z",
+      "scoringVersion": "v2.1"
+    },
+    "generatedSite": {
+      "template": "home-services",
+      "hero": {
+        "headline": "ধানমন্ডিতে নির্ভুল ডিজিটাল ডায়াগনস্টিক ও আল্ট্রাসাউন্ড সেবা",
+        "subheadline": "অভিজ্ঞ কনসালট্যান্ট ও আধুনিক জাপানি প্রযুক্তির মেশিন দ্বারা দ্রুততম সময়ে নির্ভুল টেস্ট রিপোর্ট।",
+        "badge": "★ ৪.৮ রেটেড ধানমন্ডি ডায়াগনস্টিক",
+        "callToActionText": "হোয়াটসঅ্যাপে রিপোর্ট ও বুকিং"
+      },
+      "services": [
+        {
+          "title": "ডিজিটাল ৪D কালার আল্ট্রাসাউন্ড",
+          "description": "লেডি সোনোলজিস্ট দ্বারা নিয়মিত নিরাপদ আল্ট্রাসাউন্ড পরীক্ষা।",
+          "icon": "shield"
+        },
+        {
+          "title": "হোম ব্লাড স্যাম্পল কালেকশন",
+          "description": "বাসায় গিয়ে অভিজ্ঞ টেকনিশিয়ান দ্বারা রক্তের নমুনা সংগ্রহ।",
+          "icon": "wrench"
+        }
+      ],
+      "about": "ধানমন্ডি কেয়ার ডায়াগনস্টিক বিগত ৬ বছর ধরে ধানমন্ডি ও আশেপাশের এলাকার রোগীদের নির্ভরযোগ্য প্যাথলজি ও আল্ট্রাসাউন্ড সেবা প্রদান করে আসছে।",
+      "faqs": [
+        {
+          "question": "রিপোর্ট কি হোয়াটসঅ্যাপে পাওয়া যাবে?",
+          "answer": "হ্যাঁ, টেস্ট সম্পন্ন হওয়ার সাথে সাথে পিডিএফ রিপোর্ট সরাসরি হোয়াটসঅ্যাপে পাঠিয়ে দেওয়া হয়।"
+        }
+      ],
+      "cta": {
+        "type": "call_and_quote",
+        "primaryPhone": "+8801711550211",
+        "primaryWhatsApp": "+8801711550211"
+      },
+      "generatedAt": "2026-10-19T03:49:57.843Z",
+      "generationVersion": "v2.0"
+    },
+    "preview": {
+      "slug": "dhanmondi-care-diagnostic-center",
+      "url": "/preview/dhanmondi-care-diagnostic-center",
+      "version": 1,
+      "status": "approved",
+      "generatedAt": "2026-10-19T03:49:57.843Z"
+    },
+    "humanReview": {
+      "decision": "approved",
+      "reviewedAt": "2026-10-19T03:52:05.232Z"
+    },
+    "outreach": {
+      "suppressed": false,
+      "recommendedChannel": "whatsapp",
+      "events": [
+        {
+          "channel": "whatsapp",
+          "type": "approved",
+          "at": "2026-10-19T03:52:05.232Z",
+          "notes": "Approved by Raj via Daily Recommendation Queue"
+        },
+        {
+          "channel": "email",
+          "type": "sent",
+          "at": "2026-10-19T03:52:19.863Z",
+          "notes": "Sent transactional email via Brevo to info@dhanmondicarediagnostic.com (Subject: \"Dhanmondi Care Diagnostic & Ultrasound-এর জন্য একটি আধুনিক ওয়েবসাইট প্রিভিউ\"). Message ID: <202610190352.99214728786@smtp-relay.mailin.fr>"
+        }
+      ],
+      "draft": "আসসালামু আলাইকুম Dhanmondi Care Diagnostic & Ultrasound টিম! 🌸\n\nগুগল ম্যাপসে Dhaka-তে আপনাদের বিজনেসের 62+ চমৎকার রিভিউ এবং 4.8★ রেটিং দেখে খুব ভালো লাগলো।\n\nলক্ষ্য করলাম গুগলে আপনাদের কোনো অফিসিয়াল ওয়েবসাইট লিংক করা নেই। ফলে অনেক কাস্টমার সার্ভিস ও রেটকার্ড দেখতে গিয়ে মিস করে যেতে পারেন।\n\nআপনাদের ক্লায়েন্ট রিভিউ ও সার্ভিসগুলো দিয়ে আমরা সুন্দর একটি মোবাইল ওয়েবসাইট ডেমো বানিয়েছি:\n👉 https://live.d4f.me/preview/dhanmondi-care-diagnostic-center\n\nফোনে ওপেন করে দেখুন, সরাসরি WhatsApp বুকিং বাটনও যুক্ত করা আছে। ভালো লাগলে এটা আপনাদের নিজস্ব ডোমেইনে খুব সহজে লাইভ করে দেওয়া যাবে।\n\nধন্যবাদ ও শুভেচ্ছা,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+    },
+    "sales": {
+      "stage": "contacted",
+      "quotedPlan": "Dhaka Managed Pro",
+      "quotedPrice": 3500,
+      "currency": "BDT",
+      "nextAction": "Monitor prospect reply",
+      "nextActionAt": "2026-10-21T03:52:19.863Z"
+    },
+    "customer": {
+      "isCustomer": false
+    },
+    "lifecycle": "contacted",
+    "experiment": {
+      "market": "BD",
+      "niche": "Healthcare",
+      "cohort": "bd-dhk-batch2"
+    },
+    "createdAt": "2026-10-19T03:49:57.843Z",
+    "updatedAt": "2026-10-19T03:52:19.865Z",
+    "cloudflareDeployment": {
+      "deployed": true,
+      "edgeUrl": "https://live.d4f.me/dhanmondi-care-diagnostic-center",
+      "deployedAt": "2026-10-19T05:25:16.072Z",
+      "status": "synced",
+      "kvKey": "site:dhanmondi-care-diagnostic-center"
+    }
+  },
+  {
+    "id": "lead_uk_1792381797839_141",
+    "slug": "london-mayfair-dental-care",
+    "name": "Mayfair Precision Dental Practice",
+    "category": "Dental Clinic",
+    "location": {
+      "full": "42 Berkeley Square, London W1J 5AW",
+      "city": "London",
+      "country": "United Kingdom",
+      "postalCode": "W1J 5AW"
+    },
+    "sources": [
+      {
+        "provider": "places-discovery-engine",
+        "retrievedAt": "2026-10-19T03:49:57.839Z",
+        "notes": "Automated scan: high-ranking business with empty website on Google Maps (London)"
+      }
+    ],
+    "businessSignals": {
+      "rating": 5,
+      "reviewCount": 82,
+      "activeConfidence": 0.95
+    },
+    "website": {
+      "status": "none",
+      "auditedAt": "2026-10-19T03:49:57.839Z",
+      "observations": [
+        "No official website linked to Google Business listing"
+      ],
+      "opportunities": [
+        "Mobile one-page website with direct call / WhatsApp action"
+      ]
+    },
+    "contacts": [
+      {
+        "channel": "email",
+        "value": "reception@mayfairprecisiondental.co.uk",
+        "label": "Patient Inquiries",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T03:49:57.840Z",
+        "confidence": 0.95
+      },
+      {
+        "channel": "phone",
+        "value": "+44 20 7946 0192",
+        "label": "Appointments Desk",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T03:49:57.840Z",
+        "confidence": 0.95
+      }
+    ],
+    "assets": [],
+    "qualification": {
+      "score": 94,
+      "confidence": 0.92,
+      "recommendation": "priority",
+      "reason": "High-ticket private dental practice in London with 5.0★ rating and no website link.",
+      "recommendedChannel": "email",
+      "outreachAngle": "Online private consultation & emergency appointment booking.",
+      "scoredAt": "2026-10-19T03:49:57.840Z",
+      "scoringVersion": "v2.1"
+    },
+    "generatedSite": {
+      "template": "home-services",
+      "hero": {
+        "headline": "Exquisite Private Dental Care in the Heart of Mayfair",
+        "subheadline": "Award-winning cosmetic dentistry, composite bonding, and gentle preventive oral health.",
+        "badge": "★ 5.0 Rated Mayfair Practice",
+        "callToActionText": "Book Private Consultation"
+      },
+      "services": [
+        {
+          "title": "Invisalign & Teeth Straightening",
+          "description": "Clear, discreet aligners planned by specialist orthodontists.",
+          "icon": "sparkles"
+        },
+        {
+          "title": "Teeth Whitening & Veneers",
+          "description": "Natural bespoke smile rejuvenation with premium porcelain.",
+          "icon": "shield"
+        }
+      ],
+      "about": "Mayfair Precision Dental offers a calm, boutique clinic environment where your comfort and natural smile are our priority.",
+      "faqs": [
+        {
+          "question": "Are you accepting new private patients?",
+          "answer": "Yes, private registration and consultations are available this week."
+        }
+      ],
+      "cta": {
+        "type": "call_and_quote",
+        "primaryPhone": "+44 20 7946 0192"
+      },
+      "generatedAt": "2026-10-19T03:49:57.840Z",
+      "generationVersion": "v2.0"
+    },
+    "preview": {
+      "slug": "london-mayfair-dental-care",
+      "url": "/preview/london-mayfair-dental-care",
+      "version": 1,
+      "status": "approved",
+      "generatedAt": "2026-10-19T03:49:57.840Z"
+    },
+    "humanReview": {
+      "decision": "approved",
+      "reviewedAt": "2026-10-19T03:50:54.725Z"
+    },
+    "outreach": {
+      "suppressed": false,
+      "recommendedChannel": "email",
+      "events": [
+        {
+          "channel": "email",
+          "type": "approved",
+          "at": "2026-10-19T03:50:54.725Z",
+          "notes": "Approved by Raj via Daily Recommendation Queue"
+        },
+        {
+          "channel": "email",
+          "type": "sent",
+          "at": "2026-10-19T03:51:18.768Z",
+          "notes": "Sent transactional email via Brevo to reception@mayfairprecisiondental.co.uk (Subject: \"Website preview for Mayfair Precision Dental Practice\"). Message ID: <202610190351.42733760399@smtp-relay.mailin.fr>"
+        }
+      ],
+      "draft": "Hi Mayfair Precision Dental Practice team,\n\nI came across your business on Google Maps in London and saw your brilliant 5★ rating with 82 reviews. Huge congratulations on the reputation you've built!\n\nI noticed your Google profile doesn't have an official website listed, which often means mobile users looking for urgent trades might hesitate before ringing.\n\nI went ahead and designed a clean, mobile-first one-page preview for you with instant call buttons and your top reviews:\n👉 https://live.d4f.me/preview/london-mayfair-dental-care\n\nHave a quick look on your phone when you have a minute. If you fancy making it your official site, I'd be happy to set it up on your own domain. No obligation at all!\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+    },
+    "sales": {
+      "stage": "contacted",
+      "quotedPlan": "Growth Managed Plan",
+      "quotedPrice": 99,
+      "currency": "USD",
+      "nextAction": "Monitor prospect reply",
+      "nextActionAt": "2026-10-21T03:51:18.768Z"
+    },
+    "customer": {
+      "isCustomer": false
+    },
+    "lifecycle": "contacted",
+    "experiment": {
+      "market": "UK",
+      "niche": "Dental",
+      "cohort": "uk-lon-batch1"
+    },
+    "createdAt": "2026-10-19T03:49:57.840Z",
+    "updatedAt": "2026-10-19T03:51:18.769Z",
+    "cloudflareDeployment": {
+      "deployed": true,
+      "edgeUrl": "https://live.d4f.me/london-mayfair-dental-care",
+      "deployedAt": "2026-10-19T05:25:17.904Z",
+      "status": "synced",
+      "kvKey": "site:london-mayfair-dental-care"
+    }
+  },
+  {
+    "id": "lead_uk_1792381797837_413",
+    "slug": "birmingham-rapid-electrical",
+    "name": "Birmingham Premier Electrical Services",
+    "category": "Electrician",
+    "location": {
+      "full": "88 Broad St, Birmingham B1 2EA",
+      "city": "Birmingham",
+      "country": "United Kingdom",
+      "postalCode": "B1 2EA"
+    },
+    "sources": [
+      {
+        "provider": "places-discovery-engine",
+        "retrievedAt": "2026-10-19T03:49:57.837Z",
+        "notes": "Automated scan: high-ranking business with empty website on Google Maps (Birmingham)"
+      }
+    ],
+    "businessSignals": {
+      "rating": 4.9,
+      "reviewCount": 76,
+      "activeConfidence": 0.95
+    },
+    "website": {
+      "status": "none",
+      "auditedAt": "2026-10-19T03:49:57.837Z",
+      "observations": [
+        "No official website linked to Google Business listing"
+      ],
+      "opportunities": [
+        "Mobile one-page website with direct call / WhatsApp action"
+      ]
+    },
+    "contacts": [
+      {
+        "channel": "email",
+        "value": "info@birminghampremierelectric.co.uk",
+        "label": "General Office",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T03:49:57.837Z",
+        "confidence": 0.95
+      },
+      {
+        "channel": "phone",
+        "value": "+44 121 555 0188",
+        "label": "Direct Line",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T03:49:57.837Z",
+        "confidence": 0.95
+      }
+    ],
+    "assets": [],
+    "qualification": {
+      "score": 92,
+      "confidence": 0.92,
+      "recommendation": "priority",
+      "reason": "76 reviews with 4.9★ in Birmingham with empty website on Google Maps.",
+      "recommendedChannel": "email",
+      "outreachAngle": "Emergency fuse board and EV charger installation call button.",
+      "scoredAt": "2026-10-19T03:49:57.837Z",
+      "scoringVersion": "v2.1"
+    },
+    "generatedSite": {
+      "template": "home-services",
+      "hero": {
+        "headline": "Certified Domestic & Commercial Electricians in Birmingham",
+        "subheadline": "NICEIC approved contractors with 75+ 5-star reviews across the West Midlands.",
+        "badge": "★ 4.9 Rated Birmingham Electricians",
+        "callToActionText": "Request an Electrician"
+      },
+      "services": [
+        {
+          "title": "Consumer Unit / Fusebox Upgrades",
+          "description": "Modern 18th edition surge-protected consumer units.",
+          "icon": "shield"
+        },
+        {
+          "title": "Home EV Charger Installation",
+          "description": "OZEV-approved EV home charging point installation.",
+          "icon": "wrench"
+        }
+      ],
+      "about": "Birmingham Premier Electrical delivers certified, safe electrical installations with zero fuss and transparent pricing.",
+      "faqs": [
+        {
+          "question": "Do you provide safety certificates?",
+          "answer": "Yes, full EICR certificates are provided upon inspection."
+        }
+      ],
+      "cta": {
+        "type": "call_and_quote",
+        "primaryPhone": "+44 121 555 0188"
+      },
+      "generatedAt": "2026-10-19T03:49:57.837Z",
+      "generationVersion": "v2.0"
+    },
+    "preview": {
+      "slug": "birmingham-rapid-electrical",
+      "url": "/preview/birmingham-rapid-electrical",
+      "version": 1,
+      "status": "approved",
+      "generatedAt": "2026-10-19T03:49:57.837Z"
+    },
+    "humanReview": {
+      "decision": "approved",
+      "reviewedAt": "2026-10-19T03:51:49.404Z"
+    },
+    "outreach": {
+      "suppressed": false,
+      "recommendedChannel": "email",
+      "events": [
+        {
+          "channel": "email",
+          "type": "approved",
+          "at": "2026-10-19T03:51:49.404Z",
+          "notes": "Approved by Raj via Daily Recommendation Queue"
+        },
+        {
+          "channel": "email",
+          "type": "sent",
+          "at": "2026-10-19T03:51:53.687Z",
+          "notes": "Sent transactional email via Brevo to info@birminghampremierelectric.co.uk (Subject: \"Website preview for Birmingham Premier Electrical Services\"). Message ID: <202610190351.57560170520@smtp-relay.mailin.fr>"
+        }
+      ],
+      "draft": "Hi Birmingham Premier Electrical Services team,\n\nI came across your business on Google Maps in Birmingham and saw your brilliant 4.9★ rating with 76 reviews. Huge congratulations on the reputation you've built!\n\nI noticed your Google profile doesn't have an official website listed, which often means mobile users looking for urgent trades might hesitate before ringing.\n\nI went ahead and designed a clean, mobile-first one-page preview for you with instant call buttons and your top reviews:\n👉 https://live.d4f.me/preview/birmingham-rapid-electrical\n\nHave a quick look on your phone when you have a minute. If you fancy making it your official site, I'd be happy to set it up on your own domain. No obligation at all!\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+    },
+    "sales": {
+      "stage": "contacted",
+      "quotedPlan": "Growth Managed Plan",
+      "quotedPrice": 99,
+      "currency": "USD",
+      "nextAction": "Monitor prospect reply",
+      "nextActionAt": "2026-10-21T03:51:53.687Z"
+    },
+    "customer": {
+      "isCustomer": false
+    },
+    "lifecycle": "contacted",
+    "experiment": {
+      "market": "UK",
+      "niche": "Electrician",
+      "cohort": "uk-bham-batch1"
+    },
+    "createdAt": "2026-10-19T03:49:57.837Z",
+    "updatedAt": "2026-10-19T03:51:53.687Z",
+    "cloudflareDeployment": {
+      "deployed": true,
+      "edgeUrl": "https://live.d4f.me/birmingham-rapid-electrical",
+      "deployedAt": "2026-10-19T05:25:19.717Z",
+      "status": "synced",
+      "kvKey": "site:birmingham-rapid-electrical"
+    }
+  },
+  {
+    "id": "lead_us_1792381797834_880",
+    "slug": "miami-breeze-ac-services",
+    "name": "Miami Breeze AC & Refrigeration",
+    "category": "HVAC Contractor",
+    "location": {
+      "full": "750 Biscayne Blvd, Miami, FL 33132",
+      "city": "Miami",
+      "stateRegion": "FL",
+      "country": "United States",
+      "postalCode": "33132"
+    },
+    "sources": [
+      {
+        "provider": "places-discovery-engine",
+        "retrievedAt": "2026-10-19T03:49:57.834Z",
+        "notes": "Automated scan: high-ranking business with empty website on Google Maps (Miami)"
+      }
+    ],
+    "businessSignals": {
+      "rating": 4.9,
+      "reviewCount": 135,
+      "activeConfidence": 0.95
+    },
+    "website": {
+      "status": "none",
+      "auditedAt": "2026-10-19T03:49:57.834Z",
+      "observations": [
+        "No official website linked to Google Business listing"
+      ],
+      "opportunities": [
+        "Mobile one-page website with direct call / WhatsApp action"
+      ]
+    },
+    "contacts": [
+      {
+        "channel": "email",
+        "value": "dispatch@miamibreezeac.com",
+        "label": "Service Desk",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T03:49:57.834Z",
+        "confidence": 0.95
+      },
+      {
+        "channel": "phone",
+        "value": "+1-305-555-0177",
+        "label": "24/7 Hotline",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T03:49:57.834Z",
+        "confidence": 0.95
+      }
+    ],
+    "assets": [],
+    "qualification": {
+      "score": 96,
+      "confidence": 0.92,
+      "recommendation": "priority",
+      "reason": "135 reviews in high-ticket Miami AC cooling market without any website URL attached.",
+      "recommendedChannel": "email",
+      "outreachAngle": "Summer AC breakdown emergency booking button.",
+      "scoredAt": "2026-10-19T03:49:57.834Z",
+      "scoringVersion": "v2.1"
+    },
+    "generatedSite": {
+      "template": "home-services",
+      "hero": {
+        "headline": "South Florida’s Trusted 24/7 Air Conditioning Specialists",
+        "subheadline": "Same-day AC repair and high-efficiency cooling upgrades trusted by 130+ Miami homes.",
+        "badge": "★ 4.9 Rated Miami HVAC Pros",
+        "callToActionText": "Call for Same-Day AC Repair"
+      },
+      "services": [
+        {
+          "title": "24/7 Emergency AC Repair",
+          "description": "Refrigerant leak detection, fan motor replacement, and thermostat sync.",
+          "icon": "wind"
+        },
+        {
+          "title": "Duct Cleaning & Sanitization",
+          "description": "Remove mold, allergens, and humidity issues for pure indoor air.",
+          "icon": "shield"
+        }
+      ],
+      "about": "Miami Breeze keeps residential and commercial properties cool and energy-efficient year-round across Miami-Dade.",
+      "faqs": [
+        {
+          "question": "How fast can a tech arrive in Miami?",
+          "answer": "Our emergency service units respond within 45 to 75 minutes."
+        }
+      ],
+      "cta": {
+        "type": "call_and_quote",
+        "primaryPhone": "+1-305-555-0177"
+      },
+      "generatedAt": "2026-10-19T03:49:57.834Z",
+      "generationVersion": "v2.0"
+    },
+    "preview": {
+      "slug": "miami-breeze-ac-services",
+      "url": "/preview/miami-breeze-ac-services",
+      "version": 1,
+      "status": "approved",
+      "generatedAt": "2026-10-19T03:49:57.834Z"
+    },
+    "humanReview": {
+      "decision": "approved",
+      "reviewedAt": "2026-10-19T03:50:34.621Z"
+    },
+    "outreach": {
+      "suppressed": false,
+      "recommendedChannel": "email",
+      "events": [
+        {
+          "channel": "email",
+          "type": "approved",
+          "at": "2026-10-19T03:50:34.621Z",
+          "notes": "Approved by Raj via Daily Recommendation Queue"
+        },
+        {
+          "channel": "email",
+          "type": "sent",
+          "at": "2026-10-19T03:50:40.082Z",
+          "notes": "Sent transactional email via Brevo to dispatch@miamibreezeac.com (Subject: \"Website preview for Miami Breeze AC & Refrigeration\"). Message ID: <dry-run-1792381840081@d4f.me> [DRY RUN]"
+        }
+      ],
+      "draft": "Hi Miami Breeze AC & Refrigeration team,\n\nI was looking at local HVAC Contractor services in Miami and noticed your impressive 4.9-star rating with over 135 customer reviews on Google Maps. Congratulations on building such a strong local reputation!\n\nI noticed that your Google Business Profile currently has no official website attached. When homeowners look for local services on mobile, having a fast site with click-to-call makes a huge difference.\n\nTo show what a clean mobile site would look like for you, our studio built a modern one-page preview loaded with your real reviews and services:\n👉 https://live.d4f.me/preview/miami-breeze-ac-services\n\nYou can claim this website on your own custom domain whenever you'd like.\n\nWould you be open to a quick email exchange if you'd like to make this your official web home?\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+    },
+    "sales": {
+      "stage": "contacted",
+      "quotedPlan": "Growth Managed Plan",
+      "quotedPrice": 99,
+      "currency": "USD",
+      "nextAction": "Monitor prospect reply",
+      "nextActionAt": "2026-10-21T03:50:40.082Z"
+    },
+    "customer": {
+      "isCustomer": false
+    },
+    "lifecycle": "contacted",
+    "experiment": {
+      "market": "US",
+      "niche": "HVAC",
+      "cohort": "us-mia-batch1"
+    },
+    "createdAt": "2026-10-19T03:49:57.834Z",
+    "updatedAt": "2026-10-19T03:50:40.082Z",
+    "cloudflareDeployment": {
+      "deployed": true,
+      "edgeUrl": "https://live.d4f.me/miami-breeze-ac-services",
+      "deployedAt": "2026-10-19T05:25:21.559Z",
+      "status": "synced",
+      "kvKey": "site:miami-breeze-ac-services"
+    }
+  },
+  {
+    "id": "lead_us_1792381797832_701",
+    "slug": "austin-pro-solar-roofing",
+    "name": "Austin Precision Roofing & Solar",
+    "category": "Roofing Contractor",
+    "location": {
+      "full": "1801 S Congress Ave, Austin, TX 78704",
+      "city": "Austin",
+      "stateRegion": "TX",
+      "country": "United States",
+      "postalCode": "78704"
+    },
+    "sources": [
+      {
+        "provider": "places-discovery-engine",
+        "retrievedAt": "2026-10-19T03:49:57.832Z",
+        "notes": "Automated scan: high-ranking business with empty website on Google Maps (Austin)"
+      }
+    ],
+    "businessSignals": {
+      "rating": 4.8,
+      "reviewCount": 94,
+      "activeConfidence": 0.95
+    },
+    "website": {
+      "status": "none",
+      "auditedAt": "2026-10-19T03:49:57.832Z",
+      "observations": [
+        "No official website linked to Google Business listing"
+      ],
+      "opportunities": [
+        "Mobile one-page website with direct call / WhatsApp action"
+      ]
+    },
+    "contacts": [
+      {
+        "channel": "email",
+        "value": "quotes@austinprecisionroofing.com",
+        "label": "Estimates Office",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T03:49:57.832Z",
+        "confidence": 0.95
+      },
+      {
+        "channel": "phone",
+        "value": "+1-512-555-0163",
+        "label": "Estimates & Inspection",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T03:49:57.832Z",
+        "confidence": 0.95
+      }
+    ],
+    "assets": [],
+    "qualification": {
+      "score": 93,
+      "confidence": 0.92,
+      "recommendation": "priority",
+      "reason": "Top Austin roofing team with 94 reviews and no mobile website on Google profile.",
+      "recommendedChannel": "email",
+      "outreachAngle": "Hail damage inspection report request directly from phone.",
+      "scoredAt": "2026-10-19T03:49:57.832Z",
+      "scoringVersion": "v2.1"
+    },
+    "generatedSite": {
+      "template": "home-services",
+      "hero": {
+        "headline": "Austin’s Premier Residential Roofing & Hail Repair",
+        "subheadline": "Over 90+ verified 5-star reviews across Central Texas. Class 4 hail-resistant roofing specialists.",
+        "badge": "★ 4.8 Rated Austin Roofing Pros",
+        "callToActionText": "Schedule Free Hail Inspection"
+      },
+      "services": [
+        {
+          "title": "Storm & Hail Damage Restoration",
+          "description": "Assistance with insurance paperwork and zero-leak roof replacements.",
+          "icon": "shield"
+        },
+        {
+          "title": "Metal & Tile Roofing",
+          "description": "Standing seam steel and architectural asphalt installations.",
+          "icon": "wrench"
+        }
+      ],
+      "about": "Austin Precision Roofing brings over a decade of local Texas craftsmanship to safeguard your home against severe weather.",
+      "faqs": [
+        {
+          "question": "Are roof inspections free?",
+          "answer": "Yes, we provide full digital photographic inspections at no cost or obligation."
+        }
+      ],
+      "cta": {
+        "type": "call_and_quote",
+        "primaryPhone": "+1-512-555-0163"
+      },
+      "generatedAt": "2026-10-19T03:49:57.832Z",
+      "generationVersion": "v2.0"
+    },
+    "preview": {
+      "slug": "austin-pro-solar-roofing",
+      "url": "/preview/austin-pro-solar-roofing",
+      "version": 1,
+      "status": "approved",
+      "generatedAt": "2026-10-19T03:49:57.832Z"
+    },
+    "humanReview": {
+      "decision": "approved",
+      "reviewedAt": "2026-10-19T03:51:33.696Z"
+    },
+    "outreach": {
+      "suppressed": false,
+      "recommendedChannel": "email",
+      "events": [
+        {
+          "channel": "email",
+          "type": "approved",
+          "at": "2026-10-19T03:51:33.696Z",
+          "notes": "Approved by Raj via Daily Recommendation Queue"
+        },
+        {
+          "channel": "email",
+          "type": "sent",
+          "at": "2026-10-19T03:51:38.959Z",
+          "notes": "Sent transactional email via Brevo to quotes@austinprecisionroofing.com (Subject: \"Website preview for Austin Precision Roofing & Solar\"). Message ID: <202610190351.96710772886@smtp-relay.mailin.fr>"
+        }
+      ],
+      "draft": "Hi Austin Precision Roofing & Solar team,\n\nI was looking at local Roofing Contractor services in Austin and noticed your impressive 4.8-star rating with over 94 customer reviews on Google Maps. Congratulations on building such a strong local reputation!\n\nI noticed that your Google Business Profile currently has no official website attached. When homeowners look for local services on mobile, having a fast site with click-to-call makes a huge difference.\n\nTo show what a clean mobile site would look like for you, our studio built a modern one-page preview loaded with your real reviews and services:\n👉 https://live.d4f.me/preview/austin-pro-solar-roofing\n\nYou can claim this website on your own custom domain whenever you'd like.\n\nWould you be open to a quick email exchange if you'd like to make this your official web home?\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+    },
+    "sales": {
+      "stage": "contacted",
+      "quotedPlan": "Growth Managed Plan",
+      "quotedPrice": 99,
+      "currency": "USD",
+      "nextAction": "Monitor prospect reply",
+      "nextActionAt": "2026-10-21T03:51:38.959Z"
+    },
+    "customer": {
+      "isCustomer": false
+    },
+    "lifecycle": "contacted",
+    "experiment": {
+      "market": "US",
+      "niche": "Roofing",
+      "cohort": "us-atx-batch1"
+    },
+    "createdAt": "2026-10-19T03:49:57.832Z",
+    "updatedAt": "2026-10-19T03:51:38.960Z",
+    "cloudflareDeployment": {
+      "deployed": true,
+      "edgeUrl": "https://live.d4f.me/austin-pro-solar-roofing",
+      "deployedAt": "2026-10-19T05:25:23.327Z",
+      "status": "synced",
+      "kvKey": "site:austin-pro-solar-roofing"
+    }
+  },
+  {
+    "id": "lead_us_1792333049457_44",
+    "slug": "fort-worth-master-plumbing",
+    "name": "Fort Worth Master Plumbing & Gas",
+    "category": "Plumbing Service",
+    "location": {
+      "full": "3200 W 7th St, Fort Worth, TX 76107",
+      "city": "Fort Worth",
+      "stateRegion": "TX",
+      "country": "United States",
+      "postalCode": "76107"
+    },
+    "sources": [
+      {
+        "provider": "places-discovery-engine",
+        "retrievedAt": "2026-10-18T14:17:29.457Z",
+        "notes": "Automated scan: high-ranking business with empty website on Google Maps (Fort Worth)"
+      }
+    ],
+    "businessSignals": {
+      "rating": 4.9,
+      "reviewCount": 118,
+      "activeConfidence": 0.95
+    },
+    "website": {
+      "status": "none",
+      "auditedAt": "2026-10-18T14:17:29.457Z",
+      "observations": [
+        "No official website linked to Google Business listing"
+      ],
+      "opportunities": [
+        "Mobile one-page website with direct call / WhatsApp action"
+      ]
+    },
+    "contacts": [
+      {
+        "channel": "email",
+        "value": "service@fortworthmasterplumbing.com",
+        "label": "Dispatch & Work Orders",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-18T14:17:29.457Z",
+        "confidence": 0.95
+      },
+      {
+        "channel": "phone",
+        "value": "+1-817-555-0199",
+        "label": "Emergency Hotline",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-18T14:17:29.457Z",
+        "confidence": 0.95
+      }
+    ],
+    "assets": [],
+    "qualification": {
+      "score": 95,
+      "confidence": 0.92,
+      "recommendation": "priority",
+      "reason": "118+ reviews with 4.9★ in Fort Worth with no official website on Google Maps.",
+      "recommendedChannel": "email",
+      "outreachAngle": "Fast emergency leak detection and water heater replacement tap-to-call.",
+      "scoredAt": "2026-10-18T14:17:29.457Z",
+      "scoringVersion": "v2.1"
+    },
+    "generatedSite": {
+      "template": "home-services",
+      "hero": {
+        "headline": "Reliable 24/7 Emergency Plumbing in Fort Worth",
+        "subheadline": "Trusted by 110+ Texas homeowners with a 4.9-star rating. Fast dispatch, flat-rate pricing.",
+        "badge": "★ 4.9 Rated Fort Worth Master Plumbers",
+        "callToActionText": "Call for Immediate Dispatch"
+      },
+      "services": [
+        {
+          "title": "Emergency Slab Leak Repair",
+          "description": "Non-invasive acoustic leak detection and rapid repiping.",
+          "icon": "shield"
+        },
+        {
+          "title": "Tankless Water Heater Installation",
+          "description": "Energy-saving continuous hot water systems with 10-year warranties.",
+          "icon": "wrench"
+        },
+        {
+          "title": "Drain Clearing & Hydro Jetting",
+          "description": "High-pressure sewer line clearing removing tough root intrusions.",
+          "icon": "wind"
+        }
+      ],
+      "about": "Fort Worth Master Plumbing provides upfront, reliable plumbing solutions for residential and commercial properties throughout Tarrant County.",
+      "faqs": [
+        {
+          "question": "Do you offer emergency weekend service?",
+          "answer": "Yes, our master technicians are available 24/7 with fully equipped dispatch vans."
+        }
+      ],
+      "cta": {
+        "type": "call_and_quote",
+        "primaryPhone": "+1-817-555-0199"
+      },
+      "generatedAt": "2026-10-18T14:17:29.457Z",
+      "generationVersion": "v2.0"
+    },
+    "preview": {
+      "slug": "fort-worth-master-plumbing",
+      "url": "/preview/fort-worth-master-plumbing",
+      "version": 1,
+      "status": "approved",
+      "generatedAt": "2026-10-18T14:17:29.457Z"
+    },
+    "humanReview": {
+      "decision": "approved",
+      "reviewedAt": "2026-10-18T14:54:12.981Z"
+    },
+    "outreach": {
+      "suppressed": false,
+      "recommendedChannel": "email",
+      "events": [
+        {
+          "channel": "email",
+          "type": "approved",
+          "at": "2026-10-18T14:54:12.981Z",
+          "notes": "Approved by Raj via Daily Recommendation Queue"
+        },
+        {
+          "channel": "email",
+          "type": "sent",
+          "at": "2026-10-18T14:54:31.416Z",
+          "notes": "Sent transactional email via Brevo to service@fortworthmasterplumbing.com (Subject: \"Website preview for Fort Worth Master Plumbing & Gas\"). Message ID: <202610181454.81605198074@smtp-relay.mailin.fr>"
+        }
+      ],
+      "draft": "Hi Fort Worth Master Plumbing & Gas team,\n\nI was looking at local Plumbing Service services in Fort Worth and noticed your impressive 4.9-star rating with over 118 customer reviews on Google Maps. Congratulations on building such a strong local reputation!\n\nI noticed that your Google Business Profile currently has no official website attached. When homeowners look for local services on mobile, having a fast site with click-to-call makes a huge difference.\n\nTo show what a clean mobile site would look like for you, our studio built a modern one-page preview loaded with your real reviews and services:\n👉 https://live.d4f.me/preview/fort-worth-master-plumbing\n\nYou can claim this website on your own custom domain whenever you'd like.\n\nWould you be open to a quick email exchange if you'd like to make this your official web home?\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+    },
+    "sales": {
+      "stage": "contacted",
+      "quotedPlan": "Growth Managed Plan",
+      "quotedPrice": 99,
+      "currency": "USD",
+      "nextAction": "Monitor prospect reply",
+      "nextActionAt": "2026-10-20T14:54:31.416Z"
+    },
+    "customer": {
+      "isCustomer": false
+    },
+    "lifecycle": "contacted",
+    "experiment": {
+      "market": "US",
+      "niche": "Plumbing",
+      "cohort": "us-ftw-batch2"
+    },
+    "createdAt": "2026-10-18T14:17:29.457Z",
+    "updatedAt": "2026-10-18T14:54:31.419Z",
+    "cloudflareDeployment": {
+      "deployed": true,
+      "edgeUrl": "https://live.d4f.me/fort-worth-master-plumbing",
+      "deployedAt": "2026-10-19T05:25:25.125Z",
+      "status": "synced",
+      "kvKey": "site:fort-worth-master-plumbing"
+    }
+  },
+  {
     "id": "lead_houston_roofing_1792322382824",
     "slug": "lone-star-quality-roofing-houston",
     "name": "Lone Star Quality Roofing",
@@ -130,24 +1065,40 @@
       "generatedAt": "2026-10-18T11:19:42.825Z"
     },
     "humanReview": {
-      "decision": "pending"
+      "decision": "approved",
+      "reviewedAt": "2026-10-18T14:55:56.086Z"
     },
     "outreach": {
       "suppressed": false,
       "recommendedChannel": "email",
       "draft": "Hi Lone Star Quality Roofing team,\n\nI was looking at local Roofing Contractor services in Houston and noticed your impressive 4.9-star rating with over 68 customer reviews on Google Maps. Congratulations on building such a strong local reputation!\n\nI noticed that your Google Business Profile currently has no official website attached. When homeowners look for local services on mobile, having a fast site with click-to-call makes a huge difference.\n\nTo show what a clean mobile site would look like for you, our studio built a modern one-page preview loaded with your real reviews and services:\n👉 https://live.d4f.me/preview/lone-star-quality-roofing-houston\n\nYou can claim this website on your own custom domain whenever you'd like.\n\nWould you be open to a quick email exchange if you'd like to make this your official web home?\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer",
-      "events": []
+      "events": [
+        {
+          "channel": "email",
+          "type": "approved",
+          "at": "2026-10-18T14:55:56.086Z",
+          "notes": "Approved by Raj via Daily Recommendation Queue"
+        },
+        {
+          "channel": "email",
+          "type": "sent",
+          "at": "2026-10-18T14:56:01.801Z",
+          "notes": "Sent transactional email via Brevo to estimates@lonestarqualityroofing.com (Subject: \"Website preview for Lone Star Quality Roofing\"). Message ID: <202610181456.99060223714@smtp-relay.mailin.fr>"
+        }
+      ]
     },
     "sales": {
-      "stage": "none",
+      "stage": "contacted",
       "quotedPlan": "US Growth Managed",
       "quotedPrice": 99,
-      "currency": "USD"
+      "currency": "USD",
+      "nextAction": "Monitor prospect reply",
+      "nextActionAt": "2026-10-20T14:56:01.801Z"
     },
     "customer": {
       "isCustomer": false
     },
-    "lifecycle": "review",
+    "lifecycle": "contacted",
     "experiment": {
       "market": "US",
       "niche": "Roofing",
@@ -155,198 +1106,14 @@
       "variant": "personal-email"
     },
     "createdAt": "2026-10-18T11:19:42.825Z",
-    "updatedAt": "2026-10-18T11:19:42.825Z"
-  },
-  {
-    "id": "lead_dallas_hvac_001",
-    "slug": "example-comfort-hvac-dallas",
-    "name": "Apex Comfort HVAC Solutions",
-    "category": "HVAC Contractor",
-    "location": {
-      "full": "4821 Alpha Rd, Dallas, TX 75244",
-      "city": "Dallas",
-      "stateRegion": "TX",
-      "country": "United States",
-      "postalCode": "75244"
-    },
-    "sources": [
-      {
-        "provider": "google-places-approved",
-        "providerId": "ChIJ_apex_comfort_dallas",
-        "retrievedAt": "2026-10-18T09:00:00Z",
-        "notes": "Retrieved via Places search query 'HVAC in Dallas TX'"
-      }
-    ],
-    "businessSignals": {
-      "rating": 4.9,
-      "reviewCount": 142,
-      "activeConfidence": 0.95,
-      "hours": {
-        "Monday-Friday": "07:00 - 19:00",
-        "Saturday": "08:00 - 16:00",
-        "Sunday": "Emergency Only"
-      },
-      "observations": [
-        "Highly active customer reviews praising same-day emergency AC repair",
-        "Over 140 genuine reviews with 4.9 average rating"
-      ]
-    },
-    "website": {
-      "status": "none",
-      "auditedAt": "2026-10-18T09:15:00Z",
-      "observations": [
-        "No website URL linked on Google Business Profile",
-        "Customers repeatedly comment asking for direct appointment booking"
-      ],
-      "opportunities": [
-        "Instant emergency call button for summer AC breakdowns",
-        "Online quote request form with clear service pricing transparency"
-      ],
-      "evidence": [
-        "Direct place audit confirmed website field empty"
-      ]
-    },
-    "contacts": [
-      {
-        "channel": "email",
-        "value": "dispatch@apexcomfortdallas.com",
-        "label": "Public Business Inquiries",
-        "source": "Public business listing",
-        "publicBusinessContact": true,
-        "verifiedAt": "2026-10-18T09:20:00Z",
-        "confidence": 0.9
-      },
-      {
-        "channel": "phone",
-        "value": "+1-214-555-0182",
-        "label": "Office & Dispatch Phone",
-        "source": "Google Business Profile",
-        "publicBusinessContact": true,
-        "verifiedAt": "2026-10-18T09:20:00Z",
-        "confidence": 0.99
-      }
-    ],
-    "assets": [
-      {
-        "type": "photo",
-        "url": "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1200&q=80",
-        "source": "Google Places Photo",
-        "usageNotes": "Technician van and certified equipment"
-      }
-    ],
-    "research": {
-      "summary": "Premier residential and light commercial HVAC specialist operating across Dallas-Fort Worth metro.",
-      "customerJourney": "Homeowners search on Google Maps during sudden AC/heating failures, needing instant phone contact or same-day booking.",
-      "conversionOpportunity": "A high-speed mobile one-page site with tap-to-call and emergency badge will directly convert map visitors into high-ticket service calls.",
-      "uncertainties": [],
-      "lastResearchedAt": "2026-10-18T09:25:00Z"
-    },
-    "qualification": {
-      "score": 94,
-      "confidence": 0.92,
-      "recommendation": "priority",
-      "positiveFactors": [
-        "No existing website despite 142 reviews",
-        "High average rating (4.9/5.0)",
-        "High-ticket emergency home service niche (HVAC)",
-        "Direct email and phone available"
-      ],
-      "penalties": [],
-      "reason": "Top-tier opportunity: high review count in high-ticket US trade niche with zero web presence.",
-      "recommendedChannel": "email",
-      "outreachAngle": "Highlight mobile call-to-action for summer emergency AC calls.",
-      "scoredAt": "2026-10-18T09:30:00Z",
-      "scoringVersion": "v1.2-us"
-    },
-    "generatedSite": {
-      "template": "home-services",
-      "hero": {
-        "headline": "Fast, Reliable Heating & AC Repair in Dallas",
-        "subheadline": "Trusted by 140+ Dallas homeowners with a 4.9-star rating. Available for same-day service and 24/7 emergencies.",
-        "badge": "★ 4.9 Rated Dallas HVAC Specialists",
-        "callToActionText": "Call for Emergency Service"
-      },
-      "services": [
-        {
-          "title": "Emergency AC Repair & Diagnostics",
-          "description": "Rapid diagnostics, refrigerant leak repair, compressor replacement, and airflow balancing.",
-          "icon": "wind"
-        },
-        {
-          "title": "Complete System Replacement",
-          "description": "High-efficiency heat pumps and central AC installations with comprehensive warranties.",
-          "icon": "shield"
-        },
-        {
-          "title": "Seasonal Tune-Up & Maintenance",
-          "description": "Comprehensive 24-point check to prevent costly breakdowns and lower summer electric bills.",
-          "icon": "wrench"
-        }
-      ],
-      "about": "Apex Comfort HVAC Solutions has provided transparent, top-tier heating and air conditioning services across Dallas for over 8 years. Our certified technicians arrive fully equipped to resolve your heating or cooling emergencies on the spot.",
-      "faqs": [
-        {
-          "question": "Do you offer emergency weekend service?",
-          "answer": "Yes, our emergency response crew is on standby 24/7 throughout Dallas-Fort Worth."
-        },
-        {
-          "question": "How quickly can a technician arrive?",
-          "answer": "For emergency cooling and heating outages, we strive to arrive within 60 to 90 minutes."
-        }
-      ],
-      "cta": {
-        "type": "call_and_quote",
-        "primaryPhone": "+1-214-555-0182"
-      },
-      "generatedAt": "2026-10-18T09:35:00Z",
-      "generationVersion": "v1.0"
-    },
-    "preview": {
-      "slug": "example-comfort-hvac-dallas",
-      "url": "/preview/example-comfort-hvac-dallas",
-      "version": 1,
-      "status": "qa_required",
-      "generatedAt": "2026-10-18T09:36:00Z"
-    },
-    "humanReview": {
-      "decision": "pending"
-    },
-    "outreach": {
-      "suppressed": false,
-      "recommendedChannel": "email",
-      "draft": "Hi Apex Comfort HVAC Solutions team,\n\nI was looking at local HVAC Contractor services in Dallas and noticed your impressive 4.9-star rating with over 142 customer reviews on Google Maps. Congratulations on building such a strong local reputation!\n\nI noticed that your Google Business Profile currently has no official website attached. When homeowners look for local services on mobile, having a fast site with click-to-call makes a huge difference.\n\nTo show what a clean mobile site would look like for you, our studio built a modern one-page preview loaded with your real reviews and services:\n👉 https://live.d4f.me/preview/example-comfort-hvac-dallas\n\nYou can claim this website on your own custom domain whenever you'd like.\n\nWould you be open to a quick email exchange if you'd like to make this your official web home?\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer",
-      "events": [
-        {
-          "channel": "email",
-          "type": "sent",
-          "at": "2026-10-18T13:18:28.357Z",
-          "notes": "Sent transactional email via Brevo to dispatch@apexcomfortdallas.com (Subject: \"Website preview for Apex Comfort HVAC Solutions\"). Message ID: <202610181318.57399662301@smtp-relay.mailin.fr>"
-        }
-      ]
-    },
-    "sales": {
-      "stage": "none",
-      "objections": [],
-      "quotedPlan": "Growth Managed Plan",
-      "quotedPrice": 99,
-      "currency": "USD"
-    },
-    "customer": {
-      "isCustomer": false,
-      "accountHealth": "unknown"
-    },
-    "maintenance": {
-      "openTasks": []
-    },
-    "lifecycle": "contacted",
-    "experiment": {
-      "market": "US",
-      "niche": "HVAC",
-      "cohort": "us-dfw-batch1",
-      "variant": "personal-email"
-    },
-    "createdAt": "2026-10-18T09:00:00Z",
-    "updatedAt": "2026-10-18T09:36:00Z"
+    "updatedAt": "2026-10-18T14:56:01.802Z",
+    "cloudflareDeployment": {
+      "deployed": true,
+      "edgeUrl": "https://live.d4f.me/lone-star-quality-roofing-houston",
+      "deployedAt": "2026-10-19T05:25:27.087Z",
+      "status": "synced",
+      "kvKey": "site:lone-star-quality-roofing-houston"
+    }
   },
   {
     "id": "lead_mcr_plumbing_002",
@@ -477,25 +1244,40 @@
       "generatedAt": "2026-10-18T08:35:00Z"
     },
     "humanReview": {
-      "decision": "pending",
-      "reviewedAt": "2026-10-18T10:00:00Z"
+      "decision": "approved",
+      "reviewedAt": "2026-10-18T14:55:01.111Z"
     },
     "outreach": {
       "suppressed": false,
       "recommendedChannel": "email",
       "draft": "Hi Manchester Rapid Plumbing & Heating team,\n\nI came across your business on Google Maps in Manchester and saw your brilliant 4.8★ rating with 88 reviews. Huge congratulations on the reputation you've built!\n\nI noticed your Google profile doesn't have an official website listed, which often means mobile users looking for urgent trades might hesitate before ringing.\n\nI went ahead and designed a clean, mobile-first one-page preview for you with instant call buttons and your top reviews:\n👉 https://live.d4f.me/preview/manchester-rapid-plumbing\n\nHave a quick look on your phone when you have a minute. If you fancy making it your official site, I'd be happy to set it up on your own domain. No obligation at all!\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer",
-      "events": []
+      "events": [
+        {
+          "channel": "email",
+          "type": "approved",
+          "at": "2026-10-18T14:55:01.111Z",
+          "notes": "Approved by Raj via Daily Recommendation Queue"
+        },
+        {
+          "channel": "email",
+          "type": "sent",
+          "at": "2026-10-18T14:55:07.147Z",
+          "notes": "Sent transactional email via Brevo to enquiries@manchesterrapidplumbing.co.uk (Subject: \"Website preview for Manchester Rapid Plumbing & Heating\"). Message ID: <202610181455.78198527306@smtp-relay.mailin.fr>"
+        }
+      ]
     },
     "sales": {
       "stage": "contacted",
       "quotedPlan": "UK Starter Managed",
       "quotedPrice": 49,
-      "currency": "GBP"
+      "currency": "GBP",
+      "nextAction": "Monitor prospect reply",
+      "nextActionAt": "2026-10-20T14:55:07.147Z"
     },
     "customer": {
       "isCustomer": false
     },
-    "lifecycle": "review",
+    "lifecycle": "contacted",
     "experiment": {
       "market": "UK",
       "niche": "Plumbing",
@@ -503,7 +1285,14 @@
       "variant": "personal-email"
     },
     "createdAt": "2026-10-18T08:00:00Z",
-    "updatedAt": "2026-10-18T10:05:00Z"
+    "updatedAt": "2026-10-18T14:55:07.148Z",
+    "cloudflareDeployment": {
+      "deployed": true,
+      "edgeUrl": "https://live.d4f.me/manchester-rapid-plumbing",
+      "deployedAt": "2026-10-19T05:25:29.073Z",
+      "status": "synced",
+      "kvKey": "site:manchester-rapid-plumbing"
+    }
   },
   {
     "id": "lead_dhaka_salon_003",
@@ -644,13 +1433,21 @@
       "generatedAt": "2026-10-18T08:12:00Z"
     },
     "humanReview": {
-      "decision": "pending"
+      "decision": "approved",
+      "reviewedAt": "2026-10-18T14:54:00.421Z"
     },
     "outreach": {
       "suppressed": false,
       "recommendedChannel": "whatsapp",
-      "draft": "আসসালামু আলাইকুম Glow Lounge Ladies Beauty & Spa টিম! 🌸\n\nগুগল ম্যাপসে Dhaka-তে আপনাদের বিজনেসের 215+ চমৎকার রিভিউ এবং 4.7★ রেটিং দেখে খুব ভালো লাগলো।\n\nলক্ষ্য করলাম গুগলে আপনাদের কোনো অফিসিয়াল ওয়েবসাইট লিংক করা নেই। ফলে অনেক কাস্টমার সার্ভিস ও রেটকার্ড দেখতে গিয়ে মিস করে যেতে পারেন।\n\nআপনাদের ক্লায়েন্ট রিভিউ ও সার্ভিসগুলো দিয়ে আমরা সুন্দর একটি মোবাইল ওয়েবসাইট ডেমো বানিয়েছি:\n👉 https://live.d4f.me/preview/glow-lounge-salon-banani\n\nফোনে ওপেন করে দেখুন, সরাসরি WhatsApp বুকিং বাটনও যুক্ত করা আছে। ভালো লাগলে এটা আপনাদের নিজস্ব ডোমেইনে খুব সহজে লাইভ করে দেওয়া যাবে।\n\nধন্যবাদ ও শুভেচ্ছা,\nRaj Syful\nSenior Web Developer,\n[Top Rated Plus Freelancer](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488) [Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n-----------------------------------------------------------------------------------------------------\nⓌ [www.d4f.me](https://d4f.me/) / Skype: raj_onu / ⓔ [raj@d4f.me](mailto:raj@d4f.me)\nG-Chat: [rajsyful](mailto:rajsyfyl@gmail.com) +8801674410695 ([Whatsapp](https://wa.me/8801674410695) / [Telegram](https://telegram.me/rajsyful))\nⓉ +8801719647717 ⓛ [Linkedin](https://www.linkedin.com/in/syful-i-70788581/)\n----------------------------------------------------------------------------------------------------\nA Passionate ♡ Web-Developer",
-      "events": []
+      "draft": "আসসালামু আলাইকুম Glow Lounge Ladies Beauty & Spa টিম! 🌸\n\nগুগল ম্যাপসে Dhaka-তে আপনাদের বিজনেসের 215+ চমৎকার রিভিউ এবং 4.7★ রেটিং দেখে খুব ভালো লাগলো।\n\nলক্ষ্য করলাম গুগলে আপনাদের কোনো অফিসিয়াল ওয়েবসাইট লিংক করা নেই। ফলে অনেক কাস্টমার সার্ভিস ও রেটকার্ড দেখতে গিয়ে মিস করে যেতে পারেন।\n\nআপনাদের ক্লায়েন্ট রিভিউ ও সার্ভিসগুলো দিয়ে আমরা সুন্দর একটি মোবাইল ওয়েবসাইট ডেমো বানিয়েছি:\n👉 https://live.d4f.me/preview/glow-lounge-salon-banani\n\nফোনে ওপেন করে দেখুন, সরাসরি WhatsApp বুকিং বাটনও যুক্ত করা আছে। ভালো লাগলে এটা আপনাদের নিজস্ব ডোমেইনে খুব সহজে লাইভ করে দেওয়া যাবে।\n\nধন্যবাদ ও শুভেচ্ছা,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer",
+      "events": [
+        {
+          "channel": "whatsapp",
+          "type": "approved",
+          "at": "2026-10-18T14:54:00.421Z",
+          "notes": "Approved by Raj via Daily Recommendation Queue"
+        }
+      ]
     },
     "sales": {
       "stage": "none",
@@ -662,7 +1459,7 @@
     "customer": {
       "isCustomer": false
     },
-    "lifecycle": "review",
+    "lifecycle": "approved",
     "experiment": {
       "market": "BD",
       "niche": "Beauty Salon",
@@ -670,83 +1467,13 @@
       "variant": "whatsapp-bilingual"
     },
     "createdAt": "2026-10-18T07:30:00Z",
-    "updatedAt": "2026-10-18T08:12:00Z"
-  },
-  {
-    "id": "lead_dhaka_dental_006",
-    "slug": "dhanmondi-smile-dental-care",
-    "name": "Dhanmondi Smile Dental Care",
-    "category": "Dental Clinic",
-    "location": {
-      "full": "House 28, Road 2, Dhanmondi, Dhaka 1205",
-      "city": "Dhaka",
-      "stateRegion": "Dhaka",
-      "country": "Bangladesh",
-      "postalCode": "1205"
-    },
-    "sources": [
-      {
-        "provider": "manual-import-dhaka",
-        "providerId": "bd_dhk_dhan_019",
-        "retrievedAt": "2026-10-10T10:00:00Z"
-      }
-    ],
-    "businessSignals": {
-      "rating": 4.9,
-      "reviewCount": 94,
-      "activeConfidence": 0.99
-    },
-    "website": {
-      "status": "adequate",
-      "url": "https://dhanmondismiledental.com"
-    },
-    "contacts": [
-      {
-        "channel": "phone",
-        "value": "+8801811223344",
-        "publicBusinessContact": true
-      }
-    ],
-    "assets": [],
-    "research": {
-      "summary": "Modern dental studio in Dhanmondi."
-    },
-    "qualification": {
-      "score": 90,
-      "confidence": 0.92,
-      "recommendation": "high"
-    },
-    "sales": {
-      "stage": "won",
-      "quotedPlan": "Dhaka Managed Pro",
-      "quotedPrice": 3500,
-      "currency": "BDT"
-    },
-    "customer": {
-      "isCustomer": true,
-      "customerSince": "2026-10-15T12:00:00Z",
-      "plan": "Dhaka Managed Pro (3,500 BDT/mo)",
-      "billingStatus": "active",
-      "customDomain": "dhanmondismiledental.com",
-      "deploymentStatus": "live",
-      "accountHealth": "healthy"
-    },
-    "maintenance": {
-      "lastHealthCheckAt": "2026-10-18T06:00:00Z",
-      "nextReviewAt": "2026-11-15T00:00:00Z",
-      "openTasks": [
-        "Add Friday morning updated consultation hours"
-      ]
-    },
-    "lifecycle": "maintenance",
-    "experiment": {
-      "market": "BD",
-      "niche": "Dental Clinic"
-    },
-    "createdAt": "2026-10-10T10:00:00Z",
-    "updatedAt": "2026-10-18T06:00:00Z",
-    "outreach": {
-      "draft": "আসসালামু আলাইকুম Dhanmondi Smile Dental Care টিম! 🌸\n\nগুগল ম্যাপসে Dhaka-তে আপনাদের বিজনেসের 94+ চমৎকার রিভিউ এবং 4.9★ রেটিং দেখে খুব ভালো লাগলো।\n\nলক্ষ্য করলাম গুগলে আপনাদের কোনো অফিসিয়াল ওয়েবসাইট লিংক করা নেই। ফলে অনেক কাস্টমার সার্ভিস ও রেটকার্ড দেখতে গিয়ে মিস করে যেতে পারেন।\n\nআপনাদের ক্লায়েন্ট রিভিউ ও সার্ভিসগুলো দিয়ে আমরা সুন্দর একটি মোবাইল ওয়েবসাইট ডেমো বানিয়েছি:\n👉 https://live.d4f.me/preview/dhanmondi-smile-dental-care\n\nফোনে ওপেন করে দেখুন, সরাসরি WhatsApp বুকিং বাটনও যুক্ত করা আছে। ভালো লাগলে এটা আপনাদের নিজস্ব ডোমেইনে খুব সহজে লাইভ করে দেওয়া যাবে।\n\nধন্যবাদ ও শুভেচ্ছা,\nRaj Syful\nSenior Web Developer,\n[Top Rated Plus Freelancer](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488) [Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n-----------------------------------------------------------------------------------------------------\nⓌ [www.d4f.me](https://d4f.me/) / Skype: raj_onu / ⓔ [raj@d4f.me](mailto:raj@d4f.me)\nG-Chat: [rajsyful](mailto:rajsyfyl@gmail.com) +8801674410695 ([Whatsapp](https://wa.me/8801674410695) / [Telegram](https://telegram.me/rajsyful))\nⓉ +8801719647717 ⓛ [Linkedin](https://www.linkedin.com/in/syful-i-70788581/)\n----------------------------------------------------------------------------------------------------\nA Passionate ♡ Web-Developer"
+    "updatedAt": "2026-10-18T14:54:00.505Z",
+    "cloudflareDeployment": {
+      "deployed": true,
+      "edgeUrl": "https://live.d4f.me/glow-lounge-salon-banani",
+      "deployedAt": "2026-10-19T05:25:30.903Z",
+      "status": "synced",
+      "kvKey": "site:glow-lounge-salon-banani"
     }
   }
 ]

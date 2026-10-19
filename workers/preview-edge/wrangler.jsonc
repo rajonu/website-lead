@@ -4,14 +4,21 @@
   "main": "src/index.ts",
   "compatibility_date": "2024-09-23",
   "compatibility_flags": ["nodejs_compat"],
+  "account_id": "f7b63a9b274f43bd60919b91973a0d90",
   "vars": {
     "ORIGIN_FALLBACK": "https://lead.d4f.me",
     "SHOWCASE_REDIRECT": "https://d4f.me"
   },
+  "routes": [
+    {
+      "pattern": "live.d4f.me/*",
+      "zone_name": "d4f.me"
+    }
+  ],
   "kv_namespaces": [
     {
       "binding": "PREVIEWS_KV",
-      "id": "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+      "id": "778255635eb04c86a8b646bf4d578c9b"
     }
   ],
   "observability": {
