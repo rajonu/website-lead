@@ -145,7 +145,7 @@ export interface HumanReviewData {
 
 export interface OutreachEvent {
   channel?: string;
-  type?: 'drafted' | 'approved' | 'sent' | 'delivered' | 'failed' | 'follow_up' | 'reply' | 'opt_out' | 'complaint';
+  type?: 'drafted' | 'approved' | 'sent' | 'delivered' | 'failed' | 'bounced' | 'follow_up' | 'reply' | 'opt_out' | 'complaint';
   at?: string;
   notes?: string;
 }
@@ -155,6 +155,8 @@ export interface OutreachData {
   suppressionReason?: string;
   recommendedChannel?: string;
   draft?: string;
+  deliveryStatus?: 'sent' | 'delivered' | 'bounced' | 'opened';
+  bounceReason?: string;
   events?: OutreachEvent[];
 }
 

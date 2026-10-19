@@ -321,4 +321,35 @@ export class BrevoService {
       return { success: false, error: safeError };
     }
   }
+
+  /**
+   * Fetches recent transactional delivery events (bounces, delivered, opened) from Brevo.
+   */
+  static async fetchRecentEvents(limit = 50): Promise<Array<{
+    email: string;
+    date: string;
+    messageId?: string;
+    event: string;
+    reason?: string;
+  }>> {
+    const resolvedKey = resolveBrevoApiKey();
+    if (!resolvedKey) return [];
+
+    try {
+      const res = await fetch(`https://api.brevo.com/v3/smtp/statistics/events?limit=${limit}`, {
+        headers: {
+          'api-key': resolvedKey,
+          accept: 'application/json',
+        },
+      });
+
+      if (!res.ok) return [];
+      const data = await res.json().catch(() => null);
+      return data?.events || [];
+    } catch (err) {
+      logger.error('Failed fetching Brevo delivery statistics events', err);
+      return [];
+    }
+  }
 }
+

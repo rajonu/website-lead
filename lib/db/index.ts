@@ -2,6 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import { WebsiteLead, LifecycleStage } from '@/lib/types/lead';
 import { initialSeedLeads } from './seed-data';
+import { CloudflareEdgeService } from '@/lib/services/cloudflare';
+import { BrevoService } from '@/lib/services/brevo';
 import { logger } from '@/lib/logger';
 
 const DATA_DIR =
@@ -122,6 +124,14 @@ export class LeadRepository {
     const [removed] = leads.splice(index, 1);
     this.writeAll(leads);
     logger.info('Lead deleted', { id, name: removed?.name });
+
+    // Automatically remove preview site from Cloudflare Workers KV and local export
+    if (removed?.slug) {
+      CloudflareEdgeService.deleteLeadPreview(removed.slug, removed.customer?.customDomain).catch((err) => {
+        logger.warn('Failed to clean up Cloudflare preview during lead deletion', { error: String(err) });
+      });
+    }
+
     return true;
   }
 
@@ -143,6 +153,66 @@ export class LeadRepository {
         const dateB = b.outreach?.events?.[b.outreach.events.length - 1]?.at || b.updatedAt;
         return new Date(dateB).getTime() - new Date(dateA).getTime();
       });
+  }
+
+  static async syncBrevoDeliveryEvents(): Promise<{
+    bouncedCount: number;
+    deliveredCount: number;
+    openedCount: number;
+  }> {
+    const events = await BrevoService.fetchRecentEvents(100);
+    if (!events.length) return { bouncedCount: 0, deliveredCount: 0, openedCount: 0 };
+
+    const leads = this.readAll();
+    let hasChanges = false;
+    let bouncedCount = 0;
+    let deliveredCount = 0;
+    let openedCount = 0;
+
+    for (const event of events) {
+      if (!event.email) continue;
+      const lead = leads.find((l) =>
+        l.contacts.some((c) => c.channel === 'email' && c.value.toLowerCase() === event.email.toLowerCase())
+      );
+      if (!lead) continue;
+
+      if (!lead.outreach) lead.outreach = {};
+      if (!lead.outreach.events) lead.outreach.events = [];
+
+      if (event.event === 'softBounces' || event.event === 'hardBounces') {
+        if (lead.outreach.deliveryStatus !== 'bounced') {
+          lead.outreach.deliveryStatus = 'bounced';
+          lead.outreach.bounceReason = event.reason || 'Email bounced by recipient mail server';
+          lead.outreach.events.push({
+            channel: 'email',
+            type: 'bounced',
+            at: event.date || new Date().toISOString(),
+            notes: `Brevo recorded ${event.event}: ${event.reason || 'Recipient mail server rejected message'}`,
+          });
+          hasChanges = true;
+          bouncedCount++;
+        }
+      } else if (event.event === 'delivered') {
+        if (!lead.outreach.deliveryStatus || lead.outreach.deliveryStatus === 'sent') {
+          lead.outreach.deliveryStatus = 'delivered';
+          hasChanges = true;
+          deliveredCount++;
+        }
+      } else if (event.event === 'opened') {
+        if (lead.outreach.deliveryStatus !== 'opened') {
+          lead.outreach.deliveryStatus = 'opened';
+          hasChanges = true;
+          openedCount++;
+        }
+      }
+    }
+
+    if (hasChanges) {
+      this.writeAll(leads);
+      logger.info('Synced Brevo delivery events', { bouncedCount, deliveredCount, openedCount });
+    }
+
+    return { bouncedCount, deliveredCount, openedCount };
   }
 
 

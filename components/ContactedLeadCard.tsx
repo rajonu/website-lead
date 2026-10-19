@@ -18,7 +18,9 @@ import {
   ChevronUp,
   Trash2,
   RotateCcw,
-  Cloud
+  Cloud,
+  AlertTriangle,
+  PhoneCall
 } from 'lucide-react';
 
 export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
@@ -64,7 +66,66 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
   const events = lead.outreach?.events || [];
   const latestSentEvent = [...events].reverse().find((e) => e.type === 'sent');
   const recipientEmail = lead.contacts.find((c) => c.channel === 'email')?.value || 'N/A';
-  const isDryRun = (latestSentEvent?.notes?.includes('[DRY RUN]') || false) && !isLiveSentSuccess;
+  const isBounced = lead.outreach?.deliveryStatus === 'bounced' || events.some((e) => e.type === 'bounced');
+  const bounceReason = lead.outreach?.bounceReason || events.find((e) => e.type === 'bounced')?.notes || 'Recipient mail server rejected message (No MX record found)';
+  const whatsappContact = lead.contacts.find((c) => c.channel === 'whatsapp' || c.channel === 'phone')?.value;
+  const isDryRun = (latestSentEvent?.notes?.includes('[DRY RUN]') || false) && !isLiveSentSuccess && !isBounced;
+
+  const [deletingSiteOnly, setDeletingSiteOnly] = useState(false);
+  const [siteDeletedNotice, setSiteDeletedNotice] = useState<string | null>(null);
+
+  const handleDeleteSiteOnly = async () => {
+    setDeletingSiteOnly(true);
+    setSiteDeletedNotice(null);
+    try {
+      const res = await fetch(`/api/leads/${lead.id}/deploy`, { method: 'DELETE' });
+      if (res.ok) {
+        setSiteDeletedNotice('Live site has been purged from Cloudflare Edge KV.');
+        setEdgeDeployment(undefined);
+        router.refresh();
+      } else {
+        setSiteDeletedNotice('Failed to purge site from Cloudflare.');
+      }
+    } catch {
+      setSiteDeletedNotice('Network error purging site.');
+    } finally {
+      setDeletingSiteOnly(false);
+      setTimeout(() => setSiteDeletedNotice(null), 5000);
+    }
+  };
+
+  const handleSwitchToWhatsApp = async () => {
+    setUpdating(true);
+    try {
+      const res = await fetch(`/api/leads/${lead.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          lifecycle: 'review',
+          humanReview: { decision: 'pending' },
+          outreach: {
+            ...lead.outreach,
+            recommendedChannel: 'whatsapp',
+            events: [
+              ...events,
+              {
+                channel: 'system',
+                type: 'drafted',
+                at: new Date().toISOString(),
+                notes: 'Switched from bounced email to WhatsApp outreach queue',
+              },
+            ],
+          },
+        }),
+      });
+      if (res.ok) {
+        setIsMovedToQueue(true);
+        router.refresh();
+      }
+    } finally {
+      setUpdating(false);
+    }
+  };
 
   const handleSendLiveNow = async () => {
     setSendingLive(true);
@@ -214,12 +275,14 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
             <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold flex items-center gap-1 ${
               stage === 'replied'
                 ? 'bg-purple-100 text-purple-800 border border-purple-200'
+                : isBounced
+                ? 'bg-rose-100 text-rose-800 border border-rose-200'
                 : isDryRun
                 ? 'bg-amber-100 text-amber-800 border border-amber-200'
                 : 'bg-emerald-100 text-emerald-800 border border-emerald-200'
             }`}>
-              <CheckCircle2 className="w-3 h-3" />
-              <span>{stage === 'replied' ? 'Client Replied' : isDryRun ? 'Simulated [DRY RUN]' : 'Delivered via Brevo'}</span>
+              {isBounced ? <AlertTriangle className="w-3 h-3 text-rose-600" /> : <CheckCircle2 className="w-3 h-3" />}
+              <span>{stage === 'replied' ? 'Client Replied' : isBounced ? 'Email Bounced' : isDryRun ? 'Simulated [DRY RUN]' : 'Delivered via Brevo'}</span>
             </span>
           </div>
 
@@ -275,6 +338,13 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
         </div>
       )}
 
+      {siteDeletedNotice && (
+        <div className="text-[11px] font-medium text-amber-800 bg-amber-50 border border-amber-200 rounded p-2 flex items-center justify-between">
+          <span>{siteDeletedNotice}</span>
+          <button onClick={() => setSiteDeletedNotice(null)} className="text-amber-800 text-xs font-bold">✕</button>
+        </div>
+      )}
+
       {/* Sent Delivery Record Box */}
       <div className="bg-slate-50 rounded-lg p-3.5 border border-slate-200/80 space-y-2 text-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-slate-700">
@@ -296,6 +366,78 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
           </p>
         )}
       </div>
+
+      {/* Bounced Delivery Warning & Recovery Box */}
+      {isBounced && (
+        <div className="bg-rose-50/90 border border-rose-200 rounded-lg p-3.5 space-y-2.5 text-xs">
+          <div className="flex items-center justify-between text-rose-800 font-bold">
+            <div className="flex items-center gap-1.5">
+              <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0" />
+              <span>Email Delivery Bounced by Mail Server</span>
+            </div>
+            <span className="text-[10px] uppercase tracking-wider bg-rose-100 text-rose-700 px-2 py-0.5 rounded font-mono font-bold">
+              Soft Bounce / Invalid Domain
+            </span>
+          </div>
+
+          <p className="text-[11px] text-rose-700 font-mono bg-white p-2.5 rounded border border-rose-200 leading-normal">
+            {bounceReason}
+          </p>
+
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1 border-t border-rose-100 text-[11px]">
+            <span className="text-slate-600">
+              {whatsappContact ? (
+                <span>
+                  💡 <strong>Recommendation:</strong> Use WhatsApp ({whatsappContact}) to message the owner directly.
+                </span>
+              ) : (
+                <span>
+                  💡 <strong>Recommendation:</strong> Delete dead prospect &amp; take down live site to clean storage.
+                </span>
+              )}
+            </span>
+
+            <div className="flex items-center gap-2 shrink-0">
+              {whatsappContact && (
+                <button
+                  type="button"
+                  onClick={handleSwitchToWhatsApp}
+                  disabled={updating}
+                  className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded shadow-xs transition-colors flex items-center gap-1 cursor-pointer"
+                  title="Move to WhatsApp outreach queue"
+                >
+                  <PhoneCall className="w-3 h-3" />
+                  <span>Switch to WhatsApp</span>
+                </button>
+              )}
+
+              {edgeDeployment?.deployed && (
+                <button
+                  type="button"
+                  onClick={handleDeleteSiteOnly}
+                  disabled={deletingSiteOnly}
+                  className="px-2.5 py-1 bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold rounded transition-colors flex items-center gap-1 cursor-pointer"
+                  title="Purge live site from Cloudflare Workers KV"
+                >
+                  <Cloud className="w-3 h-3 text-slate-600" />
+                  <span>{deletingSiteOnly ? 'Purging...' : 'Take Down Site Only'}</span>
+                </button>
+              )}
+
+              <button
+                type="button"
+                onClick={() => setShowDeleteConfirm(true)}
+                disabled={isDeleting}
+                className="px-2.5 py-1 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded shadow-xs transition-colors flex items-center gap-1 cursor-pointer"
+                title="Permanently delete lead and Cloudflare demo site"
+              >
+                <Trash2 className="w-3 h-3" />
+                <span>Delete Lead &amp; Site</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {liveSendNotice && (
         <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs px-3.5 py-2 rounded-lg font-medium flex items-center justify-between">

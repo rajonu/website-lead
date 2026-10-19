@@ -123,9 +123,17 @@
           "type": "sent",
           "at": "2026-10-19T12:00:39.270Z",
           "notes": "Autopilot sent cold outreach via Brevo to contact@uttaraglamourstudio.com. Message ID: <202610191200.38582528945@smtp-relay.mailin.fr>"
+        },
+        {
+          "channel": "email",
+          "type": "bounced",
+          "at": "2026-10-19T18:00:56.000+06:00",
+          "notes": "Brevo recorded softBounces: Unable to find MX of domain uttaraglamourstudio.com"
         }
       ],
-      "draft": "আসসালামু আলাইকুম Uttara Glamour Studio & Bridal Spa টিম! 🌸\n\nগুগল ম্যাপসে Dhaka-তে আপনাদের বিজনেসের 88+ চমৎকার রিভিউ এবং 4.9★ রেটিং দেখে খুব ভালো লাগলো।\n\nলক্ষ্য করলাম গুগলে আপনাদের কোনো অফিসিয়াল ওয়েবসাইট লিংক করা নেই। ফলে অনেক কাস্টমার সার্ভিস ও রেটকার্ড দেখতে গিয়ে মিস করে যেতে পারেন।\n\nআপনাদের ক্লায়েন্ট রিভিউ ও সার্ভিসগুলো দিয়ে আমরা সুন্দর একটি মোবাইল ওয়েবসাইট ডেমো বানিয়েছি:\n👉 https://live.d4f.me/preview/uttara-glamour-salon-studio\n\nফোনে ওপেন করে দেখুন, সরাসরি WhatsApp বুকিং বাটনও যুক্ত করা আছে। ভালো লাগলে এটা আপনাদের নিজস্ব ডোমেইনে খুব সহজে লাইভ করে দেওয়া যাবে।\n\nধন্যবাদ ও শুভেচ্ছা,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+      "draft": "আসসালামু আলাইকুম Uttara Glamour Studio & Bridal Spa টিম! 🌸\n\nগুগল ম্যাপসে Dhaka-তে আপনাদের বিজনেসের 88+ চমৎকার রিভিউ এবং 4.9★ রেটিং দেখে খুব ভালো লাগলো।\n\nলক্ষ্য করলাম গুগলে আপনাদের কোনো অফিসিয়াল ওয়েবসাইট লিংক করা নেই। ফলে অনেক কাস্টমার সার্ভিস ও রেটকার্ড দেখতে গিয়ে মিস করে যেতে পারেন।\n\nআপনাদের ক্লায়েন্ট রিভিউ ও সার্ভিসগুলো দিয়ে আমরা সুন্দর একটি মোবাইল ওয়েবসাইট ডেমো বানিয়েছি:\n👉 https://live.d4f.me/preview/uttara-glamour-salon-studio\n\nফোনে ওপেন করে দেখুন, সরাসরি WhatsApp বুকিং বাটনও যুক্ত করা আছে। ভালো লাগলে এটা আপনাদের নিজস্ব ডোমেইনে খুব সহজে লাইভ করে দেওয়া যাবে।\n\nধন্যবাদ ও শুভেচ্ছা,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer",
+      "deliveryStatus": "bounced",
+      "bounceReason": "Unable to find MX of domain uttaraglamourstudio.com"
     },
     "sales": {
       "stage": "contacted",
@@ -274,9 +282,17 @@
           "type": "sent",
           "at": "2026-10-19T12:18:41.987Z",
           "notes": "Sent transactional email via Brevo to enquiries@sheffieldpremieremergencyplumber.co.uk (Subject: \"Website preview for Sheffield Premier Emergency Plumber\"). Message ID: <202610191218.24139670629@smtp-relay.mailin.fr>"
+        },
+        {
+          "channel": "email",
+          "type": "bounced",
+          "at": "2026-10-19T18:18:56.000+06:00",
+          "notes": "Brevo recorded softBounces: Unable to find MX of domain sheffieldpremieremergencyplumber.co.uk"
         }
       ],
-      "draft": "Hi Sheffield Premier Emergency Plumber team,\n\nI came across your business on Google Maps in Sheffield and saw your brilliant 5★ rating with 133 reviews. Huge congratulations on the reputation you've built!\n\nI noticed your Google profile doesn't have an official website listed, which often means mobile users looking for urgent trades might hesitate before ringing.\n\nI went ahead and designed a clean, mobile-first one-page preview for you with instant call buttons and your top reviews:\n👉 https://live.d4f.me/preview/sheffield-premier-emergency-plumber\n\nHave a quick look on your phone when you have a minute. If you fancy making it your official site, I'd be happy to set it up on your own domain. No obligation at all!\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+      "draft": "Hi Sheffield Premier Emergency Plumber team,\n\nI came across your business on Google Maps in Sheffield and saw your brilliant 5★ rating with 133 reviews. Huge congratulations on the reputation you've built!\n\nI noticed your Google profile doesn't have an official website listed, which often means mobile users looking for urgent trades might hesitate before ringing.\n\nI went ahead and designed a clean, mobile-first one-page preview for you with instant call buttons and your top reviews:\n👉 https://live.d4f.me/preview/sheffield-premier-emergency-plumber\n\nHave a quick look on your phone when you have a minute. If you fancy making it your official site, I'd be happy to set it up on your own domain. No obligation at all!\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer",
+      "deliveryStatus": "bounced",
+      "bounceReason": "Unable to find MX of domain sheffieldpremieremergencyplumber.co.uk"
     },
     "sales": {
       "stage": "contacted",
@@ -425,9 +441,17 @@
           "type": "sent",
           "at": "2026-10-19T12:18:42.806Z",
           "notes": "Sent transactional email via Brevo to enquiries@birminghamapexemergencyplumber.co.uk (Subject: \"Website preview for Birmingham Apex Emergency Plumber\"). Message ID: <202610191218.26576601561@smtp-relay.mailin.fr>"
+        },
+        {
+          "channel": "email",
+          "type": "bounced",
+          "at": "2026-10-19T18:18:55.000+06:00",
+          "notes": "Brevo recorded softBounces: Unable to find MX of domain birminghamapexemergencyplumber.co.uk"
         }
       ],
-      "draft": "Hi Birmingham Apex Emergency Plumber team,\n\nI came across your business on Google Maps in Birmingham and saw your brilliant 4.8★ rating with 53 reviews. Huge congratulations on the reputation you've built!\n\nI noticed your Google profile doesn't have an official website listed, which often means mobile users looking for urgent trades might hesitate before ringing.\n\nI went ahead and designed a clean, mobile-first one-page preview for you with instant call buttons and your top reviews:\n👉 https://live.d4f.me/preview/birmingham-apex-emergency-plumber\n\nHave a quick look on your phone when you have a minute. If you fancy making it your official site, I'd be happy to set it up on your own domain. No obligation at all!\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+      "draft": "Hi Birmingham Apex Emergency Plumber team,\n\nI came across your business on Google Maps in Birmingham and saw your brilliant 4.8★ rating with 53 reviews. Huge congratulations on the reputation you've built!\n\nI noticed your Google profile doesn't have an official website listed, which often means mobile users looking for urgent trades might hesitate before ringing.\n\nI went ahead and designed a clean, mobile-first one-page preview for you with instant call buttons and your top reviews:\n👉 https://live.d4f.me/preview/birmingham-apex-emergency-plumber\n\nHave a quick look on your phone when you have a minute. If you fancy making it your official site, I'd be happy to set it up on your own domain. No obligation at all!\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer",
+      "deliveryStatus": "bounced",
+      "bounceReason": "Unable to find MX of domain birminghamapexemergencyplumber.co.uk"
     },
     "sales": {
       "stage": "contacted",
@@ -577,9 +601,17 @@
           "type": "sent",
           "at": "2026-10-19T12:18:43.209Z",
           "notes": "Sent transactional email via Brevo to service@austinvanguardelectrician.com (Subject: \"Website preview for Austin Vanguard Electrician & Repairs\"). Message ID: <202610191218.71862937964@smtp-relay.mailin.fr>"
+        },
+        {
+          "channel": "email",
+          "type": "bounced",
+          "at": "2026-10-19T18:18:55.000+06:00",
+          "notes": "Brevo recorded softBounces: Unable to find MX of domain austinvanguardelectrician.com"
         }
       ],
-      "draft": "Hi Austin Vanguard Electrician & Repairs team,\n\nI was looking at local Electrical Contractor services in Austin and noticed your impressive 4.8-star rating with over 60 customer reviews on Google Maps. Congratulations on building such a strong local reputation!\n\nI noticed that your Google Business Profile currently has no official website attached. When homeowners look for local services on mobile, having a fast site with click-to-call makes a huge difference.\n\nTo show what a clean mobile site would look like for you, our studio built a modern one-page preview loaded with your real reviews and services:\n👉 https://live.d4f.me/preview/austin-vanguard-electrician\n\nYou can claim this website on your own custom domain whenever you'd like.\n\nWould you be open to a quick email exchange if you'd like to make this your official web home?\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+      "draft": "Hi Austin Vanguard Electrician & Repairs team,\n\nI was looking at local Electrical Contractor services in Austin and noticed your impressive 4.8-star rating with over 60 customer reviews on Google Maps. Congratulations on building such a strong local reputation!\n\nI noticed that your Google Business Profile currently has no official website attached. When homeowners look for local services on mobile, having a fast site with click-to-call makes a huge difference.\n\nTo show what a clean mobile site would look like for you, our studio built a modern one-page preview loaded with your real reviews and services:\n👉 https://live.d4f.me/preview/austin-vanguard-electrician\n\nYou can claim this website on your own custom domain whenever you'd like.\n\nWould you be open to a quick email exchange if you'd like to make this your official web home?\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer",
+      "deliveryStatus": "bounced",
+      "bounceReason": "Unable to find MX of domain austinvanguardelectrician.com"
     },
     "sales": {
       "stage": "contacted",
@@ -729,9 +761,17 @@
           "type": "sent",
           "at": "2026-10-19T12:18:43.527Z",
           "notes": "Sent transactional email via Brevo to service@orlandobenchmarkroofing.com (Subject: \"Website preview for Orlando Benchmark Roofing & Repairs\"). Message ID: <202610191218.82797396947@smtp-relay.mailin.fr>"
+        },
+        {
+          "channel": "email",
+          "type": "bounced",
+          "at": "2026-10-19T18:18:55.000+06:00",
+          "notes": "Brevo recorded softBounces: Unable to find MX of domain orlandobenchmarkroofing.com"
         }
       ],
-      "draft": "Hi Orlando Benchmark Roofing & Repairs team,\n\nI was looking at local Roofing Contractor services in Orlando and noticed your impressive 4.8-star rating with over 108 customer reviews on Google Maps. Congratulations on building such a strong local reputation!\n\nI noticed that your Google Business Profile currently has no official website attached. When homeowners look for local services on mobile, having a fast site with click-to-call makes a huge difference.\n\nTo show what a clean mobile site would look like for you, our studio built a modern one-page preview loaded with your real reviews and services:\n👉 https://live.d4f.me/preview/orlando-benchmark-roofing\n\nYou can claim this website on your own custom domain whenever you'd like.\n\nWould you be open to a quick email exchange if you'd like to make this your official web home?\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+      "draft": "Hi Orlando Benchmark Roofing & Repairs team,\n\nI was looking at local Roofing Contractor services in Orlando and noticed your impressive 4.8-star rating with over 108 customer reviews on Google Maps. Congratulations on building such a strong local reputation!\n\nI noticed that your Google Business Profile currently has no official website attached. When homeowners look for local services on mobile, having a fast site with click-to-call makes a huge difference.\n\nTo show what a clean mobile site would look like for you, our studio built a modern one-page preview loaded with your real reviews and services:\n👉 https://live.d4f.me/preview/orlando-benchmark-roofing\n\nYou can claim this website on your own custom domain whenever you'd like.\n\nWould you be open to a quick email exchange if you'd like to make this your official web home?\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer",
+      "deliveryStatus": "bounced",
+      "bounceReason": "Unable to find MX of domain orlandobenchmarkroofing.com"
     },
     "sales": {
       "stage": "contacted",
@@ -891,9 +931,17 @@
           "type": "sent",
           "at": "2026-10-19T03:52:19.863Z",
           "notes": "Sent transactional email via Brevo to info@dhanmondicarediagnostic.com (Subject: \"Dhanmondi Care Diagnostic & Ultrasound-এর জন্য একটি আধুনিক ওয়েবসাইট প্রিভিউ\"). Message ID: <202610190352.99214728786@smtp-relay.mailin.fr>"
+        },
+        {
+          "channel": "email",
+          "type": "bounced",
+          "at": "2026-10-19T09:52:20.000+06:00",
+          "notes": "Brevo recorded softBounces: Unable to find MX of domain dhanmondicarediagnostic.com"
         }
       ],
-      "draft": "আসসালামু আলাইকুম Dhanmondi Care Diagnostic & Ultrasound টিম! 🌸\n\nগুগল ম্যাপসে Dhaka-তে আপনাদের বিজনেসের 62+ চমৎকার রিভিউ এবং 4.8★ রেটিং দেখে খুব ভালো লাগলো।\n\nলক্ষ্য করলাম গুগলে আপনাদের কোনো অফিসিয়াল ওয়েবসাইট লিংক করা নেই। ফলে অনেক কাস্টমার সার্ভিস ও রেটকার্ড দেখতে গিয়ে মিস করে যেতে পারেন।\n\nআপনাদের ক্লায়েন্ট রিভিউ ও সার্ভিসগুলো দিয়ে আমরা সুন্দর একটি মোবাইল ওয়েবসাইট ডেমো বানিয়েছি:\n👉 https://live.d4f.me/preview/dhanmondi-care-diagnostic-center\n\nফোনে ওপেন করে দেখুন, সরাসরি WhatsApp বুকিং বাটনও যুক্ত করা আছে। ভালো লাগলে এটা আপনাদের নিজস্ব ডোমেইনে খুব সহজে লাইভ করে দেওয়া যাবে।\n\nধন্যবাদ ও শুভেচ্ছা,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+      "draft": "আসসালামু আলাইকুম Dhanmondi Care Diagnostic & Ultrasound টিম! 🌸\n\nগুগল ম্যাপসে Dhaka-তে আপনাদের বিজনেসের 62+ চমৎকার রিভিউ এবং 4.8★ রেটিং দেখে খুব ভালো লাগলো।\n\nলক্ষ্য করলাম গুগলে আপনাদের কোনো অফিসিয়াল ওয়েবসাইট লিংক করা নেই। ফলে অনেক কাস্টমার সার্ভিস ও রেটকার্ড দেখতে গিয়ে মিস করে যেতে পারেন।\n\nআপনাদের ক্লায়েন্ট রিভিউ ও সার্ভিসগুলো দিয়ে আমরা সুন্দর একটি মোবাইল ওয়েবসাইট ডেমো বানিয়েছি:\n👉 https://live.d4f.me/preview/dhanmondi-care-diagnostic-center\n\nফোনে ওপেন করে দেখুন, সরাসরি WhatsApp বুকিং বাটনও যুক্ত করা আছে। ভালো লাগলে এটা আপনাদের নিজস্ব ডোমেইনে খুব সহজে লাইভ করে দেওয়া যাবে।\n\nধন্যবাদ ও শুভেচ্ছা,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer",
+      "deliveryStatus": "bounced",
+      "bounceReason": "Unable to find MX of domain dhanmondicarediagnostic.com"
     },
     "sales": {
       "stage": "contacted",
@@ -1044,9 +1092,17 @@
           "type": "sent",
           "at": "2026-10-19T03:51:18.768Z",
           "notes": "Sent transactional email via Brevo to reception@mayfairprecisiondental.co.uk (Subject: \"Website preview for Mayfair Precision Dental Practice\"). Message ID: <202610190351.42733760399@smtp-relay.mailin.fr>"
+        },
+        {
+          "channel": "email",
+          "type": "bounced",
+          "at": "2026-10-19T09:51:20.000+06:00",
+          "notes": "Brevo recorded softBounces: Unable to find MX of domain mayfairprecisiondental.co.uk"
         }
       ],
-      "draft": "Hi Mayfair Precision Dental Practice team,\n\nI came across your business on Google Maps in London and saw your brilliant 5★ rating with 82 reviews. Huge congratulations on the reputation you've built!\n\nI noticed your Google profile doesn't have an official website listed, which often means mobile users looking for urgent trades might hesitate before ringing.\n\nI went ahead and designed a clean, mobile-first one-page preview for you with instant call buttons and your top reviews:\n👉 https://live.d4f.me/preview/london-mayfair-dental-care\n\nHave a quick look on your phone when you have a minute. If you fancy making it your official site, I'd be happy to set it up on your own domain. No obligation at all!\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+      "draft": "Hi Mayfair Precision Dental Practice team,\n\nI came across your business on Google Maps in London and saw your brilliant 5★ rating with 82 reviews. Huge congratulations on the reputation you've built!\n\nI noticed your Google profile doesn't have an official website listed, which often means mobile users looking for urgent trades might hesitate before ringing.\n\nI went ahead and designed a clean, mobile-first one-page preview for you with instant call buttons and your top reviews:\n👉 https://live.d4f.me/preview/london-mayfair-dental-care\n\nHave a quick look on your phone when you have a minute. If you fancy making it your official site, I'd be happy to set it up on your own domain. No obligation at all!\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer",
+      "deliveryStatus": "bounced",
+      "bounceReason": "Unable to find MX of domain mayfairprecisiondental.co.uk"
     },
     "sales": {
       "stage": "contacted",
@@ -1197,9 +1253,17 @@
           "type": "sent",
           "at": "2026-10-19T03:51:53.687Z",
           "notes": "Sent transactional email via Brevo to info@birminghampremierelectric.co.uk (Subject: \"Website preview for Birmingham Premier Electrical Services\"). Message ID: <202610190351.57560170520@smtp-relay.mailin.fr>"
+        },
+        {
+          "channel": "email",
+          "type": "bounced",
+          "at": "2026-10-19T09:51:54.000+06:00",
+          "notes": "Brevo recorded softBounces: Unable to find MX of domain birminghampremierelectric.co.uk"
         }
       ],
-      "draft": "Hi Birmingham Premier Electrical Services team,\n\nI came across your business on Google Maps in Birmingham and saw your brilliant 4.9★ rating with 76 reviews. Huge congratulations on the reputation you've built!\n\nI noticed your Google profile doesn't have an official website listed, which often means mobile users looking for urgent trades might hesitate before ringing.\n\nI went ahead and designed a clean, mobile-first one-page preview for you with instant call buttons and your top reviews:\n👉 https://live.d4f.me/preview/birmingham-rapid-electrical\n\nHave a quick look on your phone when you have a minute. If you fancy making it your official site, I'd be happy to set it up on your own domain. No obligation at all!\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+      "draft": "Hi Birmingham Premier Electrical Services team,\n\nI came across your business on Google Maps in Birmingham and saw your brilliant 4.9★ rating with 76 reviews. Huge congratulations on the reputation you've built!\n\nI noticed your Google profile doesn't have an official website listed, which often means mobile users looking for urgent trades might hesitate before ringing.\n\nI went ahead and designed a clean, mobile-first one-page preview for you with instant call buttons and your top reviews:\n👉 https://live.d4f.me/preview/birmingham-rapid-electrical\n\nHave a quick look on your phone when you have a minute. If you fancy making it your official site, I'd be happy to set it up on your own domain. No obligation at all!\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer",
+      "deliveryStatus": "bounced",
+      "bounceReason": "Unable to find MX of domain birminghampremierelectric.co.uk"
     },
     "sales": {
       "stage": "contacted",
@@ -1505,9 +1569,17 @@
           "type": "sent",
           "at": "2026-10-19T03:51:38.959Z",
           "notes": "Sent transactional email via Brevo to quotes@austinprecisionroofing.com (Subject: \"Website preview for Austin Precision Roofing & Solar\"). Message ID: <202610190351.96710772886@smtp-relay.mailin.fr>"
+        },
+        {
+          "channel": "email",
+          "type": "bounced",
+          "at": "2026-10-19T09:51:40.000+06:00",
+          "notes": "Brevo recorded softBounces: Unable to find MX of domain austinprecisionroofing.com"
         }
       ],
-      "draft": "Hi Austin Precision Roofing & Solar team,\n\nI was looking at local Roofing Contractor services in Austin and noticed your impressive 4.8-star rating with over 94 customer reviews on Google Maps. Congratulations on building such a strong local reputation!\n\nI noticed that your Google Business Profile currently has no official website attached. When homeowners look for local services on mobile, having a fast site with click-to-call makes a huge difference.\n\nTo show what a clean mobile site would look like for you, our studio built a modern one-page preview loaded with your real reviews and services:\n👉 https://live.d4f.me/preview/austin-pro-solar-roofing\n\nYou can claim this website on your own custom domain whenever you'd like.\n\nWould you be open to a quick email exchange if you'd like to make this your official web home?\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+      "draft": "Hi Austin Precision Roofing & Solar team,\n\nI was looking at local Roofing Contractor services in Austin and noticed your impressive 4.8-star rating with over 94 customer reviews on Google Maps. Congratulations on building such a strong local reputation!\n\nI noticed that your Google Business Profile currently has no official website attached. When homeowners look for local services on mobile, having a fast site with click-to-call makes a huge difference.\n\nTo show what a clean mobile site would look like for you, our studio built a modern one-page preview loaded with your real reviews and services:\n👉 https://live.d4f.me/preview/austin-pro-solar-roofing\n\nYou can claim this website on your own custom domain whenever you'd like.\n\nWould you be open to a quick email exchange if you'd like to make this your official web home?\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer",
+      "deliveryStatus": "bounced",
+      "bounceReason": "Unable to find MX of domain austinprecisionroofing.com"
     },
     "sales": {
       "stage": "contacted",
@@ -1664,9 +1736,17 @@
           "type": "sent",
           "at": "2026-10-18T14:54:31.416Z",
           "notes": "Sent transactional email via Brevo to service@fortworthmasterplumbing.com (Subject: \"Website preview for Fort Worth Master Plumbing & Gas\"). Message ID: <202610181454.81605198074@smtp-relay.mailin.fr>"
+        },
+        {
+          "channel": "email",
+          "type": "bounced",
+          "at": "2026-10-18T20:54:32.000+06:00",
+          "notes": "Brevo recorded softBounces: Unable to find MX of domain fortworthmasterplumbing.com"
         }
       ],
-      "draft": "Hi Fort Worth Master Plumbing & Gas team,\n\nI was looking at local Plumbing Service services in Fort Worth and noticed your impressive 4.9-star rating with over 118 customer reviews on Google Maps. Congratulations on building such a strong local reputation!\n\nI noticed that your Google Business Profile currently has no official website attached. When homeowners look for local services on mobile, having a fast site with click-to-call makes a huge difference.\n\nTo show what a clean mobile site would look like for you, our studio built a modern one-page preview loaded with your real reviews and services:\n👉 https://live.d4f.me/preview/fort-worth-master-plumbing\n\nYou can claim this website on your own custom domain whenever you'd like.\n\nWould you be open to a quick email exchange if you'd like to make this your official web home?\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+      "draft": "Hi Fort Worth Master Plumbing & Gas team,\n\nI was looking at local Plumbing Service services in Fort Worth and noticed your impressive 4.9-star rating with over 118 customer reviews on Google Maps. Congratulations on building such a strong local reputation!\n\nI noticed that your Google Business Profile currently has no official website attached. When homeowners look for local services on mobile, having a fast site with click-to-call makes a huge difference.\n\nTo show what a clean mobile site would look like for you, our studio built a modern one-page preview loaded with your real reviews and services:\n👉 https://live.d4f.me/preview/fort-worth-master-plumbing\n\nYou can claim this website on your own custom domain whenever you'd like.\n\nWould you be open to a quick email exchange if you'd like to make this your official web home?\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer",
+      "deliveryStatus": "bounced",
+      "bounceReason": "Unable to find MX of domain fortworthmasterplumbing.com"
     },
     "sales": {
       "stage": "contacted",
@@ -1845,8 +1925,16 @@
           "type": "sent",
           "at": "2026-10-18T14:56:01.801Z",
           "notes": "Sent transactional email via Brevo to estimates@lonestarqualityroofing.com (Subject: \"Website preview for Lone Star Quality Roofing\"). Message ID: <202610181456.99060223714@smtp-relay.mailin.fr>"
+        },
+        {
+          "channel": "email",
+          "type": "bounced",
+          "at": "2026-10-18T20:56:04.000+06:00",
+          "notes": "Brevo recorded hardBounces: 554 5.7.1 <estimates@lonestarqualityroofing.com>: Recipient address rejected: user estimates@lonestarqualityroofing.com does not exist"
         }
-      ]
+      ],
+      "deliveryStatus": "bounced",
+      "bounceReason": "554 5.7.1 <estimates@lonestarqualityroofing.com>: Recipient address rejected: user estimates@lonestarqualityroofing.com does not exist"
     },
     "sales": {
       "stage": "contacted",
@@ -2024,8 +2112,16 @@
           "type": "sent",
           "at": "2026-10-18T14:55:07.147Z",
           "notes": "Sent transactional email via Brevo to enquiries@manchesterrapidplumbing.co.uk (Subject: \"Website preview for Manchester Rapid Plumbing & Heating\"). Message ID: <202610181455.78198527306@smtp-relay.mailin.fr>"
+        },
+        {
+          "channel": "email",
+          "type": "bounced",
+          "at": "2026-10-18T20:55:08.000+06:00",
+          "notes": "Brevo recorded softBounces: Unable to find MX of domain manchesterrapidplumbing.co.uk"
         }
-      ]
+      ],
+      "deliveryStatus": "bounced",
+      "bounceReason": "Unable to find MX of domain manchesterrapidplumbing.co.uk"
     },
     "sales": {
       "stage": "contacted",
