@@ -180,6 +180,16 @@ export interface CustomerData {
   accountHealth?: 'unknown' | 'healthy' | 'attention' | 'at_risk';
 }
 
+export interface CloudflareDeploymentData {
+  deployed?: boolean;
+  edgeUrl?: string;
+  deployedAt?: string;
+  customDomain?: string;
+  kvKey?: string;
+  status?: 'synced' | 'local_only' | 'failed' | 'pending';
+  lastError?: string;
+}
+
 export interface MaintenanceData {
   lastHealthCheckAt?: string;
   nextReviewAt?: string;
@@ -216,6 +226,7 @@ export interface WebsiteLead {
   maintenance?: MaintenanceData;
   lifecycle: LifecycleStage;
   experiment?: ExperimentData;
+  cloudflareDeployment?: CloudflareDeploymentData;
   createdAt: string;
   updatedAt: string;
 }

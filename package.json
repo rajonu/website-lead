@@ -13,7 +13,8 @@
     "postbuild": "cp -r public .next/standalone/ 2>/dev/null || true && cp -r .next/static .next/standalone/.next/ 2>/dev/null || true",
     "start": "next start",
     "discover": "node scripts/discover.mjs",
-    "deploy:pi": "bash scripts/deploy-pi.sh"
+    "deploy:pi": "bash scripts/deploy-pi.sh",
+    "deploy:edge": "node scripts/deploy-edge-sites.mjs"
   },
   "repository": {
     "type": "git",

@@ -28,7 +28,9 @@ import {
   Eye,
   FileText,
   Sparkles,
-  Trash2
+  Trash2,
+  Cloud,
+  Check
 } from 'lucide-react';
 
 export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
@@ -62,6 +64,31 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
   const [sentSuccessData, setSentSuccessData] = useState<{ messageId: string; dryRun: boolean } | null>(null);
   const [events, setEvents] = useState<OutreachEvent[]>(lead.outreach?.events || []);
   const [showEvents, setShowEvents] = useState(false);
+
+  // Cloudflare Edge Deployment State
+  const [edgeDeployment, setEdgeDeployment] = useState(lead.cloudflareDeployment);
+  const [deployingEdge, setDeployingEdge] = useState(false);
+  const [edgeNotice, setEdgeNotice] = useState<string | null>(null);
+
+  const handleDeployEdge = async () => {
+    setDeployingEdge(true);
+    setEdgeNotice(null);
+    try {
+      const res = await fetch(`/api/leads/${lead.id}/deploy`, { method: 'POST' });
+      const data = await res.json().catch(() => null);
+      if (res.ok && data?.success) {
+        setEdgeDeployment(data.data?.cloudflareDeployment);
+        setEdgeNotice(data.deployResult?.mode === 'cloudflare_edge' ? 'Synced to Cloudflare Edge!' : 'Exported static HTML locally.');
+      } else {
+        setEdgeNotice(data?.error || 'Deploy failed');
+      }
+    } catch {
+      setEdgeNotice('Network error deploying to edge');
+    } finally {
+      setDeployingEdge(false);
+      setTimeout(() => setEdgeNotice(null), 4000);
+    }
+  };
 
   const fullDraft = `${messageBody.trim()}\n\n${signature}`;
 
@@ -290,18 +317,45 @@ export default function RecommendationCard({ lead }: { lead: WebsiteLead }) {
             ))}
           </div>
 
-          <div className="pt-2 border-t border-slate-200/60 flex items-center justify-between">
-            <span className="text-slate-500">Pre-built Demo:</span>
-            <a
-              href={`/preview/${lead.slug}`}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-md text-xs font-semibold shadow-sm transition-colors"
-            >
-              <span>Inspect Demo Site</span>
-              <ExternalLink className="w-3 h-3" />
-            </a>
+          <div className="pt-2 border-t border-slate-200/60 flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-1.5">
+              <span className="text-slate-500">Pre-built Demo:</span>
+              {edgeDeployment?.deployed && (
+                <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-sky-50 text-sky-700 border border-sky-200 flex items-center gap-1">
+                  <Cloud className="w-3 h-3 text-sky-600" />
+                  Edge Ready
+                </span>
+              )}
+            </div>
+
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={handleDeployEdge}
+                disabled={deployingEdge}
+                title="Sync self-contained static site to Cloudflare Edge KV and local export"
+                className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-md text-xs font-semibold transition-colors disabled:opacity-50 cursor-pointer"
+              >
+                <Cloud className="w-3.5 h-3.5 text-sky-600" />
+                <span>{deployingEdge ? 'Syncing...' : 'Deploy to Edge'}</span>
+              </button>
+
+              <a
+                href={`/preview/${lead.slug}`}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-md text-xs font-semibold shadow-sm transition-colors"
+              >
+                <span>Inspect Demo</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
           </div>
+          {edgeNotice && (
+            <div className="text-[11px] font-medium text-sky-700 bg-sky-50 border border-sky-200 rounded p-1.5 text-center">
+              {edgeNotice}
+            </div>
+          )}
         </div>
       </div>
 

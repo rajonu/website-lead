@@ -1,6 +1,7 @@
 import { WebsiteLead } from '@/lib/types/lead';
 import { LeadRepository } from '@/lib/db';
 import { generatePersonalOutreachDraft, getEmailSubject } from '@/lib/ai/outreach';
+import { CloudflareEdgeService } from '@/lib/services/cloudflare';
 import { logger } from '@/lib/logger';
 
 export interface ScanOptions {
@@ -474,6 +475,12 @@ export async function scanForLeads(options: ScanOptions = {}): Promise<{
     // Save lead to persistent database
     await LeadRepository.saveLead(initialLead);
     newlyCreatedLeads.push(initialLead);
+
+    // Asynchronously export and deploy preview to edge
+    CloudflareEdgeService.deployLeadPreview(initialLead).catch((err) => {
+      logger.warn('Background edge deployment notice', err);
+    });
+
     logger.info('Discovered and saved new prospect from scan', {
       id: initialLead.id,
       name: initialLead.name,

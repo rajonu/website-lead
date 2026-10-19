@@ -13,6 +13,7 @@ dist
 .next
 out
 build
+data/exported-sites/
 
 # Python
 __pycache__/

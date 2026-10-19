@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "website-lead-preview-edge",
+  "main": "src/index.ts",
+  "compatibility_date": "2024-09-23",
+  "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "ORIGIN_FALLBACK": "https://lead.d4f.me",
+    "SHOWCASE_REDIRECT": "https://d4f.me"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "PREVIEWS_KV",
+      "id": "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  }
+}

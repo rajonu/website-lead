@@ -16,7 +16,8 @@ import {
   XCircle, 
   CheckSquare, 
   Square,
-  Sparkles
+  Sparkles,
+  Cloud
 } from 'lucide-react';
 
 export default function ClientsManager({ initialClients }: { initialClients: WebsiteLead[] }) {
@@ -44,6 +45,35 @@ export default function ClientsManager({ initialClients }: { initialClients: Web
   // Delete State
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState<WebsiteLead | null>(null);
+
+  // Cloudflare Edge Sync State
+  const [syncingId, setSyncingId] = useState<string | null>(null);
+  const [syncNotice, setSyncNotice] = useState<{ id: string; msg: string } | null>(null);
+
+  const handleSyncToEdge = async (client: WebsiteLead) => {
+    setSyncingId(client.id);
+    setSyncNotice(null);
+    try {
+      const res = await fetch(`/api/leads/${client.id}/deploy`, { method: 'POST' });
+      const data = await res.json().catch(() => null);
+      if (res.ok && data?.success) {
+        setClients((prev) => prev.map((c) => (c.id === client.id ? data.data : c)));
+        setSyncNotice({
+          id: client.id,
+          msg: data.deployResult?.mode === 'cloudflare_edge'
+            ? 'Edge Synced with Custom Domain!'
+            : 'Static HTML exported locally.',
+        });
+      } else {
+        setSyncNotice({ id: client.id, msg: data?.error || 'Sync failed' });
+      }
+    } catch {
+      setSyncNotice({ id: client.id, msg: 'Network error' });
+    } finally {
+      setSyncingId(null);
+      setTimeout(() => setSyncNotice(null), 4000);
+    }
+  };
 
   const openAddModal = () => {
     setEditingClient(null);
@@ -407,13 +437,23 @@ export default function ClientsManager({ initialClients }: { initialClients: Web
 
                 {/* Action Buttons */}
                 <div className="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
-                  <div className="flex items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-2">
                     <button
                       onClick={() => openEditModal(client)}
                       className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg font-semibold transition-colors flex items-center gap-1.5 cursor-pointer"
                     >
                       <Edit3 className="w-3.5 h-3.5 text-slate-600" />
                       <span>Edit Account &amp; Tasks</span>
+                    </button>
+
+                    <button
+                      onClick={() => handleSyncToEdge(client)}
+                      disabled={syncingId === client.id}
+                      title="Deploy and sync client landing page and custom domain to Cloudflare Edge"
+                      className="px-3 py-1.5 bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200 rounded-lg font-semibold transition-colors flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+                    >
+                      <Cloud className="w-3.5 h-3.5 text-sky-600" />
+                      <span>{syncingId === client.id ? 'Syncing...' : 'Sync to Cloudflare'}</span>
                     </button>
 
                     <button
@@ -429,6 +469,12 @@ export default function ClientsManager({ initialClients }: { initialClients: Web
                     ID: {client.id}
                   </div>
                 </div>
+
+                {syncNotice && syncNotice.id === client.id && (
+                  <div className="text-[11px] font-medium text-sky-700 bg-sky-50 border border-sky-200 rounded p-1.5 text-center mt-2">
+                    {syncNotice.msg}
+                  </div>
+                )}
               </div>
             );
           })
