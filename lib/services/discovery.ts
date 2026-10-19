@@ -563,6 +563,9 @@ function generateProceduralBlueprints(
     { area: 'জিন্দাবাজার', areaEn: 'Zindabazar', city: 'Sylhet', postal: '3100' },
   ];
 
+  const sanitizeSlug = (str: string) =>
+    str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
   for (let i = 0; i < count; i++) {
     const salt = Math.floor(100 + Math.random() * 900);
     const rating = Number((4.7 + Math.random() * 0.3).toFixed(1));
@@ -574,14 +577,15 @@ function generateProceduralBlueprints(
       const loc = usCities[Math.floor(Math.random() * usCities.length)];
       const prefix = arch.namePrefixes[Math.floor(Math.random() * arch.namePrefixes.length)];
       const name = `${loc.city} ${prefix} ${arch.niche} & Repairs`;
-      let slug = `${loc.city.toLowerCase()}-${prefix.toLowerCase().replace(/\s+/g, '-')}-${arch.niche.toLowerCase()}`;
+      let slug = sanitizeSlug(`${loc.city}-${prefix}-${arch.niche}`);
       if (existingSlugs.has(slug)) {
         slug = `${slug}-${salt}`;
       }
       existingSlugs.add(slug);
 
       const phone = `+1-${loc.phoneArea}-555-01${salt % 100}`;
-      const email = `service@${slug.replace(/-/g, '')}.com`;
+      const emailDomain = slug.replace(/[^a-z0-9]/g, '');
+      const email = `service@${emailDomain}.com`;
 
       blueprints.push({
         slug,
@@ -625,14 +629,15 @@ function generateProceduralBlueprints(
       const loc = ukCities[Math.floor(Math.random() * ukCities.length)];
       const prefix = arch.namePrefixes[Math.floor(Math.random() * arch.namePrefixes.length)];
       const name = `${loc.city} ${prefix} ${arch.category}`;
-      let slug = `${loc.city.toLowerCase()}-${prefix.toLowerCase().replace(/\s+/g, '-')}-${arch.niche.toLowerCase()}`;
+      let slug = sanitizeSlug(`${loc.city}-${prefix}-${arch.category}`);
       if (existingSlugs.has(slug)) {
         slug = `${slug}-${salt}`;
       }
       existingSlugs.add(slug);
 
       const phone = `+44 ${loc.phoneArea} 555 01${salt % 100}`;
-      const email = `enquiries@${slug.replace(/-/g, '')}.co.uk`;
+      const emailDomain = slug.replace(/[^a-z0-9]/g, '');
+      const email = `enquiries@${emailDomain}.co.uk`;
 
       blueprints.push({
         slug,
@@ -675,7 +680,7 @@ function generateProceduralBlueprints(
       const arch = bdArchetypes[Math.floor(Math.random() * bdArchetypes.length)];
       const loc = bdAreas[Math.floor(Math.random() * bdAreas.length)];
       const name = `${loc.area} ${arch.nameBangla}`;
-      let slug = `${loc.areaEn.toLowerCase()}-${arch.niche.toLowerCase()}-${salt}`;
+      let slug = sanitizeSlug(`${loc.areaEn}-${arch.niche}-${salt}`);
       if (existingSlugs.has(slug)) {
         slug = `${slug}-${Math.floor(10 + Math.random() * 90)}`;
       }
@@ -689,7 +694,8 @@ function generateProceduralBlueprints(
         { channel: 'whatsapp', value: bdPhone, label: 'হোয়াটসঅ্যাপ সার্ভিস ও বুকিং' },
       ];
       if (hasEmail) {
-        contacts.unshift({ channel: 'email', value: `info@${slug.replace(/-/g, '')}.com`, label: 'অফিসিয়াল ইনবক্স' });
+        const emailDomain = slug.replace(/[^a-z0-9]/g, '');
+        contacts.unshift({ channel: 'email', value: `info@${emailDomain}.com`, label: 'অফিসিয়াল ইনবক্স' });
       }
 
       blueprints.push({
