@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import AutopilotCard from '@/components/AutopilotCard';
 import { LeadRepository } from '@/lib/db';
 import { MARKETS } from '@/lib/config/markets';
 import { 
@@ -77,6 +78,9 @@ export default async function DashboardPage({
           </Link>
         </div>
       </div>
+
+      {/* Hourly Prospecting Autopilot System */}
+      <AutopilotCard />
 
       {/* Funnel Metrics Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">

@@ -17,6 +17,8 @@ rsync -avz --delete --exclude 'data' \
 rsync -avz --ignore-existing \
   data/ "$PI_USER@$PI_HOST:$PI_TARGET_DIR/data/"
 
+rsync -avz scripts/ "$PI_USER@$PI_HOST:$PI_TARGET_DIR/scripts/"
+
 # Ensure standalone directory symlinks to persistent data
 ssh "$PI_USER@$PI_HOST" "ln -sfn $PI_TARGET_DIR/data $PI_TARGET_DIR/.next/standalone/data"
 

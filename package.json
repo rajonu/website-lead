@@ -14,7 +14,8 @@
     "start": "next start",
     "discover": "node scripts/discover.mjs",
     "deploy:pi": "bash scripts/deploy-pi.sh",
-    "deploy:edge": "node scripts/deploy-edge-sites.mjs"
+    "deploy:edge": "node scripts/deploy-edge-sites.mjs",
+    "autopilot:run": "node scripts/autopilot-cron.mjs"
   },
   "repository": {
     "type": "git",

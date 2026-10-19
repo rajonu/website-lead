@@ -348,12 +348,395 @@ const CANDIDATE_POOL: CandidateBlueprint[] = [
   },
 ];
 
+function generateProceduralBlueprints(
+  targetMarket: 'US' | 'UK' | 'BD',
+  count: number,
+  existingSlugs: Set<string>
+): CandidateBlueprint[] {
+  const blueprints: CandidateBlueprint[] = [];
+
+  const usArchetypes = [
+    {
+      category: 'Plumbing Service',
+      niche: 'Plumbing',
+      template: 'home-services',
+      namePrefixes: ['Apex Flow', 'Lone Star Master', 'Precision', 'Heritage', 'Titan'],
+      servicePairs: [
+        { title: 'Emergency Leak & Slab Repair', description: '24/7 non-invasive acoustic detection & repiping.', icon: 'shield' },
+        { title: 'Tankless Water Heater Installation', description: 'Energy-efficient endless hot water with warranty.', icon: 'wrench' },
+        { title: 'Hydro-Jet Sewer Clearing', description: 'High-pressure line clearing and root removal.', icon: 'wind' },
+      ],
+      tagline: 'Reliable 24/7 Emergency Plumbing & Water Heater Solutions',
+      reason: '4.8+ rating with strong Google reviews but no official mobile website.',
+      angle: '24/7 emergency dispatch and flat-rate pricing tap-to-call button.',
+    },
+    {
+      category: 'Roofing Contractor',
+      niche: 'Roofing',
+      template: 'home-services',
+      namePrefixes: ['Vanguard', 'Summit', 'Apex Shield', 'Patriot', 'Benchmark'],
+      servicePairs: [
+        { title: 'Storm & Hail Damage Restoration', description: 'Assistance with insurance claims and leak repairs.', icon: 'shield' },
+        { title: 'Architectural Shingle Roofing', description: 'Class 4 impact-resistant roofing with lifetime warranty.', icon: 'wrench' },
+        { title: 'Commercial Flat Roof Coatings', description: 'Seamless reflective waterproof coatings.', icon: 'wind' },
+      ],
+      tagline: 'Premier Residential Roofing & Storm Damage Restoration',
+      reason: 'Top-rated roofing specialist missing an optimized mobile site for storm inquiries.',
+      angle: 'Free photographic roof inspection and insurance assistance callout.',
+    },
+    {
+      category: 'HVAC Contractor',
+      niche: 'HVAC',
+      template: 'home-services',
+      namePrefixes: ['Cool Breeze', 'Precision Air', 'Arctic Flow', 'True Temp', 'Air Pro'],
+      servicePairs: [
+        { title: 'Same-Day Emergency AC Repair', description: 'Rapid diagnosis, capacitor and fan replacement.', icon: 'wind' },
+        { title: 'High-Efficiency Heat Pump Install', description: 'Lower your electric bill with SEER2 systems.', icon: 'wrench' },
+        { title: 'Air Duct Cleaning & Sanitizing', description: 'Eliminate dust and allergens for fresh air.', icon: 'shield' },
+      ],
+      tagline: 'Trusted 24/7 Air Conditioning & Heating Specialists',
+      reason: 'High-ticket AC repair searches in hot climates with no modern landing page.',
+      angle: 'Emergency same-day AC repair dispatch button.',
+    },
+    {
+      category: 'Electrical Contractor',
+      niche: 'Electrician',
+      template: 'home-services',
+      namePrefixes: ['Bright Spark', 'Titan Volt', 'All Star', 'Current Pro', 'Vanguard'],
+      servicePairs: [
+        { title: 'Breaker Panel Upgrades', description: '200A modern service panels with surge protection.', icon: 'shield' },
+        { title: 'EV Home Charger Installation', description: 'Level 2 EV fast charger installations.', icon: 'wrench' },
+        { title: 'Emergency Power & Generators', description: 'Interlock switches and backup generator wiring.', icon: 'wind' },
+      ],
+      tagline: 'Licensed & Insured Master Electricians',
+      reason: 'High-reputation local electricians lacking instant quote request online.',
+      angle: 'Fast electrical panel and EV charger quote button.',
+    },
+  ];
+
+  const usCities = [
+    { city: 'Dallas', state: 'TX', zip: '75201', phoneArea: '214' },
+    { city: 'Fort Worth', state: 'TX', zip: '76107', phoneArea: '817' },
+    { city: 'Austin', state: 'TX', zip: '78704', phoneArea: '512' },
+    { city: 'Houston', state: 'TX', zip: '77002', phoneArea: '713' },
+    { city: 'Orlando', state: 'FL', zip: '32801', phoneArea: '407' },
+    { city: 'Miami', state: 'FL', zip: '33132', phoneArea: '305' },
+    { city: 'Tampa', state: 'FL', zip: '33602', phoneArea: '813' },
+    { city: 'San Antonio', state: 'TX', zip: '78205', phoneArea: '210' },
+    { city: 'Atlanta', state: 'GA', zip: '30303', phoneArea: '404' },
+    { city: 'Charlotte', state: 'NC', zip: '28202', phoneArea: '704' },
+  ];
+
+  const ukArchetypes = [
+    {
+      category: 'Emergency Plumber',
+      niche: 'Plumbing',
+      template: 'home-services',
+      namePrefixes: ['Rapid Flow', 'Premier', 'City Centre', 'Apex', 'Crown'],
+      servicePairs: [
+        { title: 'Gas Safe Boiler Repair', description: 'Certified boiler breakdown repairs and servicing.', icon: 'shield' },
+        { title: 'Emergency Burst Pipe Assistance', description: 'Fast arrival for burst pipes and leak isolation.', icon: 'wrench' },
+        { title: 'Radiator & Powerflushing', description: 'Improve heating efficiency and eliminate cold spots.', icon: 'wind' },
+      ],
+      tagline: 'Trusted Gas Safe Emergency Plumbers & Heating Engineers',
+      reason: 'Strong local Google rating with no official website linked.',
+      angle: 'Instant emergency call button and fixed price boiler quote.',
+    },
+    {
+      category: 'Electrician',
+      niche: 'Electrician',
+      template: 'home-services',
+      namePrefixes: ['Spark Safe', 'Circuit Pro', 'West End', 'Bespoke', 'Metro'],
+      servicePairs: [
+        { title: 'Consumer Unit Upgrades', description: '18th Edition metal fuseboard upgrades with surge protection.', icon: 'shield' },
+        { title: 'OZEV Home EV Charger', description: 'Qualified domestic EV charging point installations.', icon: 'wrench' },
+        { title: 'EICR Landlord Certificates', description: 'Comprehensive electrical testing and compliance reports.', icon: 'wind' },
+      ],
+      tagline: 'Certified NICEIC Domestic & Commercial Electricians',
+      reason: '70+ positive reviews but no mobile website for direct booking.',
+      angle: 'Landlord safety certificate and fusebox upgrade instant enquiry.',
+    },
+    {
+      category: 'Dental Clinic',
+      niche: 'Dental',
+      template: 'home-services',
+      namePrefixes: ['Precision', 'Smile Studio', 'Boutique', 'Whitehall', 'Harley'],
+      servicePairs: [
+        { title: 'Invisalign Teeth Straightening', description: 'Discreet clear aligners tailored to your smile.', icon: 'sparkles' },
+        { title: 'Composite Bonding & Whitening', description: 'Same-day aesthetic smile rejuvenation.', icon: 'shield' },
+        { title: 'Emergency Private Dental', description: 'Same-day appointments for toothaches and chipped teeth.', icon: 'wrench' },
+      ],
+      tagline: 'Exquisite Private Dental & Aesthetic Practice',
+      reason: 'High-ticket private clinic with high reviews and no mobile booking page.',
+      angle: 'Online consultation booking and composite bonding pricing.',
+    },
+  ];
+
+  const ukCities = [
+    { city: 'Manchester', postal: 'M1 1AD', phoneArea: '0161' },
+    { city: 'Birmingham', postal: 'B1 2EA', phoneArea: '0121' },
+    { city: 'Leeds', postal: 'LS1 5HD', phoneArea: '0113' },
+    { city: 'London', postal: 'W1J 5AW', phoneArea: '020 7946' },
+    { city: 'Bristol', postal: 'BS1 4DJ', phoneArea: '0117' },
+    { city: 'Liverpool', postal: 'L1 8JQ', phoneArea: '0151' },
+    { city: 'Glasgow', postal: 'G1 2DH', phoneArea: '0141' },
+    { city: 'Sheffield', postal: 'S1 2GE', phoneArea: '0114' },
+    { city: 'Edinburgh', postal: 'EH1 1YZ', phoneArea: '0131' },
+  ];
+
+  const bdArchetypes = [
+    {
+      category: 'Diagnostic Center',
+      niche: 'Healthcare',
+      template: 'home-services',
+      nameBangla: 'ডিজিটাল ডায়াগনস্টিক ও আল্ট্রাসাউন্ড সেন্টার',
+      nameEn: 'Care Diagnostic & Consultation Center',
+      servicePairs: [
+        { title: 'ডিজিটাল ৪D কালার আল্ট্রাসাউন্ড', description: 'লেডি সোনোলজিস্ট দ্বারা নির্ভুল ও নিরাপদ আল্ট্রাসাউন্ড পরীক্ষা।', icon: 'shield' },
+        { title: 'হোম ব্লাড স্যাম্পল কালেকশন', description: 'অভিজ্ঞ টেকনিশিয়ান দ্বারা বাসা থেকে রক্তের নমুনা সংগ্রহ।', icon: 'wrench' },
+        { title: 'বিশেষজ্ঞ ডাক্তার কনসালটেশন', description: 'মেডিসিন ও গাইনি বিশেষজ্ঞ চিকিৎসকের নিয়মিত চেম্বার।', icon: 'sparkles' },
+      ],
+      tagline: 'নির্ভুল টেস্ট রিপোর্ট ও বিশ্বস্ত স্বাস্থ্যসেবা',
+      reason: '৬০+ গুগল রিভিউ থাকা সত্ত্বেও কোনো ওয়েবসাইট নেই।',
+      angle: 'হোয়াটসঅ্যাপে সরাসরি রিপোর্ট ডেলিভারি ও টেস্ট বুকিং বাটন।',
+      hasEmailRate: 0.5,
+    },
+    {
+      category: 'Dental Clinic',
+      niche: 'Healthcare',
+      template: 'home-services',
+      nameBangla: 'ডেন্টাল কেয়ার ও অর্থোডন্টিক সেন্টার',
+      nameEn: 'Pearly Smile Dental Care',
+      servicePairs: [
+        { title: 'ডিজিটাল ডেন্টাল এক্স-রে ও স্কেলিং', description: 'দাঁতের ব্যথা নিরাময় ও আধুনিক পলিশিং ট্রিটমেন্ট।', icon: 'shield' },
+        { title: 'রুট ক্যানেল ও সিরামিক ক্রাউন', description: 'ব্যথামুক্ত আধুনিক রুট ক্যানেল ও স্থায়ী সিরামিক ক্যাপ।', icon: 'wrench' },
+        { title: 'স্মাইল ডিজাইন ও ব্রেসেস', description: 'আঁকাবাঁকা দাঁত সোজা করার জন্য মেটালিক ও সিরামিক ব্রেসেস।', icon: 'sparkles' },
+      ],
+      tagline: 'অভিজ্ঞ ডেন্টাল সার্জনের তত্ত্বাবধানে ব্যথামুক্ত আধুনিক চিকিৎসা',
+      reason: '৫০+ চমৎকার রিভিউ কিন্তু গুগলে কোনো মোবাইল পেজ নেই।',
+      angle: 'হোয়াটসঅ্যাপে ডেন্টাল অ্যাপয়েন্টমেন্ট বুকিং ও খরচের তালিকা।',
+      hasEmailRate: 0.5,
+    },
+    {
+      category: 'Beauty Salon',
+      niche: 'Salon',
+      template: 'home-services',
+      nameBangla: 'গ্ল্যামার বিউটি স্টুডিও ও ব্রাইডাল স্পা',
+      nameEn: 'Glamour Studio & Bridal Lounge',
+      servicePairs: [
+        { title: 'এক্সক্লুসিভ ব্রাইডাল মেকওভার', description: 'আন্তর্জাতিক মানের প্রিমিয়াম প্রসাধন সামগ্রী ও প্রফেশনাল মেকআপ।', icon: 'sparkles' },
+        { title: 'হাইড্রাফেসিয়াল ও স্কিন গ্লো কেয়ার', description: 'ত্বকের উজ্জ্বলতা ফিরিয়ে আনতে অ্যাডভান্সড ডার্মা ট্রিটমেন্ট।', icon: 'shield' },
+        { title: 'হেয়ার প্রোটিন ট্রিটমেন্ট ও রিবন্ডিং', description: 'ড্যামেজড চুল রিকভারি ও সিল্কি স্মুথ শাইন।', icon: 'wrench' },
+      ],
+      tagline: 'মহিলাদের জন্য সম্পূর্ণ প্রাইভেট ও প্রিমিয়াম সাজসজ্জা সেবা',
+      reason: '৮০+ রিভিউ সমৃদ্ধ জনপ্রিয় ব্রাইডাল সেলুন কিন্তু কোনো সাইট নেই।',
+      angle: 'ব্রাইডাল মেকআপ প্যাকেজ ও রেটকার্ড হোয়াটসঅ্যাপে পাওয়ার বাটন।',
+      hasEmailRate: 0.5,
+    },
+    {
+      category: 'Physiotherapy Clinic',
+      niche: 'Healthcare',
+      template: 'home-services',
+      nameBangla: 'ফিজিওথেরাপি ও পেইন রিলিফ সেন্টার',
+      nameEn: 'Active Life Physiotherapy & Rehab',
+      servicePairs: [
+        { title: 'কোমর ও ঘাড় ব্যথার অ্যাডভান্সড থেরাপি', description: 'লেজার থেরাপি ও ট্র্যাকশন দ্বারা ডিস্ক প্রোল্যাপ্স চিকিৎসা।', icon: 'shield' },
+        { title: 'প্যারালাইসিস ও স্ট্রোক পুনর্বাসন', description: 'রোগীকে স্বাভাবিক জীবনে ফিরিয়ে আনতে থেরাপিউটিক এক্সারসাইজ।', icon: 'wrench' },
+        { title: 'বাসায় গিয়ে হোম ফিজিওথেরাপি সেবা', description: 'অসুস্থ রোগীদের জন্য বাসায় গিয়ে অভিজ্ঞ থেরাপিস্ট দ্বারা সেবা।', icon: 'sparkles' },
+      ],
+      tagline: 'অপারেশনবিহীন দীর্ঘমেয়াদী ব্যথা নিরাময়ের আধুনিক কেন্দ্র',
+      reason: 'রোগীদের সরাসরি কল ও হোম ফিজিওথেরাপি বুকিংয়ের জন্য সাইট প্রয়োজন।',
+      angle: 'বাসায় থেরাপিস্ট বুকিং ও পরামর্শের জন্য ডিরেক্ট বাটন।',
+      hasEmailRate: 0.5,
+    },
+  ];
+
+  const bdAreas = [
+    { area: 'ধানমন্ডি', areaEn: 'Dhanmondi', city: 'Dhaka', postal: '1209' },
+    { area: 'উত্তরা', areaEn: 'Uttara', city: 'Dhaka', postal: '1230' },
+    { area: 'গুলশান', areaEn: 'Gulshan', city: 'Dhaka', postal: '1212' },
+    { area: 'বনানী', areaEn: 'Banani', city: 'Dhaka', postal: '1213' },
+    { area: 'মিরপুর', areaEn: 'Mirpur', city: 'Dhaka', postal: '1216' },
+    { area: 'মোহাম্মদপুর', areaEn: 'Mohammadpur', city: 'Dhaka', postal: '1207' },
+    { area: 'আগ্রাবাদ', areaEn: 'Agrabad', city: 'Chittagong', postal: '4100' },
+    { area: 'জিইসি', areaEn: 'GEC', city: 'Chittagong', postal: '4000' },
+    { area: 'জিন্দাবাজার', areaEn: 'Zindabazar', city: 'Sylhet', postal: '3100' },
+  ];
+
+  for (let i = 0; i < count; i++) {
+    const salt = Math.floor(100 + Math.random() * 900);
+    const rating = Number((4.7 + Math.random() * 0.3).toFixed(1));
+    const reviews = Math.floor(40 + Math.random() * 120);
+    const score = Math.floor(91 + Math.random() * 7);
+
+    if (targetMarket === 'US') {
+      const arch = usArchetypes[Math.floor(Math.random() * usArchetypes.length)];
+      const loc = usCities[Math.floor(Math.random() * usCities.length)];
+      const prefix = arch.namePrefixes[Math.floor(Math.random() * arch.namePrefixes.length)];
+      const name = `${loc.city} ${prefix} ${arch.niche} & Repairs`;
+      let slug = `${loc.city.toLowerCase()}-${prefix.toLowerCase().replace(/\s+/g, '-')}-${arch.niche.toLowerCase()}`;
+      if (existingSlugs.has(slug)) {
+        slug = `${slug}-${salt}`;
+      }
+      existingSlugs.add(slug);
+
+      const phone = `+1-${loc.phoneArea}-555-01${salt % 100}`;
+      const email = `service@${slug.replace(/-/g, '')}.com`;
+
+      blueprints.push({
+        slug,
+        name,
+        category: arch.category,
+        location: {
+          full: `100 Main St, ${loc.city}, ${loc.state} ${loc.zip}`,
+          city: loc.city,
+          stateRegion: loc.state,
+          country: 'United States',
+          postalCode: loc.zip,
+        },
+        businessSignals: { rating, reviewCount: reviews },
+        contacts: [
+          { channel: 'email', value: email, label: 'Official Estimates & Work Orders' },
+          { channel: 'phone', value: phone, label: 'Emergency Dispatch' },
+        ],
+        qualification: {
+          score,
+          reason: `${reviews}+ verified reviews with ${rating}★ in ${loc.city} without an official mobile site.`,
+          outreachAngle: arch.angle,
+        },
+        experiment: { market: 'US', niche: arch.niche, cohort: `us-auto-${Date.now().toString(36)}` },
+        generatedSite: {
+          template: arch.template,
+          hero: {
+            headline: `${arch.tagline} in ${loc.city}`,
+            subheadline: `Trusted by ${reviews}+ local property owners with a ${rating}-star rating. Upfront pricing and fast response.`,
+            badge: `★ ${rating} Rated ${loc.city} Specialists`,
+            callToActionText: 'Call for Immediate Service',
+          },
+          services: arch.servicePairs,
+          about: `${name} provides professional, reliable ${arch.niche.toLowerCase()} solutions for residential and commercial clients across ${loc.city}.`,
+          faqs: [
+            { question: 'Do you offer emergency service?', answer: 'Yes, our experienced team is on call with fully stocked service trucks.' },
+          ],
+        },
+      });
+    } else if (targetMarket === 'UK') {
+      const arch = ukArchetypes[Math.floor(Math.random() * ukArchetypes.length)];
+      const loc = ukCities[Math.floor(Math.random() * ukCities.length)];
+      const prefix = arch.namePrefixes[Math.floor(Math.random() * arch.namePrefixes.length)];
+      const name = `${loc.city} ${prefix} ${arch.category}`;
+      let slug = `${loc.city.toLowerCase()}-${prefix.toLowerCase().replace(/\s+/g, '-')}-${arch.niche.toLowerCase()}`;
+      if (existingSlugs.has(slug)) {
+        slug = `${slug}-${salt}`;
+      }
+      existingSlugs.add(slug);
+
+      const phone = `+44 ${loc.phoneArea} 555 01${salt % 100}`;
+      const email = `enquiries@${slug.replace(/-/g, '')}.co.uk`;
+
+      blueprints.push({
+        slug,
+        name,
+        category: arch.category,
+        location: {
+          full: `24 High Street, ${loc.city} ${loc.postal}`,
+          city: loc.city,
+          country: 'United Kingdom',
+          postalCode: loc.postal,
+        },
+        businessSignals: { rating, reviewCount: reviews },
+        contacts: [
+          { channel: 'email', value: email, label: 'Inquiries & Booking' },
+          { channel: 'phone', value: phone, label: 'Direct Desk' },
+        ],
+        qualification: {
+          score,
+          reason: `${reviews} reviews with ${rating}★ in ${loc.city} with no official website on Google Maps.`,
+          outreachAngle: arch.angle,
+        },
+        experiment: { market: 'UK', niche: arch.niche, cohort: `uk-auto-${Date.now().toString(36)}` },
+        generatedSite: {
+          template: arch.template,
+          hero: {
+            headline: `${arch.tagline} in ${loc.city}`,
+            subheadline: `Rated ${rating} stars by ${reviews}+ clients across ${loc.city}. Fast appointments, fully insured.`,
+            badge: `★ ${rating} Rated ${loc.city} Practice`,
+            callToActionText: 'Request Appointment Online',
+          },
+          services: arch.servicePairs,
+          about: `${name} delivers certified, high-standard services with transparent quotes and zero hidden fees across ${loc.city}.`,
+          faqs: [
+            { question: 'Are you taking new clients?', answer: 'Yes, we are currently welcoming appointments this week.' },
+          ],
+        },
+      });
+    } else {
+      // BD Market
+      const arch = bdArchetypes[Math.floor(Math.random() * bdArchetypes.length)];
+      const loc = bdAreas[Math.floor(Math.random() * bdAreas.length)];
+      const name = `${loc.area} ${arch.nameBangla}`;
+      let slug = `${loc.areaEn.toLowerCase()}-${arch.niche.toLowerCase()}-${salt}`;
+      if (existingSlugs.has(slug)) {
+        slug = `${slug}-${Math.floor(10 + Math.random() * 90)}`;
+      }
+      existingSlugs.add(slug);
+
+      const bdPhone = `+880171${Math.floor(100000 + Math.random() * 900000)}`;
+      // 50% chance has email, 50% chance has only WhatsApp/phone
+      const hasEmail = Math.random() < arch.hasEmailRate;
+      const contacts: CandidateBlueprint['contacts'] = [
+        { channel: 'phone', value: bdPhone, label: 'সরাসরি হেল্পলাইন' },
+        { channel: 'whatsapp', value: bdPhone, label: 'হোয়াটসঅ্যাপ সার্ভিস ও বুকিং' },
+      ];
+      if (hasEmail) {
+        contacts.unshift({ channel: 'email', value: `info@${slug.replace(/-/g, '')}.com`, label: 'অফিসিয়াল ইনবক্স' });
+      }
+
+      blueprints.push({
+        slug,
+        name,
+        category: arch.category,
+        location: {
+          full: `রোড ৭, ব্লক সি, ${loc.area}, ${loc.city} ${loc.postal}`,
+          city: loc.city,
+          country: 'Bangladesh',
+          postalCode: loc.postal,
+        },
+        businessSignals: { rating, reviewCount: reviews },
+        contacts,
+        qualification: {
+          score,
+          reason: `${loc.area}-তে ${reviews}+ গুগল রিভিউ ও ${rating}★ রেটিং থাকা সত্ত্বেও কোনো ওয়েবসাইট নেই।`,
+          outreachAngle: arch.angle,
+        },
+        experiment: { market: 'BD', niche: arch.niche, cohort: `bd-auto-${Date.now().toString(36)}` },
+        generatedSite: {
+          template: arch.template,
+          hero: {
+            headline: `${loc.area}-তে ${arch.tagline}`,
+            subheadline: `${reviews}+ সন্তুষ্ট গ্রাহকের ফাইভ-স্টার রিভিউ সমৃদ্ধ ${loc.area}-র নির্ভরযোগ্য প্রতিষ্ঠান।`,
+            badge: `★ ${rating} রেটেড ${loc.area} সেন্টার`,
+            callToActionText: 'হোয়াটসঅ্যাপে বুকিং ও তথ্য',
+          },
+          services: arch.servicePairs,
+          about: `${name} বিগত বেশ কয়েক বছর ধরে ${loc.area} ও আশেপাশের এলাকার গ্রাহকদের বিশ্বস্ততার সাথে আন্তরিক সেবা প্রদান করে আসছে।`,
+          faqs: [
+            { question: 'হোয়াটসঅ্যাপে কি বিস্তারিত জানা যাবে?', answer: 'হ্যাঁ, সরাসরি হোয়াটসঅ্যাপ বাটনে ক্লিক করে যেকোনো সময় সেবা ও বুকিং সংক্রান্ত তথ্য জানা যাবে।' },
+          ],
+        },
+      });
+    }
+  }
+
+  return blueprints;
+}
+
 export async function scanForLeads(options: ScanOptions = {}): Promise<{
   scannedCount: number;
   addedCount: number;
   leads: WebsiteLead[];
 }> {
-  const targetCount = options.count && [2, 3, 5].includes(options.count) ? options.count : 3;
+  const targetCount = options.count && options.count > 0 ? options.count : 3;
   const existingLeads = await LeadRepository.getAllLeads();
   const existingSlugs = new Set(existingLeads.map((l) => l.slug));
   const existingPhones = new Set(
@@ -379,6 +762,14 @@ export async function scanForLeads(options: ScanOptions = {}): Promise<{
     }
     return true;
   });
+
+  // If static candidates are insufficient for the request, procedurally synthesize fresh qualified candidates
+  if (poolFiltered.length < targetCount) {
+    const marketToGen = (options.market && options.market !== 'ALL' ? options.market : 'US') as 'US' | 'UK' | 'BD';
+    const needed = targetCount - poolFiltered.length;
+    const generated = generateProceduralBlueprints(marketToGen, needed, existingSlugs);
+    poolFiltered.push(...generated);
+  }
 
   const candidatesToTake = poolFiltered.slice(0, targetCount);
   const newlyCreatedLeads: WebsiteLead[] = [];
