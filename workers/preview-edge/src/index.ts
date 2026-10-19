@@ -65,8 +65,18 @@ export default {
         return Response.redirect(redirectUrl, 302);
       }
 
-      // Ignore assets or system paths
-      if (cleanPath.includes('.') || cleanPath.startsWith('_next') || cleanPath.startsWith('api/')) {
+      // Proxy Next.js assets to origin if requested
+      if (pathname.startsWith('/_next/') || pathname.startsWith('/favicon.ico')) {
+        const origin = env.ORIGIN_FALLBACK || 'https://lead.d4f.me';
+        return fetch(`${origin}${pathname}${url.search}`, {
+          headers: {
+            'User-Agent': 'Cloudflare-Edge-Worker-Asset-Proxy',
+          },
+        });
+      }
+
+      // Ignore other system paths
+      if (cleanPath.startsWith('api/')) {
         return new Response('Not Found', { status: 404 });
       }
 
@@ -97,13 +107,25 @@ export default {
     // Ensures uninterrupted service if a preview has not yet been synced to KV
     const origin = env.ORIGIN_FALLBACK || 'https://lead.d4f.me';
     try {
-      const fallbackUrl = `${origin}/preview/${encodeURIComponent(slug)}`;
-      const originRes = await fetch(fallbackUrl, {
+      // First try self-contained standalone HTML endpoint with Tailwind CDN
+      let fallbackUrl = `${origin}/api/preview-html/${encodeURIComponent(slug)}`;
+      let originRes = await fetch(fallbackUrl, {
         headers: {
           'User-Agent': 'Cloudflare-Edge-Worker-Fallback',
           'Accept': 'text/html',
         },
       });
+
+      if (!originRes.ok) {
+        // Secondary fallback to /preview/:slug
+        fallbackUrl = `${origin}/preview/${encodeURIComponent(slug)}`;
+        originRes = await fetch(fallbackUrl, {
+          headers: {
+            'User-Agent': 'Cloudflare-Edge-Worker-Fallback',
+            'Accept': 'text/html',
+          },
+        });
+      }
 
       if (originRes.ok) {
         const html = await originRes.text();

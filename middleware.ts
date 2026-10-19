@@ -31,6 +31,7 @@ export function middleware(req: NextRequest) {
     pathname === '/login' ||
     pathname.startsWith('/api/auth') ||
     pathname === '/api/health' ||
+    pathname.startsWith('/api/preview-html') ||
     (isLocalhost && pathname.startsWith('/api/autopilot')) ||
     pathname.startsWith('/_next') ||
     pathname === '/favicon.ico' ||

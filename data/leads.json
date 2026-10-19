@@ -1,5 +1,766 @@
 [
   {
+    "id": "lead_bd_1792411238398_987",
+    "slug": "uttara-glamour-salon-studio",
+    "name": "Uttara Glamour Studio & Bridal Spa",
+    "category": "Beauty Salon",
+    "location": {
+      "full": "Sector 4, Road 7, Uttara, Dhaka 1230",
+      "city": "Dhaka",
+      "country": "Bangladesh",
+      "postalCode": "1230"
+    },
+    "sources": [
+      {
+        "provider": "places-discovery-engine",
+        "retrievedAt": "2026-10-19T12:00:38.398Z",
+        "notes": "Automated scan: high-ranking business with empty website on Google Maps (Dhaka)"
+      }
+    ],
+    "businessSignals": {
+      "rating": 4.9,
+      "reviewCount": 88,
+      "activeConfidence": 0.95
+    },
+    "website": {
+      "status": "none",
+      "auditedAt": "2026-10-19T12:00:38.398Z",
+      "observations": [
+        "No official website linked to Google Business listing"
+      ],
+      "opportunities": [
+        "Mobile one-page website with direct call / WhatsApp action"
+      ]
+    },
+    "contacts": [
+      {
+        "channel": "email",
+        "value": "contact@uttaraglamourstudio.com",
+        "label": "Management",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T12:00:38.398Z",
+        "confidence": 0.95
+      },
+      {
+        "channel": "phone",
+        "value": "+8801819550322",
+        "label": "Salon Front Desk",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T12:00:38.398Z",
+        "confidence": 0.95
+      },
+      {
+        "channel": "whatsapp",
+        "value": "+8801819550322",
+        "label": "Appointment Booking",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T12:00:38.398Z",
+        "confidence": 0.95
+      }
+    ],
+    "assets": [],
+    "qualification": {
+      "score": 93,
+      "confidence": 0.92,
+      "recommendation": "priority",
+      "reason": "88 reviews in Uttara bridal niche with no official site. Highly visual service.",
+      "recommendedChannel": "whatsapp",
+      "outreachAngle": "Bridal package ratecard and WhatsApp appointment booking.",
+      "scoredAt": "2026-10-19T12:00:38.398Z",
+      "scoringVersion": "v2.1"
+    },
+    "generatedSite": {
+      "template": "home-services",
+      "hero": {
+        "headline": "উত্তরায় এক্সক্লুসিভ ব্রাইডাল মেকওভার ও স্কিনকেয়ার স্পা",
+        "subheadline": "৮০+ ফাইভ-স্টার রিভিউ সমৃদ্ধ উত্তরার অন্যতম জনপ্রিয় প্রিমিয়াম বিউটি ও ব্রাইডাল স্টুডিও।",
+        "badge": "★ ৪.৯ রেটেড উত্তরা স্টুডিও",
+        "callToActionText": "হোয়াটসঅ্যাপে প্যাকেজ ও বুকিং"
+      },
+      "services": [
+        {
+          "title": "এক্সক্লুসিভ ব্রাইডাল মেকআপ",
+          "description": "আন্তর্জাতিক ব্রান্ডের পণ্য ও প্রফেশনাল আর্টিস্টদের মেকওভার।",
+          "icon": "sparkles"
+        },
+        {
+          "title": "হাইড্রাফেসিয়াল ও হেয়ার বোটক্স",
+          "description": "ত্বকের উজ্জ্বলতা ফিরিয়ে আনতে আধুনিক রিভাইটালাইজিং ট্রিটমেন্ট।",
+          "icon": "shield"
+        }
+      ],
+      "about": "উত্তরা গ্ল্যামার স্টুডিও মহিলাদের জন্য সম্পূর্ণ প্রাইভেট ও আরামদায়ক পরিবেশে প্রিমিয়াম সাজসজ্জা সেবা প্রদান করে।",
+      "faqs": [
+        {
+          "question": "ব্রাইডাল সাজের জন্য কতদিন আগে বুকিং দিতে হবে?",
+          "answer": "পছন্দের তারিখ নিশ্চিত করতে অন্তত ৭-১০ দিন পূর্বে অগ্রিম বুকিং দেওয়ার অনুরোধ করা হচ্ছে।"
+        }
+      ],
+      "cta": {
+        "type": "call_and_quote",
+        "primaryPhone": "+8801819550322",
+        "primaryWhatsApp": "+8801819550322"
+      },
+      "generatedAt": "2026-10-19T12:00:38.399Z",
+      "generationVersion": "v2.0"
+    },
+    "preview": {
+      "slug": "uttara-glamour-salon-studio",
+      "url": "/preview/uttara-glamour-salon-studio",
+      "version": 1,
+      "status": "approved",
+      "generatedAt": "2026-10-19T12:00:38.399Z"
+    },
+    "humanReview": {
+      "decision": "pending"
+    },
+    "outreach": {
+      "suppressed": false,
+      "recommendedChannel": "whatsapp",
+      "events": [
+        {
+          "channel": "email",
+          "type": "sent",
+          "at": "2026-10-19T12:00:39.270Z",
+          "notes": "Autopilot sent cold outreach via Brevo to contact@uttaraglamourstudio.com. Message ID: <202610191200.38582528945@smtp-relay.mailin.fr>"
+        }
+      ],
+      "draft": "আসসালামু আলাইকুম Uttara Glamour Studio & Bridal Spa টিম! 🌸\n\nগুগল ম্যাপসে Dhaka-তে আপনাদের বিজনেসের 88+ চমৎকার রিভিউ এবং 4.9★ রেটিং দেখে খুব ভালো লাগলো।\n\nলক্ষ্য করলাম গুগলে আপনাদের কোনো অফিসিয়াল ওয়েবসাইট লিংক করা নেই। ফলে অনেক কাস্টমার সার্ভিস ও রেটকার্ড দেখতে গিয়ে মিস করে যেতে পারেন।\n\nআপনাদের ক্লায়েন্ট রিভিউ ও সার্ভিসগুলো দিয়ে আমরা সুন্দর একটি মোবাইল ওয়েবসাইট ডেমো বানিয়েছি:\n👉 https://live.d4f.me/preview/uttara-glamour-salon-studio\n\nফোনে ওপেন করে দেখুন, সরাসরি WhatsApp বুকিং বাটনও যুক্ত করা আছে। ভালো লাগলে এটা আপনাদের নিজস্ব ডোমেইনে খুব সহজে লাইভ করে দেওয়া যাবে।\n\nধন্যবাদ ও শুভেচ্ছা,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+    },
+    "sales": {
+      "stage": "contacted",
+      "quotedPlan": "Dhaka Managed Pro",
+      "quotedPrice": 3500,
+      "currency": "BDT",
+      "nextAction": "Monitor prospect reply",
+      "nextActionAt": "2026-10-21T12:00:39.270Z"
+    },
+    "customer": {
+      "isCustomer": false
+    },
+    "lifecycle": "contacted",
+    "experiment": {
+      "market": "BD",
+      "niche": "Salon",
+      "cohort": "bd-dhk-batch3"
+    },
+    "createdAt": "2026-10-19T12:00:38.399Z",
+    "updatedAt": "2026-10-19T12:00:39.274Z",
+    "cloudflareDeployment": {
+      "deployed": true,
+      "edgeUrl": "https://live.d4f.me/uttara-glamour-salon-studio",
+      "deployedAt": "2026-10-19T12:11:27.348Z",
+      "status": "synced",
+      "kvKey": "site:uttara-glamour-salon-studio"
+    }
+  },
+  {
+    "id": "lead_uk_1792411202009_67",
+    "slug": "sheffield-premier-emergency-plumber",
+    "name": "Sheffield Premier Emergency Plumber",
+    "category": "Emergency Plumber",
+    "location": {
+      "full": "24 High Street, Sheffield S1 2GE",
+      "city": "Sheffield",
+      "country": "United Kingdom",
+      "postalCode": "S1 2GE"
+    },
+    "sources": [
+      {
+        "provider": "places-discovery-engine",
+        "retrievedAt": "2026-10-19T12:00:02.009Z",
+        "notes": "Automated scan: high-ranking business with empty website on Google Maps (Sheffield)"
+      }
+    ],
+    "businessSignals": {
+      "rating": 5,
+      "reviewCount": 133,
+      "activeConfidence": 0.95
+    },
+    "website": {
+      "status": "none",
+      "auditedAt": "2026-10-19T12:00:02.009Z",
+      "observations": [
+        "No official website linked to Google Business listing"
+      ],
+      "opportunities": [
+        "Mobile one-page website with direct call / WhatsApp action"
+      ]
+    },
+    "contacts": [
+      {
+        "channel": "email",
+        "value": "enquiries@sheffieldpremieremergencyplumber.co.uk",
+        "label": "Inquiries & Booking",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T12:00:02.009Z",
+        "confidence": 0.95
+      },
+      {
+        "channel": "phone",
+        "value": "+44 0114 555 0190",
+        "label": "Direct Desk",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T12:00:02.009Z",
+        "confidence": 0.95
+      }
+    ],
+    "assets": [],
+    "qualification": {
+      "score": 95,
+      "confidence": 0.92,
+      "recommendation": "priority",
+      "reason": "133 reviews with 5★ in Sheffield with no official website on Google Maps.",
+      "recommendedChannel": "email",
+      "outreachAngle": "Instant emergency call button and fixed price boiler quote.",
+      "scoredAt": "2026-10-19T12:00:02.009Z",
+      "scoringVersion": "v2.1"
+    },
+    "generatedSite": {
+      "template": "home-services",
+      "hero": {
+        "headline": "Trusted Gas Safe Emergency Plumbers & Heating Engineers in Sheffield",
+        "subheadline": "Rated 5 stars by 133+ clients across Sheffield. Fast appointments, fully insured.",
+        "badge": "★ 5 Rated Sheffield Practice",
+        "callToActionText": "Request Appointment Online"
+      },
+      "services": [
+        {
+          "title": "Gas Safe Boiler Repair",
+          "description": "Certified boiler breakdown repairs and servicing.",
+          "icon": "shield"
+        },
+        {
+          "title": "Emergency Burst Pipe Assistance",
+          "description": "Fast arrival for burst pipes and leak isolation.",
+          "icon": "wrench"
+        },
+        {
+          "title": "Radiator & Powerflushing",
+          "description": "Improve heating efficiency and eliminate cold spots.",
+          "icon": "wind"
+        }
+      ],
+      "about": "Sheffield Premier Emergency Plumber delivers certified, high-standard services with transparent quotes and zero hidden fees across Sheffield.",
+      "faqs": [
+        {
+          "question": "Are you taking new clients?",
+          "answer": "Yes, we are currently welcoming appointments this week."
+        }
+      ],
+      "cta": {
+        "type": "call_and_quote",
+        "primaryPhone": "+44 0114 555 0190"
+      },
+      "generatedAt": "2026-10-19T12:00:02.009Z",
+      "generationVersion": "v2.0"
+    },
+    "preview": {
+      "slug": "sheffield-premier-emergency-plumber",
+      "url": "/preview/sheffield-premier-emergency-plumber",
+      "version": 1,
+      "status": "approved",
+      "generatedAt": "2026-10-19T12:00:02.009Z"
+    },
+    "humanReview": {
+      "decision": "pending"
+    },
+    "outreach": {
+      "suppressed": false,
+      "recommendedChannel": "email",
+      "events": [
+        {
+          "channel": "email",
+          "type": "sent",
+          "at": "2026-10-19T12:00:02.976Z",
+          "notes": "Autopilot sent cold outreach via Brevo to enquiries@sheffieldpremieremergencyplumber.co.uk. Message ID: <dry-run-1792411202976@d4f.me> [DRY RUN]"
+        }
+      ],
+      "draft": "Hi Sheffield Premier Emergency Plumber team,\n\nI came across your business on Google Maps in Sheffield and saw your brilliant 5★ rating with 133 reviews. Huge congratulations on the reputation you've built!\n\nI noticed your Google profile doesn't have an official website listed, which often means mobile users looking for urgent trades might hesitate before ringing.\n\nI went ahead and designed a clean, mobile-first one-page preview for you with instant call buttons and your top reviews:\n👉 https://live.d4f.me/preview/sheffield-premier-emergency-plumber\n\nHave a quick look on your phone when you have a minute. If you fancy making it your official site, I'd be happy to set it up on your own domain. No obligation at all!\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+    },
+    "sales": {
+      "stage": "contacted",
+      "quotedPlan": "Growth Managed Plan",
+      "quotedPrice": 99,
+      "currency": "USD",
+      "nextAction": "Monitor prospect reply",
+      "nextActionAt": "2026-10-21T12:00:02.976Z"
+    },
+    "customer": {
+      "isCustomer": false
+    },
+    "lifecycle": "contacted",
+    "experiment": {
+      "market": "UK",
+      "niche": "Plumbing",
+      "cohort": "uk-auto-mvf7cmvt"
+    },
+    "createdAt": "2026-10-19T12:00:02.009Z",
+    "updatedAt": "2026-10-19T12:00:02.978Z",
+    "cloudflareDeployment": {
+      "deployed": true,
+      "edgeUrl": "https://live.d4f.me/sheffield-premier-emergency-plumber",
+      "deployedAt": "2026-10-19T12:11:28.237Z",
+      "status": "synced",
+      "kvKey": "site:sheffield-premier-emergency-plumber"
+    }
+  },
+  {
+    "id": "lead_uk_1792410979546_77",
+    "slug": "birmingham-apex-emergency-plumber",
+    "name": "Birmingham Apex Emergency Plumber",
+    "category": "Emergency Plumber",
+    "location": {
+      "full": "24 High Street, Birmingham B1 2EA",
+      "city": "Birmingham",
+      "country": "United Kingdom",
+      "postalCode": "B1 2EA"
+    },
+    "sources": [
+      {
+        "provider": "places-discovery-engine",
+        "retrievedAt": "2026-10-19T11:56:19.546Z",
+        "notes": "Automated scan: high-ranking business with empty website on Google Maps (Birmingham)"
+      }
+    ],
+    "businessSignals": {
+      "rating": 4.8,
+      "reviewCount": 53,
+      "activeConfidence": 0.95
+    },
+    "website": {
+      "status": "none",
+      "auditedAt": "2026-10-19T11:56:19.546Z",
+      "observations": [
+        "No official website linked to Google Business listing"
+      ],
+      "opportunities": [
+        "Mobile one-page website with direct call / WhatsApp action"
+      ]
+    },
+    "contacts": [
+      {
+        "channel": "email",
+        "value": "enquiries@birminghamapexemergencyplumber.co.uk",
+        "label": "Inquiries & Booking",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T11:56:19.546Z",
+        "confidence": 0.95
+      },
+      {
+        "channel": "phone",
+        "value": "+44 0121 555 0152",
+        "label": "Direct Desk",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T11:56:19.546Z",
+        "confidence": 0.95
+      }
+    ],
+    "assets": [],
+    "qualification": {
+      "score": 91,
+      "confidence": 0.92,
+      "recommendation": "priority",
+      "reason": "53 reviews with 4.8★ in Birmingham with no official website on Google Maps.",
+      "recommendedChannel": "email",
+      "outreachAngle": "Instant emergency call button and fixed price boiler quote.",
+      "scoredAt": "2026-10-19T11:56:19.546Z",
+      "scoringVersion": "v2.1"
+    },
+    "generatedSite": {
+      "template": "home-services",
+      "hero": {
+        "headline": "Trusted Gas Safe Emergency Plumbers & Heating Engineers in Birmingham",
+        "subheadline": "Rated 4.8 stars by 53+ clients across Birmingham. Fast appointments, fully insured.",
+        "badge": "★ 4.8 Rated Birmingham Practice",
+        "callToActionText": "Request Appointment Online"
+      },
+      "services": [
+        {
+          "title": "Gas Safe Boiler Repair",
+          "description": "Certified boiler breakdown repairs and servicing.",
+          "icon": "shield"
+        },
+        {
+          "title": "Emergency Burst Pipe Assistance",
+          "description": "Fast arrival for burst pipes and leak isolation.",
+          "icon": "wrench"
+        },
+        {
+          "title": "Radiator & Powerflushing",
+          "description": "Improve heating efficiency and eliminate cold spots.",
+          "icon": "wind"
+        }
+      ],
+      "about": "Birmingham Apex Emergency Plumber delivers certified, high-standard services with transparent quotes and zero hidden fees across Birmingham.",
+      "faqs": [
+        {
+          "question": "Are you taking new clients?",
+          "answer": "Yes, we are currently welcoming appointments this week."
+        }
+      ],
+      "cta": {
+        "type": "call_and_quote",
+        "primaryPhone": "+44 0121 555 0152"
+      },
+      "generatedAt": "2026-10-19T11:56:19.546Z",
+      "generationVersion": "v2.0"
+    },
+    "preview": {
+      "slug": "birmingham-apex-emergency-plumber",
+      "url": "/preview/birmingham-apex-emergency-plumber",
+      "version": 1,
+      "status": "approved",
+      "generatedAt": "2026-10-19T11:56:19.546Z"
+    },
+    "humanReview": {
+      "decision": "pending"
+    },
+    "outreach": {
+      "suppressed": false,
+      "recommendedChannel": "email",
+      "events": [
+        {
+          "channel": "email",
+          "type": "sent",
+          "at": "2026-10-19T11:56:19.557Z",
+          "notes": "Autopilot sent cold outreach via Brevo to enquiries@birminghamapexemergencyplumber.co.uk. Message ID: <dry-run-1792410979557@d4f.me> [DRY RUN]"
+        }
+      ],
+      "draft": "Hi Birmingham Apex Emergency Plumber team,\n\nI came across your business on Google Maps in Birmingham and saw your brilliant 4.8★ rating with 53 reviews. Huge congratulations on the reputation you've built!\n\nI noticed your Google profile doesn't have an official website listed, which often means mobile users looking for urgent trades might hesitate before ringing.\n\nI went ahead and designed a clean, mobile-first one-page preview for you with instant call buttons and your top reviews:\n👉 https://live.d4f.me/preview/birmingham-apex-emergency-plumber\n\nHave a quick look on your phone when you have a minute. If you fancy making it your official site, I'd be happy to set it up on your own domain. No obligation at all!\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+    },
+    "sales": {
+      "stage": "contacted",
+      "quotedPlan": "Growth Managed Plan",
+      "quotedPrice": 99,
+      "currency": "USD",
+      "nextAction": "Monitor prospect reply",
+      "nextActionAt": "2026-10-21T11:56:19.557Z"
+    },
+    "customer": {
+      "isCustomer": false
+    },
+    "lifecycle": "contacted",
+    "experiment": {
+      "market": "UK",
+      "niche": "Plumbing",
+      "cohort": "uk-auto-mvf77v8a"
+    },
+    "createdAt": "2026-10-19T11:56:19.546Z",
+    "updatedAt": "2026-10-19T11:56:19.559Z",
+    "cloudflareDeployment": {
+      "deployed": true,
+      "edgeUrl": "https://live.d4f.me/birmingham-apex-emergency-plumber",
+      "deployedAt": "2026-10-19T12:11:28.953Z",
+      "status": "synced",
+      "kvKey": "site:birmingham-apex-emergency-plumber"
+    }
+  },
+  {
+    "id": "lead_us_1792410800406_369",
+    "slug": "austin-vanguard-electrician",
+    "name": "Austin Vanguard Electrician & Repairs",
+    "category": "Electrical Contractor",
+    "location": {
+      "full": "100 Main St, Austin, TX 78704",
+      "city": "Austin",
+      "stateRegion": "TX",
+      "country": "United States",
+      "postalCode": "78704"
+    },
+    "sources": [
+      {
+        "provider": "places-discovery-engine",
+        "retrievedAt": "2026-10-19T11:53:20.406Z",
+        "notes": "Automated scan: high-ranking business with empty website on Google Maps (Austin)"
+      }
+    ],
+    "businessSignals": {
+      "rating": 4.8,
+      "reviewCount": 60,
+      "activeConfidence": 0.95
+    },
+    "website": {
+      "status": "none",
+      "auditedAt": "2026-10-19T11:53:20.406Z",
+      "observations": [
+        "No official website linked to Google Business listing"
+      ],
+      "opportunities": [
+        "Mobile one-page website with direct call / WhatsApp action"
+      ]
+    },
+    "contacts": [
+      {
+        "channel": "email",
+        "value": "service@austinvanguardelectrician.com",
+        "label": "Official Estimates & Work Orders",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T11:53:20.406Z",
+        "confidence": 0.95
+      },
+      {
+        "channel": "phone",
+        "value": "+1-512-555-0170",
+        "label": "Emergency Dispatch",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T11:53:20.406Z",
+        "confidence": 0.95
+      }
+    ],
+    "assets": [],
+    "qualification": {
+      "score": 91,
+      "confidence": 0.92,
+      "recommendation": "priority",
+      "reason": "60+ verified reviews with 4.8★ in Austin without an official mobile site.",
+      "recommendedChannel": "email",
+      "outreachAngle": "Fast electrical panel and EV charger quote button.",
+      "scoredAt": "2026-10-19T11:53:20.406Z",
+      "scoringVersion": "v2.1"
+    },
+    "generatedSite": {
+      "template": "home-services",
+      "hero": {
+        "headline": "Licensed & Insured Master Electricians in Austin",
+        "subheadline": "Trusted by 60+ local property owners with a 4.8-star rating. Upfront pricing and fast response.",
+        "badge": "★ 4.8 Rated Austin Specialists",
+        "callToActionText": "Call for Immediate Service"
+      },
+      "services": [
+        {
+          "title": "Breaker Panel Upgrades",
+          "description": "200A modern service panels with surge protection.",
+          "icon": "shield"
+        },
+        {
+          "title": "EV Home Charger Installation",
+          "description": "Level 2 EV fast charger installations.",
+          "icon": "wrench"
+        },
+        {
+          "title": "Emergency Power & Generators",
+          "description": "Interlock switches and backup generator wiring.",
+          "icon": "wind"
+        }
+      ],
+      "about": "Austin Vanguard Electrician & Repairs provides professional, reliable electrician solutions for residential and commercial clients across Austin.",
+      "faqs": [
+        {
+          "question": "Do you offer emergency service?",
+          "answer": "Yes, our experienced team is on call with fully stocked service trucks."
+        }
+      ],
+      "cta": {
+        "type": "call_and_quote",
+        "primaryPhone": "+1-512-555-0170"
+      },
+      "generatedAt": "2026-10-19T11:53:20.406Z",
+      "generationVersion": "v2.0"
+    },
+    "preview": {
+      "slug": "austin-vanguard-electrician",
+      "url": "/preview/austin-vanguard-electrician",
+      "version": 1,
+      "status": "approved",
+      "generatedAt": "2026-10-19T11:53:20.406Z"
+    },
+    "humanReview": {
+      "decision": "pending"
+    },
+    "outreach": {
+      "suppressed": false,
+      "recommendedChannel": "email",
+      "events": [
+        {
+          "channel": "email",
+          "type": "sent",
+          "at": "2026-10-19T11:53:20.418Z",
+          "notes": "Autopilot sent cold outreach via Brevo to service@austinvanguardelectrician.com. Message ID: <dry-run-1792410800418@d4f.me> [DRY RUN]"
+        }
+      ],
+      "draft": "Hi Austin Vanguard Electrician & Repairs team,\n\nI was looking at local Electrical Contractor services in Austin and noticed your impressive 4.8-star rating with over 60 customer reviews on Google Maps. Congratulations on building such a strong local reputation!\n\nI noticed that your Google Business Profile currently has no official website attached. When homeowners look for local services on mobile, having a fast site with click-to-call makes a huge difference.\n\nTo show what a clean mobile site would look like for you, our studio built a modern one-page preview loaded with your real reviews and services:\n👉 https://live.d4f.me/preview/austin-vanguard-electrician\n\nYou can claim this website on your own custom domain whenever you'd like.\n\nWould you be open to a quick email exchange if you'd like to make this your official web home?\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+    },
+    "sales": {
+      "stage": "contacted",
+      "quotedPlan": "Growth Managed Plan",
+      "quotedPrice": 99,
+      "currency": "USD",
+      "nextAction": "Monitor prospect reply",
+      "nextActionAt": "2026-10-21T11:53:20.418Z"
+    },
+    "customer": {
+      "isCustomer": false
+    },
+    "lifecycle": "contacted",
+    "experiment": {
+      "market": "US",
+      "niche": "Electrician",
+      "cohort": "us-auto-mvf74106"
+    },
+    "createdAt": "2026-10-19T11:53:20.406Z",
+    "updatedAt": "2026-10-19T11:53:20.419Z",
+    "cloudflareDeployment": {
+      "deployed": true,
+      "edgeUrl": "https://live.d4f.me/austin-vanguard-electrician",
+      "deployedAt": "2026-10-19T12:11:30.196Z",
+      "status": "synced",
+      "kvKey": "site:austin-vanguard-electrician"
+    }
+  },
+  {
+    "id": "lead_us_1792410697399_109",
+    "slug": "orlando-benchmark-roofing",
+    "name": "Orlando Benchmark Roofing & Repairs",
+    "category": "Roofing Contractor",
+    "location": {
+      "full": "100 Main St, Orlando, FL 32801",
+      "city": "Orlando",
+      "stateRegion": "FL",
+      "country": "United States",
+      "postalCode": "32801"
+    },
+    "sources": [
+      {
+        "provider": "places-discovery-engine",
+        "retrievedAt": "2026-10-19T11:51:37.399Z",
+        "notes": "Automated scan: high-ranking business with empty website on Google Maps (Orlando)"
+      }
+    ],
+    "businessSignals": {
+      "rating": 4.8,
+      "reviewCount": 108,
+      "activeConfidence": 0.95
+    },
+    "website": {
+      "status": "none",
+      "auditedAt": "2026-10-19T11:51:37.399Z",
+      "observations": [
+        "No official website linked to Google Business listing"
+      ],
+      "opportunities": [
+        "Mobile one-page website with direct call / WhatsApp action"
+      ]
+    },
+    "contacts": [
+      {
+        "channel": "email",
+        "value": "service@orlandobenchmarkroofing.com",
+        "label": "Official Estimates & Work Orders",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T11:51:37.399Z",
+        "confidence": 0.95
+      },
+      {
+        "channel": "phone",
+        "value": "+1-407-555-0190",
+        "label": "Emergency Dispatch",
+        "publicBusinessContact": true,
+        "verifiedAt": "2026-10-19T11:51:37.399Z",
+        "confidence": 0.95
+      }
+    ],
+    "assets": [],
+    "qualification": {
+      "score": 92,
+      "confidence": 0.92,
+      "recommendation": "priority",
+      "reason": "108+ verified reviews with 4.8★ in Orlando without an official mobile site.",
+      "recommendedChannel": "email",
+      "outreachAngle": "Free photographic roof inspection and insurance assistance callout.",
+      "scoredAt": "2026-10-19T11:51:37.399Z",
+      "scoringVersion": "v2.1"
+    },
+    "generatedSite": {
+      "template": "home-services",
+      "hero": {
+        "headline": "Premier Residential Roofing & Storm Damage Restoration in Orlando",
+        "subheadline": "Trusted by 108+ local property owners with a 4.8-star rating. Upfront pricing and fast response.",
+        "badge": "★ 4.8 Rated Orlando Specialists",
+        "callToActionText": "Call for Immediate Service"
+      },
+      "services": [
+        {
+          "title": "Storm & Hail Damage Restoration",
+          "description": "Assistance with insurance claims and leak repairs.",
+          "icon": "shield"
+        },
+        {
+          "title": "Architectural Shingle Roofing",
+          "description": "Class 4 impact-resistant roofing with lifetime warranty.",
+          "icon": "wrench"
+        },
+        {
+          "title": "Commercial Flat Roof Coatings",
+          "description": "Seamless reflective waterproof coatings.",
+          "icon": "wind"
+        }
+      ],
+      "about": "Orlando Benchmark Roofing & Repairs provides professional, reliable roofing solutions for residential and commercial clients across Orlando.",
+      "faqs": [
+        {
+          "question": "Do you offer emergency service?",
+          "answer": "Yes, our experienced team is on call with fully stocked service trucks."
+        }
+      ],
+      "cta": {
+        "type": "call_and_quote",
+        "primaryPhone": "+1-407-555-0190"
+      },
+      "generatedAt": "2026-10-19T11:51:37.399Z",
+      "generationVersion": "v2.0"
+    },
+    "preview": {
+      "slug": "orlando-benchmark-roofing",
+      "url": "/preview/orlando-benchmark-roofing",
+      "version": 1,
+      "status": "approved",
+      "generatedAt": "2026-10-19T11:51:37.399Z"
+    },
+    "humanReview": {
+      "decision": "pending"
+    },
+    "outreach": {
+      "suppressed": false,
+      "recommendedChannel": "email",
+      "events": [
+        {
+          "channel": "email",
+          "type": "sent",
+          "at": "2026-10-19T11:51:37.408Z",
+          "notes": "Autopilot sent cold outreach via Brevo to service@orlandobenchmarkroofing.com. Message ID: <dry-run-1792410697408@d4f.me> [DRY RUN]"
+        }
+      ],
+      "draft": "Hi Orlando Benchmark Roofing & Repairs team,\n\nI was looking at local Roofing Contractor services in Orlando and noticed your impressive 4.8-star rating with over 108 customer reviews on Google Maps. Congratulations on building such a strong local reputation!\n\nI noticed that your Google Business Profile currently has no official website attached. When homeowners look for local services on mobile, having a fast site with click-to-call makes a huge difference.\n\nTo show what a clean mobile site would look like for you, our studio built a modern one-page preview loaded with your real reviews and services:\n👉 https://live.d4f.me/preview/orlando-benchmark-roofing\n\nYou can claim this website on your own custom domain whenever you'd like.\n\nWould you be open to a quick email exchange if you'd like to make this your official web home?\n\nBest Regards,\nRaj Syful — Senior Web Developer\n[Top Rated Plus Freelancer | Upwork Inc.](https://www.upwork.com/freelancers/~0198d6650c592b6bc2?p=1494224534121791488)\n----------------------------------------------------------------------\n🌐 [www.d4f.me](https://d4f.me/) | ✉️ [raj@d4f.me](mailto:raj@d4f.me) | 💬 [WhatsApp](https://wa.me/8801674410695) | ✈️ [Telegram](https://telegram.me/rajsyful)\n📞 +8801719647717 | 💼 [LinkedIn](https://www.linkedin.com/in/syful-i-70788581/)\nA Passionate ♡ Web-Developer"
+    },
+    "sales": {
+      "stage": "contacted",
+      "quotedPlan": "Growth Managed Plan",
+      "quotedPrice": 99,
+      "currency": "USD",
+      "nextAction": "Monitor prospect reply",
+      "nextActionAt": "2026-10-21T11:51:37.408Z"
+    },
+    "customer": {
+      "isCustomer": false
+    },
+    "lifecycle": "contacted",
+    "experiment": {
+      "market": "US",
+      "niche": "Roofing",
+      "cohort": "us-auto-mvf71tiv"
+    },
+    "createdAt": "2026-10-19T11:51:37.399Z",
+    "updatedAt": "2026-10-19T11:51:37.409Z",
+    "cloudflareDeployment": {
+      "deployed": true,
+      "edgeUrl": "https://live.d4f.me/orlando-benchmark-roofing",
+      "deployedAt": "2026-10-19T12:11:30.705Z",
+      "status": "synced",
+      "kvKey": "site:orlando-benchmark-roofing"
+    }
+  },
+  {
     "id": "lead_bd_1792381797843_850",
     "slug": "dhanmondi-care-diagnostic-center",
     "name": "Dhanmondi Care Diagnostic & Ultrasound",
@@ -156,7 +917,7 @@
     "cloudflareDeployment": {
       "deployed": true,
       "edgeUrl": "https://live.d4f.me/dhanmondi-care-diagnostic-center",
-      "deployedAt": "2026-10-19T05:25:16.072Z",
+      "deployedAt": "2026-10-19T12:11:32.704Z",
       "status": "synced",
       "kvKey": "site:dhanmondi-care-diagnostic-center"
     }
@@ -309,7 +1070,7 @@
     "cloudflareDeployment": {
       "deployed": true,
       "edgeUrl": "https://live.d4f.me/london-mayfair-dental-care",
-      "deployedAt": "2026-10-19T05:25:17.904Z",
+      "deployedAt": "2026-10-19T12:11:33.279Z",
       "status": "synced",
       "kvKey": "site:london-mayfair-dental-care"
     }
@@ -462,7 +1223,7 @@
     "cloudflareDeployment": {
       "deployed": true,
       "edgeUrl": "https://live.d4f.me/birmingham-rapid-electrical",
-      "deployedAt": "2026-10-19T05:25:19.717Z",
+      "deployedAt": "2026-10-19T12:11:36.289Z",
       "status": "synced",
       "kvKey": "site:birmingham-rapid-electrical"
     }
@@ -616,7 +1377,7 @@
     "cloudflareDeployment": {
       "deployed": true,
       "edgeUrl": "https://live.d4f.me/miami-breeze-ac-services",
-      "deployedAt": "2026-10-19T05:25:21.559Z",
+      "deployedAt": "2026-10-19T12:11:36.801Z",
       "status": "synced",
       "kvKey": "site:miami-breeze-ac-services"
     }
@@ -770,7 +1531,7 @@
     "cloudflareDeployment": {
       "deployed": true,
       "edgeUrl": "https://live.d4f.me/austin-pro-solar-roofing",
-      "deployedAt": "2026-10-19T05:25:23.327Z",
+      "deployedAt": "2026-10-19T12:11:37.326Z",
       "status": "synced",
       "kvKey": "site:austin-pro-solar-roofing"
     }
@@ -929,7 +1690,7 @@
     "cloudflareDeployment": {
       "deployed": true,
       "edgeUrl": "https://live.d4f.me/fort-worth-master-plumbing",
-      "deployedAt": "2026-10-19T05:25:25.125Z",
+      "deployedAt": "2026-10-19T12:11:39.267Z",
       "status": "synced",
       "kvKey": "site:fort-worth-master-plumbing"
     }
@@ -1110,7 +1871,7 @@
     "cloudflareDeployment": {
       "deployed": true,
       "edgeUrl": "https://live.d4f.me/lone-star-quality-roofing-houston",
-      "deployedAt": "2026-10-19T05:25:27.087Z",
+      "deployedAt": "2026-10-19T12:11:39.744Z",
       "status": "synced",
       "kvKey": "site:lone-star-quality-roofing-houston"
     }
@@ -1289,7 +2050,7 @@
     "cloudflareDeployment": {
       "deployed": true,
       "edgeUrl": "https://live.d4f.me/manchester-rapid-plumbing",
-      "deployedAt": "2026-10-19T05:25:29.073Z",
+      "deployedAt": "2026-10-19T12:11:40.252Z",
       "status": "synced",
       "kvKey": "site:manchester-rapid-plumbing"
     }
@@ -1471,7 +2232,7 @@
     "cloudflareDeployment": {
       "deployed": true,
       "edgeUrl": "https://live.d4f.me/glow-lounge-salon-banani",
-      "deployedAt": "2026-10-19T05:25:30.903Z",
+      "deployedAt": "2026-10-19T12:11:40.866Z",
       "status": "synced",
       "kvKey": "site:glow-lounge-salon-banani"
     }
