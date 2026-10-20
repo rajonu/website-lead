@@ -50,9 +50,9 @@ export default function DashboardLayout({
           >
             <div className="flex items-center gap-3">
               <Sparkles className="w-4 h-4 text-amber-400" />
-              <span>Daily Queue</span>
+              <span>Outreach Queue</span>
             </div>
-            <span className="px-1.5 py-0.5 text-xs bg-amber-500/20 text-amber-300 rounded font-semibold">2–5</span>
+            <span className="px-1.5 py-0.5 text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded font-semibold">1/hr Autopilot</span>
           </Link>
           <Link 
             href="/pipeline" 

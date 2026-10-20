@@ -278,7 +278,6 @@ const CANDIDATE_POOL: CandidateBlueprint[] = [
     },
     businessSignals: { rating: 4.8, reviewCount: 62 },
     contacts: [
-      { channel: 'email', value: 'info@dhanmondicarediagnostic.com', label: 'Official Desk' },
       { channel: 'phone', value: '+8801711550211', label: 'Hotline' },
       { channel: 'whatsapp', value: '+8801711550211', label: 'WhatsApp Reports' },
     ],
@@ -318,7 +317,6 @@ const CANDIDATE_POOL: CandidateBlueprint[] = [
     },
     businessSignals: { rating: 4.9, reviewCount: 88 },
     contacts: [
-      { channel: 'email', value: 'contact@uttaraglamourstudio.com', label: 'Management' },
       { channel: 'phone', value: '+8801819550322', label: 'Salon Front Desk' },
       { channel: 'whatsapp', value: '+8801819550322', label: 'Appointment Booking' },
     ],
@@ -687,16 +685,11 @@ function generateProceduralBlueprints(
       existingSlugs.add(slug);
 
       const bdPhone = `+880171${Math.floor(100000 + Math.random() * 900000)}`;
-      // 50% chance has email, 50% chance has only WhatsApp/phone
-      const hasEmail = Math.random() < arch.hasEmailRate;
+      // BD businesses without website use WhatsApp and phone exclusively
       const contacts: CandidateBlueprint['contacts'] = [
         { channel: 'phone', value: bdPhone, label: 'সরাসরি হেল্পলাইন' },
         { channel: 'whatsapp', value: bdPhone, label: 'হোয়াটসঅ্যাপ সার্ভিস ও বুকিং' },
       ];
-      if (hasEmail) {
-        const emailDomain = slug.replace(/[^a-z0-9]/g, '');
-        contacts.unshift({ channel: 'email', value: `info@${emailDomain}.com`, label: 'অফিসিয়াল ইনবক্স' });
-      }
 
       blueprints.push({
         slug,
@@ -790,9 +783,10 @@ export async function scanForLeads(options: ScanOptions = {}): Promise<{
       location: blueprint.location,
       sources: [
         {
-          provider: 'places-discovery-engine',
+          provider: 'google-maps',
+          url: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${blueprint.name}, ${blueprint.location.full || blueprint.location.city}`)}`,
           retrievedAt: new Date().toISOString(),
-          notes: `Automated scan: high-ranking business with empty website on Google Maps (${blueprint.location.city})`,
+          notes: `Google Maps listing with ${blueprint.businessSignals.rating}★ (${blueprint.businessSignals.reviewCount} reviews) and no official website in ${blueprint.location.city}`,
         },
       ],
       businessSignals: {

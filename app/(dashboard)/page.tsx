@@ -2,6 +2,7 @@ import Link from 'next/link';
 import AutopilotCard from '@/components/AutopilotCard';
 import { LeadRepository } from '@/lib/db';
 import { MARKETS } from '@/lib/config/markets';
+import { getLeadGoogleMapsUrl } from '@/lib/utils/maps';
 import { 
   Sparkles, 
   ArrowRight, 
@@ -38,7 +39,7 @@ export default async function DashboardPage({
         <div>
           <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Executive Dashboard</h2>
           <p className="text-sm text-slate-500 mt-1">
-            Pipeline overview, daily human approval queue, and customer maintenance.
+            Pipeline overview, 1-lead-per-hour autopilot queue (UK 2 ➔ US 2 ➔ BD 1), and customer maintenance.
           </p>
         </div>
 
@@ -138,16 +139,16 @@ export default async function DashboardPage({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-amber-500" />
-            <h3 className="text-lg font-bold text-slate-900">Today&apos;s Recommended Prospects</h3>
-            <span className="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-medium">
-              Curated: {recommendations.length} of 5 max
+            <h3 className="text-lg font-bold text-slate-900">Autopilot Queue &amp; New Prospects</h3>
+            <span className="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-medium">
+              Pending: {recommendations.length}
             </span>
           </div>
           <Link
             href="/recommendations"
             className="text-xs font-semibold text-sky-600 hover:text-sky-700 flex items-center gap-1"
           >
-            Open Full Daily Queue <ArrowRight className="w-3.5 h-3.5" />
+            Open Outreach Station <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
@@ -176,10 +177,17 @@ export default async function DashboardPage({
                 </div>
 
                 <div className="flex items-center gap-3 text-xs text-slate-600">
-                  <div className="flex items-center gap-1">
-                    <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                  <a
+                    href={getLeadGoogleMapsUrl(lead)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-slate-600 hover:text-sky-600 hover:underline"
+                    title="View on Google Maps"
+                  >
+                    <MapPin className="w-3.5 h-3.5 text-rose-500 shrink-0" />
                     <span>{lead.location.city}, {lead.location.country}</span>
-                  </div>
+                    <ExternalLink className="w-2.5 h-2.5 text-slate-400" />
+                  </a>
                   <div className="flex items-center gap-1">
                     <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
                     <span className="font-semibold">{lead.businessSignals?.rating}</span>
@@ -251,7 +259,16 @@ export default async function DashboardPage({
                 {allLeads.map((lead) => (
                   <tr key={lead.id} className="hover:bg-slate-50/60 transition-colors">
                     <td className="p-3.5 font-bold text-slate-900">
-                      <div>{lead.name}</div>
+                      <a
+                        href={getLeadGoogleMapsUrl(lead)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-sky-600 hover:underline inline-flex items-center gap-1"
+                        title="Open on Google Maps"
+                      >
+                        <span>{lead.name}</span>
+                        <ExternalLink className="w-3 h-3 text-slate-400" />
+                      </a>
                       <div className="text-[11px] font-normal text-slate-400">{lead.contacts[0]?.value || 'No email'}</div>
                     </td>
                     <td className="p-3.5">

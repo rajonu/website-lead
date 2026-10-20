@@ -31,11 +31,11 @@ export default async function RecommendationsPage({
             </Link>
             <h2 className="text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
               <Sparkles className="w-6 h-6 text-amber-500" />
-              <span>Daily Outreach Station</span>
+              <span>Autopilot Outreach Station</span>
             </h2>
           </div>
           <p className="text-sm text-slate-500 mt-1">
-            Review top high-confidence prospects, send 1-to-1 personal emails via Brevo, and manage delivered &amp; bounced outreach.
+            1 lead per hour rotation (UK 2 ➔ US 2 ➔ BD 1). Direct Google Maps sources, 1-to-1 Brevo delivery &amp; 1-click WhatsApp outreach.
           </p>
         </div>
 

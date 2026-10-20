@@ -22,10 +22,10 @@ import {
 import { AutopilotState, AutopilotLogEntry } from '@/lib/services/autopilot';
 
 const ROTATION_STEPS = [
-  { step: 0, label: 'US Prospect #1', flag: '🇺🇸', market: 'US' },
-  { step: 1, label: 'US Prospect #2', flag: '🇺🇸', market: 'US' },
-  { step: 2, label: 'UK Prospect #1', flag: '🇬🇧', market: 'UK' },
-  { step: 3, label: 'UK Prospect #2', flag: '🇬🇧', market: 'UK' },
+  { step: 0, label: 'UK Prospect #1', flag: '🇬🇧', market: 'UK' },
+  { step: 1, label: 'UK Prospect #2', flag: '🇬🇧', market: 'UK' },
+  { step: 2, label: 'US Prospect #1', flag: '🇺🇸', market: 'US' },
+  { step: 3, label: 'US Prospect #2', flag: '🇺🇸', market: 'US' },
   { step: 4, label: 'BD Prospect #1', flag: '🇧🇩', market: 'BD' },
 ];
 

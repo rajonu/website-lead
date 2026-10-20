@@ -217,14 +217,14 @@ export class BrevoService {
           logger.warn('Recipient domain has no active MX records. Aborting send to protect sender reputation.', { domain });
           return {
             success: false,
-            error: `Domain "${domain}" has no active mail server (MX records). Contact this prospect via WhatsApp or phone instead.`,
+            error: `Domain "${domain}" has no active mail server (MX records). This local business has no domain inbox — please contact them directly via WhatsApp or phone.`,
           };
         }
       } catch (err: unknown) {
         logger.warn('DNS MX lookup failed for domain, aborting to prevent bounce', { domain, error: String(err) });
         return {
           success: false,
-          error: `Domain "${domain}" does not exist or has no active mail servers. Contact this prospect via WhatsApp or phone instead.`,
+          error: `Domain "${domain}" does not exist or has no active mail server (MX records). This local business has no domain inbox — please contact them directly via WhatsApp or phone.`,
         };
       }
     }

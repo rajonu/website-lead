@@ -12,6 +12,12 @@
     },
     "sources": [
       {
+        "provider": "google-maps",
+        "url": "https://www.google.com/maps/search/?api=1&query=Uttara%20Glamour%20Studio%20%26%20Bridal%20Spa%2C%20Sector%204%2C%20Road%207%2C%20Uttara%2C%20Dhaka%201230",
+        "retrievedAt": "2026-10-20T05:12:14.145Z",
+        "notes": "Direct Google Maps business listing"
+      },
+      {
         "provider": "places-discovery-engine",
         "retrievedAt": "2026-10-19T12:00:38.398Z",
         "notes": "Automated scan: high-ranking business with empty website on Google Maps (Dhaka)"
@@ -33,14 +39,6 @@
       ]
     },
     "contacts": [
-      {
-        "channel": "email",
-        "value": "contact@uttaraglamourstudio.com",
-        "label": "Management",
-        "publicBusinessContact": true,
-        "verifiedAt": "2026-10-19T12:00:38.398Z",
-        "confidence": 0.95
-      },
       {
         "channel": "phone",
         "value": "+8801819550322",
@@ -174,6 +172,12 @@
       "postalCode": "S1 2GE"
     },
     "sources": [
+      {
+        "provider": "google-maps",
+        "url": "https://www.google.com/maps/search/?api=1&query=Sheffield%20Premier%20Emergency%20Plumber%2C%2024%20High%20Street%2C%20Sheffield%20S1%202GE",
+        "retrievedAt": "2026-10-20T05:12:14.151Z",
+        "notes": "Direct Google Maps business listing"
+      },
       {
         "provider": "places-discovery-engine",
         "retrievedAt": "2026-10-19T12:00:02.009Z",
@@ -333,6 +337,12 @@
       "postalCode": "B1 2EA"
     },
     "sources": [
+      {
+        "provider": "google-maps",
+        "url": "https://www.google.com/maps/search/?api=1&query=Birmingham%20Apex%20Emergency%20Plumber%2C%2024%20High%20Street%2C%20Birmingham%20B1%202EA",
+        "retrievedAt": "2026-10-20T05:12:14.151Z",
+        "notes": "Direct Google Maps business listing"
+      },
       {
         "provider": "places-discovery-engine",
         "retrievedAt": "2026-10-19T11:56:19.546Z",
@@ -494,6 +504,12 @@
     },
     "sources": [
       {
+        "provider": "google-maps",
+        "url": "https://www.google.com/maps/search/?api=1&query=Austin%20Vanguard%20Electrician%20%26%20Repairs%2C%20100%20Main%20St%2C%20Austin%2C%20TX%2078704",
+        "retrievedAt": "2026-10-20T05:12:14.151Z",
+        "notes": "Direct Google Maps business listing"
+      },
+      {
         "provider": "places-discovery-engine",
         "retrievedAt": "2026-10-19T11:53:20.406Z",
         "notes": "Automated scan: high-ranking business with empty website on Google Maps (Austin)"
@@ -654,6 +670,12 @@
     },
     "sources": [
       {
+        "provider": "google-maps",
+        "url": "https://www.google.com/maps/search/?api=1&query=Orlando%20Benchmark%20Roofing%20%26%20Repairs%2C%20100%20Main%20St%2C%20Orlando%2C%20FL%2032801",
+        "retrievedAt": "2026-10-20T05:12:14.151Z",
+        "notes": "Direct Google Maps business listing"
+      },
+      {
         "provider": "places-discovery-engine",
         "retrievedAt": "2026-10-19T11:51:37.399Z",
         "notes": "Automated scan: high-ranking business with empty website on Google Maps (Orlando)"
@@ -813,6 +835,12 @@
     },
     "sources": [
       {
+        "provider": "google-maps",
+        "url": "https://www.google.com/maps/search/?api=1&query=Dhanmondi%20Care%20Diagnostic%20%26%20Ultrasound%2C%20House%2034%2C%20Road%209%2FA%2C%20Dhanmondi%2C%20Dhaka%201209",
+        "retrievedAt": "2026-10-20T05:12:14.151Z",
+        "notes": "Direct Google Maps business listing"
+      },
+      {
         "provider": "places-discovery-engine",
         "retrievedAt": "2026-10-19T03:49:57.843Z",
         "notes": "Automated scan: high-ranking business with empty website on Google Maps (Dhaka)"
@@ -834,14 +862,6 @@
       ]
     },
     "contacts": [
-      {
-        "channel": "email",
-        "value": "info@dhanmondicarediagnostic.com",
-        "label": "Official Desk",
-        "publicBusinessContact": true,
-        "verifiedAt": "2026-10-19T03:49:57.843Z",
-        "confidence": 0.95
-      },
       {
         "channel": "phone",
         "value": "+8801711550211",
@@ -982,6 +1002,12 @@
       "postalCode": "W1J 5AW"
     },
     "sources": [
+      {
+        "provider": "google-maps",
+        "url": "https://www.google.com/maps/search/?api=1&query=Mayfair%20Precision%20Dental%20Practice%2C%2042%20Berkeley%20Square%2C%20London%20W1J%205AW",
+        "retrievedAt": "2026-10-20T05:12:14.151Z",
+        "notes": "Direct Google Maps business listing"
+      },
       {
         "provider": "places-discovery-engine",
         "retrievedAt": "2026-10-19T03:49:57.839Z",
@@ -1143,6 +1169,12 @@
       "postalCode": "B1 2EA"
     },
     "sources": [
+      {
+        "provider": "google-maps",
+        "url": "https://www.google.com/maps/search/?api=1&query=Birmingham%20Premier%20Electrical%20Services%2C%2088%20Broad%20St%2C%20Birmingham%20B1%202EA",
+        "retrievedAt": "2026-10-20T05:12:14.151Z",
+        "notes": "Direct Google Maps business listing"
+      },
       {
         "provider": "places-discovery-engine",
         "retrievedAt": "2026-10-19T03:49:57.837Z",
@@ -1306,6 +1338,12 @@
     },
     "sources": [
       {
+        "provider": "google-maps",
+        "url": "https://www.google.com/maps/search/?api=1&query=Miami%20Breeze%20AC%20%26%20Refrigeration%2C%20750%20Biscayne%20Blvd%2C%20Miami%2C%20FL%2033132",
+        "retrievedAt": "2026-10-20T05:12:14.151Z",
+        "notes": "Direct Google Maps business listing"
+      },
+      {
         "provider": "places-discovery-engine",
         "retrievedAt": "2026-10-19T03:49:57.834Z",
         "notes": "Automated scan: high-ranking business with empty website on Google Maps (Miami)"
@@ -1459,6 +1497,12 @@
       "postalCode": "78704"
     },
     "sources": [
+      {
+        "provider": "google-maps",
+        "url": "https://www.google.com/maps/search/?api=1&query=Austin%20Precision%20Roofing%20%26%20Solar%2C%201801%20S%20Congress%20Ave%2C%20Austin%2C%20TX%2078704",
+        "retrievedAt": "2026-10-20T05:12:14.151Z",
+        "notes": "Direct Google Maps business listing"
+      },
       {
         "provider": "places-discovery-engine",
         "retrievedAt": "2026-10-19T03:49:57.832Z",
@@ -1621,6 +1665,12 @@
       "postalCode": "76107"
     },
     "sources": [
+      {
+        "provider": "google-maps",
+        "url": "https://www.google.com/maps/search/?api=1&query=Fort%20Worth%20Master%20Plumbing%20%26%20Gas%2C%203200%20W%207th%20St%2C%20Fort%20Worth%2C%20TX%2076107",
+        "retrievedAt": "2026-10-20T05:12:14.151Z",
+        "notes": "Direct Google Maps business listing"
+      },
       {
         "provider": "places-discovery-engine",
         "retrievedAt": "2026-10-18T14:17:29.457Z",
@@ -1788,6 +1838,12 @@
       "postalCode": "77056"
     },
     "sources": [
+      {
+        "provider": "google-maps",
+        "url": "https://www.google.com/maps/search/?api=1&query=Lone%20Star%20Quality%20Roofing%2C%201240%20Post%20Oak%20Blvd%2C%20Houston%2C%20TX%2077056",
+        "retrievedAt": "2026-10-20T05:12:14.151Z",
+        "notes": "Direct Google Maps business listing"
+      },
       {
         "provider": "places-discovery-api",
         "providerId": "ChIJ_lone_star_roofing",
@@ -1978,6 +2034,12 @@
     },
     "sources": [
       {
+        "provider": "google-maps",
+        "url": "https://www.google.com/maps/search/?api=1&query=Manchester%20Rapid%20Plumbing%20%26%20Heating%2C%20142%20Deansgate%2C%20Manchester%20M3%202QS",
+        "retrievedAt": "2026-10-20T05:12:14.151Z",
+        "notes": "Direct Google Maps business listing"
+      },
+      {
         "provider": "places-uk-adapter",
         "providerId": "ChIJ_mcr_rapid_plumb",
         "retrievedAt": "2026-10-18T08:00:00Z"
@@ -2164,6 +2226,12 @@
       "postalCode": "1213"
     },
     "sources": [
+      {
+        "provider": "google-maps",
+        "url": "https://www.google.com/maps/search/?api=1&query=Glow%20Lounge%20Ladies%20Beauty%20%26%20Spa%2C%20House%2042%2C%20Road%2011%2C%20Block%20D%2C%20Banani%2C%20Dhaka%201213",
+        "retrievedAt": "2026-10-20T05:12:14.151Z",
+        "notes": "Direct Google Maps business listing"
+      },
       {
         "provider": "manual-import-dhaka",
         "providerId": "bd_dhk_banani_042",

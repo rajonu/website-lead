@@ -24,7 +24,7 @@ export interface AutopilotLogEntry {
 export interface AutopilotState {
   enabled: boolean;
   dryRun: boolean;
-  rotationStep: number; // 0=US, 1=US, 2=UK, 3=UK, 4=BD
+  rotationStep: number; // 0=UK, 1=UK, 2=US, 3=US, 4=BD
   lastRunAt?: string;
   nextRunAt?: string;
   totalRuns: number;
@@ -34,7 +34,7 @@ export interface AutopilotState {
   recentLogs: AutopilotLogEntry[];
 }
 
-const ROTATION_SEQUENCE: Array<'US' | 'UK' | 'BD'> = ['US', 'US', 'UK', 'UK', 'BD'];
+const ROTATION_SEQUENCE: Array<'UK' | 'US' | 'BD'> = ['UK', 'UK', 'US', 'US', 'BD'];
 
 const DATA_DIR =
   process.env.DATA_DIR ||
@@ -100,7 +100,7 @@ export class AutopilotService {
 
   /**
    * Execute 1 hourly cycle:
-   * 1. Determine market by rotation sequence (US -> US -> UK -> UK -> BD).
+   * 1. Determine market by rotation sequence (UK -> UK -> US -> US -> BD).
    * 2. Scrape/discover 1 qualified business prospect.
    * 3. Sync & host site immediately on Cloudflare Edge KV.
    * 4. If email exists: Send 1-to-1 cold outreach email via Brevo.

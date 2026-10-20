@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 
 import { WebsiteLead } from '@/lib/types/lead';
 import { generateWhatsAppTemplate } from '@/lib/ai/outreach';
+import { getLeadGoogleMapsUrl } from '@/lib/utils/maps';
 import { 
   Send, 
   MapPin, 
@@ -70,6 +71,7 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
   const isBounced = lead.outreach?.deliveryStatus === 'bounced' || events.some((e) => e.type === 'bounced');
   const bounceReason = lead.outreach?.bounceReason || events.find((e) => e.type === 'bounced')?.notes || 'Recipient mail server rejected message (No MX record found)';
   const whatsappContact = lead.contacts.find((c) => c.channel === 'whatsapp' || c.channel === 'phone')?.value;
+  const mapsSourceUrl = getLeadGoogleMapsUrl(lead);
   const isDryRun = (latestSentEvent?.notes?.includes('[DRY RUN]') || false) && !isLiveSentSuccess && !isBounced;
 
   const [deletingSiteOnly, setDeletingSiteOnly] = useState(false);
@@ -290,15 +292,34 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
           <h3 className="text-lg font-bold text-slate-900 mt-1">{lead.name}</h3>
 
           <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 mt-1">
-            <div className="flex items-center gap-1">
-              <MapPin className="w-3.5 h-3.5 text-slate-400" />
-              <span>{lead.location.city}, {lead.location.country}</span>
-            </div>
+            <a
+              href={mapsSourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-slate-700 hover:text-sky-600 hover:underline font-medium bg-slate-100 hover:bg-slate-200/80 px-2 py-0.5 rounded border border-slate-200 transition-colors"
+              title="Open exact business listing on Google Maps"
+            >
+              <MapPin className="w-3.5 h-3.5 text-rose-500 shrink-0" />
+              <span>{lead.location.full || `${lead.location.city}, ${lead.location.country}`}</span>
+              <ExternalLink className="w-3 h-3 text-slate-400 shrink-0" />
+            </a>
+
             <div className="flex items-center gap-1">
               <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
               <span className="font-semibold text-slate-700">{lead.businessSignals?.rating ?? 'N/A'}</span>
               <span>({lead.businessSignals?.reviewCount ?? 0})</span>
             </div>
+
+            <a
+              href={mapsSourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-[11px] font-bold text-sky-700 hover:text-sky-900 bg-sky-50 hover:bg-sky-100 px-2 py-0.5 rounded border border-sky-200 transition-colors"
+              title="View on Google Maps"
+            >
+              <span>🗺️ Google Maps</span>
+              <ExternalLink className="w-3 h-3 text-sky-600" />
+            </a>
           </div>
         </div>
 
