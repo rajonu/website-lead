@@ -320,6 +320,25 @@ export default function ContactedLeadCard({ lead }: { lead: WebsiteLead }) {
               <span>🗺️ Google Maps</span>
               <ExternalLink className="w-3 h-3 text-sky-600" />
             </a>
+
+            {lead.website.url && (
+              <a
+                href={lead.website.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-700 hover:text-sky-700 bg-amber-50 hover:bg-amber-100 px-2 py-0.5 rounded border border-amber-200 transition-colors"
+                title="Open client's current website"
+              >
+                <span>🌐 বর্তমান সাইট</span>
+                <ExternalLink className="w-2.5 h-2.5 text-slate-500" />
+              </a>
+            )}
+
+            {lead.website.mobileAudit && (
+              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
+                <span>📱 মোবাইল স্কোর: {lead.website.mobileAudit.mobileScore}/100</span>
+              </span>
+            )}
           </div>
         </div>
 

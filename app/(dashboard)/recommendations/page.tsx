@@ -35,7 +35,7 @@ export default async function RecommendationsPage({
             </h2>
           </div>
           <p className="text-sm text-slate-500 mt-1">
-            1 lead per hour rotation (UK 2 ➔ US 2 ➔ BD 1). Direct Google Maps sources, 1-to-1 Brevo delivery &amp; 1-click WhatsApp outreach.
+            ঢাকা মার্কেট ফোকাস: দৈনিক ৫টি সাইটের মোবাইল অডিট, চিহ্নিত সমস্যা ও ১-ক্লিক হোয়াটসঅ্যাপ আউটরিচ স্টেশন।
           </p>
         </div>
 

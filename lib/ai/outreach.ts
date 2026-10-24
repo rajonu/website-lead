@@ -22,8 +22,29 @@ export function generatePersonalOutreachDraft(lead: WebsiteLead): string {
   const rating = lead.businessSignals?.rating || 4.8;
   const reviews = lead.businessSignals?.reviewCount || 30;
   const previewUrl = `https://live.d4f.me/preview/${lead.slug}`;
+  const existingWebsite = lead.website?.url;
+  const mobileAudit = lead.website?.mobileAudit;
 
   if (isBd) {
+    if (existingWebsite) {
+      const topIssue =
+        mobileAudit?.issues?.[0]?.labelBn ||
+        'মোবাইল স্ক্রিনে সাইটটি ছোট দেখায় এবং সরাসরি কল বা WhatsApp বুকিং বাটন নেই';
+
+      return `আসসালামু আলাইকুম ${lead.name} টিম! 🌸
+
+গুগল ম্যাপসে ${lead.location.city}-তে আপনাদের বিজনেসের ${reviews}+ চমৎকার রিভিউ এবং ${rating}★ রেটিং দেখে যোগাযোগ করলাম।
+
+আপনাদের বর্তমান ওয়েবসাইটটি (${existingWebsite}) মোবাইল থেকে ভিজিট করে দেখলাম যে স্মার্টফোনে এটি দেখতে ও ব্যবহার করতে বেশ সমস্যা হচ্ছে (${topIssue})। বর্তমান সময়ে ৮০%+ কাস্টমার সরাসরি স্মার্টফোন থেকে সার্ভিস খোঁজেন।
+
+আপনাদের আসল রিভিউ ও সার্ভিসগুলো দিয়ে আমরা সম্পূর্ণ নতুন একটি সুপারফাস্ট ও মোবাইল-ফ্রেন্ডলি লাইভ ডেমো বানিয়েছি:
+👉 ${previewUrl}
+
+ফোনে ওপেন করে দেখুন, সরাসরি ১-ক্লিকে WhatsApp বুকিং ও কল বাটন যুক্ত করা আছে। কোনো অগ্রিম ফি ছাড়া বা অত্যন্ত সুলভ খরচে আমরা এটি আপনাদের নিজস্ব ডোমেইনে আধুনিকায়ন করে দিতে পারি।
+
+${RAJ_OFFICIAL_SIGNATURE_BD}`;
+    }
+
     return `আসসালামু আলাইকুম ${lead.name} টিম! 🌸
 
 গুগল ম্যাপসে ${lead.location.city}-তে আপনাদের বিজনেসের ${reviews}+ চমৎকার রিভিউ এবং ${rating}★ রেটিং দেখে খুব ভালো লাগলো।
@@ -74,6 +95,9 @@ export function getEmailSubject(lead: WebsiteLead): string {
   const market = lead.experiment?.market || lead.location.country;
   const isBd = market === 'BD' || market.includes('Bangladesh');
   if (isBd) {
+    if (lead.website?.url) {
+      return `${lead.name}-এর ওয়েবসাইটের জন্য আধুনিক মোবাইল-ফ্রেন্ডলি আপডেট`;
+    }
     return `${lead.name}-এর জন্য একটি আধুনিক ওয়েবসাইট প্রিভিউ`;
   }
   return `Website preview for ${lead.name}`;
@@ -143,8 +167,23 @@ export function generateWhatsAppTemplate(lead: WebsiteLead): string {
   const city = lead.location?.city || '';
   const rating = lead.businessSignals?.rating || 4.9;
   const previewUrl = `https://live.d4f.me/${lead.slug}`;
+  const existingWebsite = lead.website?.url;
 
   if (isBd) {
+    if (existingWebsite) {
+      return `আসসালামু আলাইকুম ${lead.name} টিম,
+
+গুগল ম্যাপসে আপনাদের দারুণ রিভিউ (${rating}★) দেখে যোগাযোগ করলাম।
+
+আপনাদের বর্তমান ওয়েবসাইট (${existingWebsite}) ফোনে ভিজিট করে দেখলাম মোবাইলে স্ক্রিন ছোট হয়ে আসে ও সরাসরি কল/WhatsApp বুকিং বাটন নেই। তাই আপনাদের আসল রিভিউ ও সার্ভিস দিয়ে নতুন একটি আধুনিক ও দ্রুতগতির মোবাইল ডেমো বানিয়েছি:
+👉 ${previewUrl}
+
+ফোনে যেকোনো সময় একটু দেখে নিবেন। কোনো অগ্রিম ফি ছাড়া বা অত্যন্ত সুলভ খরচে আপনাদের সাইটটি এভাবে স্মার্টফোনের উপযোগী করে দেওয়া যাবে। কেমন লাগলো জানাবেন!
+
+ধন্যবাদ,
+Raj Syful — Senior Web Developer (https://d4f.me)`;
+    }
+
     return `আসসালামু আলাইকুম ${lead.name} টিম,
 
 গুগল ম্যাপসে ${city ? city + '-তে ' : ''}আপনাদের দারুণ রিভিউ (${rating}★) দেখে যোগাযোগ করলাম।

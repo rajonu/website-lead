@@ -35,6 +35,16 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    if (action === 'run_daily_batch' || action === 'run_dhaka_batch') {
+      const count = body.count ? Number(body.count) : 5;
+      const result = await AutopilotService.runDailyDhakaBatch(count);
+      return NextResponse.json({
+        success: result.success,
+        message: result.details,
+        data: result,
+      });
+    }
+
     if (action === 'toggle' || enabled !== undefined) {
       const current = AutopilotService.getStatus();
       const newEnabled = enabled !== undefined ? Boolean(enabled) : !current.enabled;

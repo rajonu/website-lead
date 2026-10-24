@@ -34,7 +34,7 @@ export interface AutopilotState {
   recentLogs: AutopilotLogEntry[];
 }
 
-const ROTATION_SEQUENCE: Array<'UK' | 'US' | 'BD'> = ['UK', 'UK', 'US', 'US', 'BD'];
+const ROTATION_SEQUENCE: Array<'BD'> = ['BD'];
 
 const DATA_DIR =
   process.env.DATA_DIR ||
@@ -223,10 +223,11 @@ export class AutopilotService {
           logger.error('Autopilot email delivery failure', undefined, { error: sendResult.error });
         }
       } else if (whatsappContact) {
-        // Prospect has NO email, but has WhatsApp (e.g. Bangladesh market):
-        // Keep in review queue for Raj with WhatsApp Ready status
+        // Prospect has WhatsApp (e.g. Dhaka, Bangladesh mobile revamp lead):
+        const mobileScore = newLead.website.mobileAudit?.mobileScore;
+        const scoreLabel = mobileScore !== undefined ? ` (মোবাইল স্কোর: ${mobileScore}/100)` : '';
         cycleAction = 'whatsapp_queued';
-        actionDetails = `No email found. Saved to WhatsApp Outreach Queue for Raj (${whatsappContact}).`;
+        actionDetails = `📱 ঢাকা মোবাইল অডিট সম্পন্ন: ${newLead.name}${scoreLabel}. হোয়াটসঅ্যাপ আউটরিচ কিউতে সংরক্ষিত (${whatsappContact})।`;
 
         await LeadRepository.updateLead(newLead.id, {
           lifecycle: 'review',
@@ -239,7 +240,7 @@ export class AutopilotService {
                 channel: 'whatsapp',
                 type: 'drafted',
                 at: new Date().toISOString(),
-                notes: `Autopilot queued for manual WhatsApp dispatch (${whatsappContact})`,
+                notes: `Autopilot mobile audit queued for 1-click WhatsApp outreach (${whatsappContact})`,
               },
             ],
           },
@@ -303,6 +304,62 @@ export class AutopilotService {
         error: errorMsg,
       };
     }
+  }
+
+  /**
+   * Run Daily Dhaka Mobile Audit Batch (5 sites daily):
+   * Scans verified Dhaka businesses with good reviews and outdated mobile websites.
+   * Runs automated mobile responsiveness audit, deploys responsive previews to Cloudflare Edge,
+   * and prepares 1-click WhatsApp outreach.
+   */
+  static async runDailyDhakaBatch(count = 5): Promise<{
+    success: boolean;
+    addedCount: number;
+    leads: WebsiteLead[];
+    details: string;
+  }> {
+    const state = this.getState();
+    logger.info('Starting Daily Dhaka Mobile Audit Batch', { count });
+
+    const scanResult = await scanForLeads({ market: 'BD', count });
+    const newlyAdded = scanResult.leads;
+
+    for (const lead of newlyAdded) {
+      await CloudflareEdgeService.deployLeadPreview(lead);
+    }
+
+    state.totalRuns += 1;
+    state.whatsappQueued += newlyAdded.length;
+    state.lastRunAt = new Date().toISOString();
+
+    const summaryText = newlyAdded.length > 0
+      ? `দৈনিক ${newlyAdded.length}টি ঢাকা বিজনেস মোবাইল অডিট সম্পন্ন: ${newlyAdded.map((l) => `${l.name} (${l.website.mobileAudit?.mobileScore ?? '?'}/100)`).join(', ')}`
+      : 'আজকের ঢাকা ক্যান্ডিডেট পুলে কোনো নতুন সাইট বাকি নেই বা ইতিমধ্যে অডিট সম্পন্ন হয়েছে।';
+
+    const logEntry: AutopilotLogEntry = {
+      id: `log_batch_${Date.now()}`,
+      timestamp: new Date().toISOString(),
+      market: 'BD',
+      action: newlyAdded.length > 0 ? 'whatsapp_queued' : 'skipped',
+      leadName: `${newlyAdded.length} Dhaka Businesses Audited`,
+      leadSlug: newlyAdded[0]?.slug || 'dhaka-daily-batch',
+      details: summaryText,
+      dryRun: false,
+    };
+
+    state.recentLogs.unshift(logEntry);
+    if (state.recentLogs.length > 50) {
+      state.recentLogs = state.recentLogs.slice(0, 50);
+    }
+
+    this.saveState(state);
+
+    return {
+      success: true,
+      addedCount: newlyAdded.length,
+      leads: newlyAdded,
+      details: summaryText,
+    };
   }
 
   /**

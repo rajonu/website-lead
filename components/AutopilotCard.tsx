@@ -22,11 +22,11 @@ import {
 import { AutopilotState, AutopilotLogEntry } from '@/lib/services/autopilot';
 
 const ROTATION_STEPS = [
-  { step: 0, label: 'UK Prospect #1', flag: '🇬🇧', market: 'UK' },
-  { step: 1, label: 'UK Prospect #2', flag: '🇬🇧', market: 'UK' },
-  { step: 2, label: 'US Prospect #1', flag: '🇺🇸', market: 'US' },
-  { step: 3, label: 'US Prospect #2', flag: '🇺🇸', market: 'US' },
-  { step: 4, label: 'BD Prospect #1', flag: '🇧🇩', market: 'BD' },
+  { step: 0, label: 'Dhaka Audit #1', flag: '🇧🇩', market: 'BD (Dhanmondi)' },
+  { step: 1, label: 'Dhaka Audit #2', flag: '🇧🇩', market: 'BD (Uttara)' },
+  { step: 2, label: 'Dhaka Audit #3', flag: '🇧🇩', market: 'BD (Gulshan)' },
+  { step: 3, label: 'Dhaka Audit #4', flag: '🇧🇩', market: 'BD (Banani)' },
+  { step: 4, label: 'Dhaka Audit #5', flag: '🇧🇩', market: 'BD (Mirpur)' },
 ];
 
 export default function AutopilotCard() {
@@ -111,13 +111,36 @@ export default function AutopilotCard() {
       });
       const json = await res.json();
       if (json.success) {
-        setFeedback(`Success: Scraped ${json.data?.market} prospect "${json.data?.lead?.name || ''}" (${json.data?.action}).`);
+        setFeedback(`Success: Audited ${json.data?.market} prospect "${json.data?.lead?.name || ''}" (${json.data?.action}).`);
         await fetchStatus();
       } else {
         setFeedback(`Cycle alert: ${json.data?.error || json.message || 'Execution halted'}`);
       }
     } catch (err) {
       setFeedback('Network error while running autopilot cycle.');
+    } finally {
+      setRunningAction(false);
+    }
+  };
+
+  const handleRunDhakaDailyBatch = async () => {
+    setRunningAction(true);
+    setFeedback(null);
+    try {
+      const res = await fetch('/api/autopilot', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'run_dhaka_batch', count: 5 }),
+      });
+      const json = await res.json();
+      if (json.success) {
+        setFeedback(json.message || `Successfully audited 5 Dhaka websites!`);
+        await fetchStatus();
+      } else {
+        setFeedback(`Audit alert: ${json.message || 'Execution halted'}`);
+      }
+    } catch {
+      setFeedback('Network error while running Dhaka daily batch audit.');
     } finally {
       setRunningAction(false);
     }
@@ -136,11 +159,11 @@ export default function AutopilotCard() {
           </div>
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="text-lg font-bold text-white tracking-tight">Hourly Prospecting Autopilot</h3>
+              <h3 className="text-lg font-bold text-white tracking-tight">Dhaka Mobile Audit Autopilot</h3>
               {state?.enabled ? (
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  Active 24/7
+                  Active 24/7 (Dhaka Focus)
                 </span>
               ) : (
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-800 text-slate-400 border border-slate-700">
@@ -149,19 +172,12 @@ export default function AutopilotCard() {
                 </span>
               )}
 
-              {state?.dryRun ? (
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30" title="Simulating sends safely without calling Brevo API">
-                  Simulation Mode (Dry Run)
-                </span>
-              ) : (
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-sky-500/20 text-sky-300 border border-sky-500/30" title="Live real email delivery via Brevo SMTP API">
-                  <Flame className="w-3 h-3 text-sky-400" />
-                  Live Brevo Delivery
-                </span>
-              )}
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                🇧🇩 Domestic Target (US/UK Paused)
+              </span>
             </div>
             <p className="text-xs text-slate-300 mt-1">
-              Scrapes 1 business/hour ➔ Edge preview site on Cloudflare ➔ Auto-emails Brevo or queues for WhatsApp ➔ 30-day unreplied site cleanup.
+              গুগল ম্যাপস থেকে ভালো রিভিউর ৫টি ঢাকা ওয়েবসাইট অডিট ➔ মোবাইল সমস্যা চিহ্নিতকরণ ➔ Cloudflare Edge ডেমো ➔ ১-ক্লিক হোয়াটসঅ্যাপ আউটরিচ।
             </p>
           </div>
         </div>
@@ -169,33 +185,28 @@ export default function AutopilotCard() {
         {/* Action Controls */}
         <div className="flex flex-wrap items-center gap-2 shrink-0">
           <button
-            onClick={handleToggleDryRun}
+            onClick={handleRunDhakaDailyBatch}
             disabled={runningAction || loading}
-            className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all border ${
-              state?.dryRun
-                ? 'bg-amber-600/20 hover:bg-amber-600/30 text-amber-200 border-amber-500/40 shadow-sm'
-                : 'bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-200 border-emerald-500/40 shadow-sm'
-            }`}
-            title={state?.dryRun ? 'Switch to Live Brevo sending' : 'Switch to Safe Simulation'}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-emerald-600/30 active:scale-95 cursor-pointer"
+            title="Execute daily batch of 5 Dhaka website mobile audits"
           >
-            <Flame className="w-3.5 h-3.5 text-amber-400" />
-            <span>{state?.dryRun ? 'Mode: Simulated' : 'Mode: Live Send'}</span>
+            <span>📱 Audit 5 Dhaka Sites</span>
           </button>
 
           <button
             onClick={handleRunCycle}
             disabled={runningAction || loading}
-            className="inline-flex items-center gap-2 px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-indigo-600/30 active:scale-95"
+            className="inline-flex items-center gap-2 px-3.5 py-2 bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-indigo-600/30 active:scale-95 cursor-pointer"
             title="Execute 1 hourly prospecting cycle immediately"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${runningAction ? 'animate-spin' : ''}`} />
-            <span>Run 1 Cycle Now</span>
+            <span>Audit 1 Site Now</span>
           </button>
 
           <button
             onClick={handleToggle}
             disabled={runningAction || loading}
-            className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all border ${
+            className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
               state?.enabled
                 ? 'bg-slate-800/80 hover:bg-slate-800 text-slate-300 border-slate-700'
                 : 'bg-emerald-600 hover:bg-emerald-500 text-white border-emerald-500 shadow-md shadow-emerald-600/30'
@@ -236,7 +247,7 @@ export default function AutopilotCard() {
       <div className="p-5 md:p-6 bg-slate-900/50 border-b border-slate-800/80 space-y-3">
         <div className="flex items-center justify-between">
           <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-            Continuous Market Sequence (5-Hour Loop)
+            Dhaka Hub Target Neighborhoods (Daily Audit Sequence)
           </span>
           <span className="text-xs text-sky-400 font-medium">
             Next target: <strong className="text-white font-bold">{currentStepObj.flag} {currentStepObj.market}</strong> (Step {currentStep + 1} of 5)

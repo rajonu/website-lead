@@ -39,12 +39,20 @@ export default async function DashboardPage({
         <div>
           <h2 className="text-2xl font-bold text-slate-900 tracking-tight">Executive Dashboard</h2>
           <p className="text-sm text-slate-500 mt-1">
-            Pipeline overview, 1-lead-per-hour autopilot queue (UK 2 ➔ US 2 ➔ BD 1), and customer maintenance.
+            Pipeline overview, Dhaka 5-site daily mobile responsiveness audit station, and customer maintenance.
           </p>
         </div>
 
         {/* Market Filter Tabs */}
         <div className="flex items-center gap-1.5 p-1 bg-slate-200/80 rounded-lg text-xs font-medium">
+          <Link
+            href="/?market=BD"
+            className={`px-3 py-1.5 rounded-md transition-colors ${
+              currentMarket === 'BD' || currentMarket === 'ALL' ? 'bg-white text-slate-900 shadow-sm font-bold' : 'text-slate-600 hover:text-slate-900'
+            }`}
+          >
+            🇧🇩 BD (Dhaka Hub - Focus)
+          </Link>
           <Link
             href="/"
             className={`px-3 py-1.5 rounded-md transition-colors ${
@@ -55,27 +63,21 @@ export default async function DashboardPage({
           </Link>
           <Link
             href="/?market=US"
-            className={`px-3 py-1.5 rounded-md transition-colors ${
+            className={`px-3 py-1.5 rounded-md transition-colors opacity-70 ${
               currentMarket === 'US' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900'
             }`}
+            title="Foreign outreach currently paused"
           >
-            🇺🇸 US (DFW, HOU, ORL)
+            🇺🇸 US [Paused]
           </Link>
           <Link
             href="/?market=UK"
-            className={`px-3 py-1.5 rounded-md transition-colors ${
+            className={`px-3 py-1.5 rounded-md transition-colors opacity-70 ${
               currentMarket === 'UK' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900'
             }`}
+            title="Foreign outreach currently paused"
           >
-            🇬🇧 UK (MCR, BHM, LDS)
-          </Link>
-          <Link
-            href="/?market=BD"
-            className={`px-3 py-1.5 rounded-md transition-colors ${
-              currentMarket === 'BD' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900'
-            }`}
-          >
-            🇧🇩 BD (Dhaka)
+            🇬🇧 UK [Paused]
           </Link>
         </div>
       </div>

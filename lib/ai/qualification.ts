@@ -9,17 +9,24 @@ export function calculateLeadScore(lead: Partial<WebsiteLead>): QualificationDat
   const market = lead.experiment?.market || lead.location?.country || 'US';
   const isBd = market === 'BD' || market.includes('Bangladesh');
 
-  // 1. Website Status Evaluation
+  // 1. Website Status & Mobile Audit Evaluation
   const websiteStatus = lead.website?.status || 'unknown';
-  if (websiteStatus === 'none') {
-    score += 30;
+  const mobileAudit = lead.website?.mobileAudit;
+
+  if (mobileAudit && !mobileAudit.isMobileFriendly) {
+    score += 35;
+    positiveFactors.push(
+      `Existing site is not mobile-friendly (Mobile score: ${mobileAudit.mobileScore}/100) with ${mobileAudit.issues.length} detected mobile defects`
+    );
+  } else if (websiteStatus === 'weak' || websiteStatus === 'broken') {
+    score += 25;
+    positiveFactors.push('Existing website is outdated or mobile-unfriendly; prime candidate for mobile redesign');
+  } else if (websiteStatus === 'none') {
+    score += 25;
     positiveFactors.push('No website attached to Google Business listing (High opportunity)');
-  } else if (websiteStatus === 'broken' || websiteStatus === 'weak') {
-    score += 20;
-    positiveFactors.push('Existing website is weak/broken, clear upgrade opportunity');
   } else if (websiteStatus === 'adequate' || websiteStatus === 'strong') {
-    score -= 35;
-    penalties.push('Business already has an adequate or strong web presence');
+    score -= 30;
+    penalties.push('Business already has an adequate modern mobile presence');
   }
 
   // 2. Google Reputation & Reviews

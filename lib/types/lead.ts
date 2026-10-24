@@ -53,6 +53,30 @@ export interface BusinessSignals {
   observations?: string[];
 }
 
+export interface MobileAuditIssue {
+  code: string;
+  label: string;
+  labelBn: string;
+  severity: 'critical' | 'warning' | 'info';
+  detail: string;
+  detailBn: string;
+}
+
+export interface MobileAuditDetails {
+  isMobileFriendly: boolean;
+  mobileScore: number; // 0 to 100
+  viewportConfigured: boolean;
+  hasResponsiveLayout: boolean;
+  hasMobileTapCta: boolean; // tel: or whatsapp link present
+  isHttps: boolean;
+  hasOutdatedTech: boolean;
+  issues: MobileAuditIssue[];
+  summary: string;
+  summaryBn: string;
+  testedUrl: string;
+  auditedAt: string;
+}
+
 export interface WebsiteAudit {
   url?: string;
   status: WebsiteStatus;
@@ -60,6 +84,7 @@ export interface WebsiteAudit {
   observations?: string[];
   opportunities?: string[];
   evidence?: string[];
+  mobileAudit?: MobileAuditDetails;
 }
 
 export interface ContactMethod {

@@ -7,8 +7,8 @@ import { Search, Loader2, Sparkles, CheckCircle2, AlertCircle, XCircle } from 'l
 export default function ScanLeadsModal() {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
-  const [count, setCount] = useState<number>(3);
-  const [market, setMarket] = useState<string>('ALL');
+  const [count, setCount] = useState<number>(5);
+  const [market, setMarket] = useState<string>('BD');
   const [niche, setNiche] = useState<string>('ALL');
   const [scanning, setScanning] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -78,7 +78,7 @@ export default function ScanLeadsModal() {
                   <span>Scan &amp; Discover Local Leads</span>
                 </h4>
                 <p className="text-xs text-slate-500 mt-0.5">
-                  Scan Google Maps profiles without websites and generate instant mobile demos.
+                  গুগল ম্যাপস থেকে ঢাকা বিজনেসের ওয়েবসাইট অডিট ও মোবাইল রেসপনসিভ ডেমো তৈরি।
                 </p>
               </div>
               <button
@@ -143,10 +143,10 @@ export default function ScanLeadsModal() {
                   onChange={(e) => setMarket(e.target.value)}
                   className="w-full text-xs p-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none cursor-pointer"
                 >
+                  <option value="BD">🇧🇩 Bangladesh (Dhaka - Dhanmondi, Uttara, Banani, Gulshan)</option>
                   <option value="ALL">🌐 All Available Regions</option>
-                  <option value="US">🇺🇸 United States (Dallas, Austin, Fort Worth, Miami)</option>
-                  <option value="UK">🇬🇧 United Kingdom (London, Birmingham, Manchester)</option>
-                  <option value="BD">🇧🇩 Bangladesh (Dhaka - Dhanmondi, Uttara)</option>
+                  <option value="US">🇺🇸 United States (Dallas, Austin, Fort Worth, Miami) [Paused]</option>
+                  <option value="UK">🇬🇧 United Kingdom (London, Birmingham, Manchester) [Paused]</option>
                 </select>
               </div>
 
@@ -160,22 +160,19 @@ export default function ScanLeadsModal() {
                   onChange={(e) => setNiche(e.target.value)}
                   className="w-full text-xs p-2.5 bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:outline-none cursor-pointer"
                 >
-                  <option value="ALL">🎯 All High-Ticket Trade Niches</option>
-                  <option value="HVAC">❄️ HVAC &amp; Air Conditioning</option>
-                  <option value="Roofing">🏠 Roofing Contractor</option>
-                  <option value="Plumbing">🔧 Plumbing &amp; Water Heaters</option>
-                  <option value="Electrician">⚡ Certified Electricians</option>
-                  <option value="Dental">🦷 Dental Practice</option>
-                  <option value="Healthcare">🏥 Diagnostic &amp; Clinics</option>
-                  <option value="Salon">💆 Salon &amp; Bridal Spa</option>
+                  <option value="ALL">🎯 All Dhaka Verified Niches</option>
+                  <option value="Healthcare">🏥 Diagnostic &amp; Healthcare Clinics</option>
+                  <option value="Dental">🦷 Dental &amp; Orthodontic Clinics</option>
+                  <option value="Salon">💆 Beauty Salons &amp; Bridal Spas</option>
+                  <option value="Interior Design">🎨 Interior Design &amp; Architecture</option>
                 </select>
               </div>
 
               <div className="p-3 bg-slate-50 rounded-lg border border-slate-200 text-[11px] text-slate-600 space-y-1">
-                <div className="font-semibold text-slate-700">What the scanner does:</div>
-                <div>• Scans businesses with 50+ reviews &amp; no official website.</div>
-                <div>• Auto-generates high-converting mobile demo structure.</div>
-                <div>• Pre-populates outreach draft with your verified signature.</div>
+                <div className="font-semibold text-slate-700">অটোমেটেড মোবাইল অডিটের কাজ:</div>
+                <div>• গুগল ম্যাপসের ৫০+ রিভিউর ভালো বিজনেস যাদের ওয়েবসাইট মোবাইলে অপ্টিমাইজড নয়।</div>
+                <div>• ভিউপোর্ট, ফিক্সড উইডথ অনুভূমিক স্ক্রলিং ও কল/হোয়াটসঅ্যাপ বাটন অডিট করে।</div>
+                <div>• স্বয়ংক্রিয়ভাবে একটি সুপারফাস্ট মোবাইল ডেমো বানিয়ে কিউতে যুক্ত করে।</div>
               </div>
             </div>
 

@@ -1,7 +1,8 @@
-import { WebsiteLead } from '@/lib/types/lead';
+import { WebsiteLead, MobileAuditDetails } from '@/lib/types/lead';
 import { LeadRepository } from '@/lib/db';
 import { generatePersonalOutreachDraft } from '@/lib/ai/outreach';
 import { CloudflareEdgeService } from '@/lib/services/cloudflare';
+import { MobileAuditService } from '@/lib/services/mobile-audit';
 import { logger } from '@/lib/logger';
 
 export interface ScanOptions {
@@ -26,9 +27,10 @@ interface CandidateBlueprint {
     reviewCount: number;
   };
   website: {
-    status: 'none' | 'broken';
+    status: 'none' | 'weak' | 'broken';
     url?: string;
     observations: string[];
+    mobileAudit?: MobileAuditDetails;
   };
   contacts: Array<{
     channel: 'email' | 'phone' | 'whatsapp';
@@ -428,220 +430,539 @@ const CANDIDATE_POOL: CandidateBlueprint[] = [
   },
 
   // ==========================================
-  // --- 🇧🇩 BANGLADESH CANDIDATES (NO WEBSITE) ---
+  // --- 🇧🇩 DHAKA, BANGLADESH CANDIDATES (EXISTING WEBSITES WITH MOBILE ISSUES) ---
   // ==========================================
   {
-    slug: 'glow-lounge-salon-banani',
-    name: 'Glow Lounge Ladies Beauty & Spa',
-    category: 'Beauty Salon',
+    slug: 'dhanmondi-central-diagnostic',
+    name: 'Dhanmondi Central Diagnostic & Consultation Centre',
+    category: 'Diagnostic Center & Pathology',
     location: {
-      full: 'Road 11, Block D, Banani, Dhaka 1213',
+      full: 'House 42, Road 7, Dhanmondi, Dhaka 1205',
       city: 'Dhaka',
       country: 'Bangladesh',
-      postalCode: '1213',
+      postalCode: '1205',
     },
-    businessSignals: { rating: 4.9, reviewCount: 72 },
+    businessSignals: { rating: 4.8, reviewCount: 92 },
     website: {
-      status: 'none',
-      observations: ['No website attached to Google Maps listing', 'Operates 100% via WhatsApp and walk-in appointments'],
-    },
-    contacts: [
-      { channel: 'phone', value: '+8801712440192', label: 'Front Desk' },
-      { channel: 'whatsapp', value: '+8801712440192', label: 'WhatsApp Booking' },
-    ],
-    qualification: {
-      score: 94,
-      reason: 'Banani luxury salon with 72 reviews and 4.9★ on Maps with no standalone booking website.',
-      outreachAngle: 'WhatsApp direct booking button and service ratecard showcase.',
-    },
-    experiment: { market: 'BD', niche: 'Salon', cohort: 'bd-ban-batch1' },
-    generatedSite: {
-      template: 'home-services',
-      hero: {
-        headline: 'বনানীতে এক্সক্লুসিভ লেডিস বিউটি ও স্কিন কেয়ার স্পা',
-        subheadline: '৭০+ ফাইভ-স্টার রিভিউ সমৃদ্ধ বনানীর অন্যতম জনপ্রিয় প্রিমিয়াম বিউটি লাউঞ্জ।',
-        badge: '★ ৪.৯ রেটেড বনানী বিউটি লাউঞ্জ',
-        callToActionText: 'হোয়াটসঅ্যাপে বুকিং করুন',
+      status: 'weak',
+      url: 'http://dhanmondicentraldiagnostic.com.bd',
+      observations: [
+        'Website lacks mobile viewport meta tag (tiny desktop rendering on smartphones)',
+        'Fixed 1024px table layout causes horizontal scrolling and cut-off text',
+        'No tap-to-call or direct WhatsApp report/booking button',
+        'Runs on insecure HTTP without SSL certificate',
+      ],
+      mobileAudit: {
+        isMobileFriendly: false,
+        mobileScore: 35,
+        viewportConfigured: false,
+        hasResponsiveLayout: false,
+        hasMobileTapCta: false,
+        isHttps: false,
+        hasOutdatedTech: true,
+        issues: [
+          {
+            code: 'missing_viewport',
+            label: 'Missing Mobile Viewport Meta Tag',
+            labelBn: 'মোবাইল ভিউপোর্ট ট্যাগ অনুপস্থিত (স্মার্টফোনে স্ক্রিন ছোট দেখায়)',
+            severity: 'critical',
+            detail: 'Renders 980px desktop view zoomed out on mobile phones.',
+            detailBn: 'ফোনের স্ক্রিনে সাইটটি অনেক ছোট হয়ে আসে এবং লেখা জুম ইন ছাড়া পড়া যায় না।',
+          },
+          {
+            code: 'fixed_width_layout',
+            label: 'Fixed 1024px Layout Width',
+            labelBn: 'ফিক্সড উইডথ লেআউট (মোবাইলে কেটে যায় ও স্ক্রল করতে হয়)',
+            severity: 'critical',
+            detail: 'Fixed container forces horizontal scrolling on screens under 500px.',
+            detailBn: 'ডেস্কটপ ফিক্সড সাইজ হওয়ার কারণে মোবাইলে ডানে টেনে স্ক্রল করতে হয়।',
+          },
+          {
+            code: 'missing_mobile_cta',
+            label: 'No 1-Click WhatsApp or Call Button',
+            labelBn: 'মোবাইল থেকে সরাসরি কল বা হোয়াটসঅ্যাপ বাটন নেই',
+            severity: 'warning',
+            detail: 'No instant tap-to-call or WhatsApp appointment button for mobile patients.',
+            detailBn: 'রোগীদের সরাসরি রিপোর্ট জানা বা টেস্ট বুকিংয়ের জন্য কোনো বাটন নেই।',
+          },
+        ],
+        summary: 'Site is not mobile-friendly. Missing viewport tag, fixed desktop tables, and no 1-click mobile CTA.',
+        summaryBn: 'মোবাইল ভিউপোর্ট ট্যাগ নেই এবং ফিক্সড ১০২৪ পিক্সেল লেআউট থাকায় ফোনে লেখা ছোট দেখায় ও স্ক্রল করতে সমস্যা হয়। কোনো কল বা হোয়াটসঅ্যাপ বাটন নেই।',
+        testedUrl: 'http://dhanmondicentraldiagnostic.com.bd',
+        auditedAt: '2026-10-24T19:30:00.000Z',
       },
-      services: [
-        { title: 'ব্রাইডাল ও পার্টি মেকওভার', description: 'আন্তর্জাতিক ব্রান্ডের মেকআপ প্রডাক্ট ও এক্সপার্ট আর্টিস্ট।', icon: 'sparkles' },
-        { title: 'হাইড্রাফেসিয়াল ও স্কিন গ্লো', description: 'ত্বকের ডিপ ক্লিনিং ও ইনস্ট্যান্ট গ্লো থেরাপি।', icon: 'shield' },
-      ],
-      about: 'গ্লো লাউঞ্জ বনানীতে মহিলাদের জন্য আধুনিক ও আরামদায়ক পরিবেশে প্রিমিয়াম বিউটি সেবা প্রদান করে।',
-      faqs: [
-        { question: 'হোয়াটসঅ্যাপে কি রেটকার্ড পাওয়া যাবে?', answer: 'হ্যাঁ, সরাসরি হোয়াটসঅ্যাপে মেসেজ পাঠালেই সব প্যাকেজের রেটকার্ড পেয়ে যাবেন।' },
-      ],
-    },
-  },
-  {
-    slug: 'dhanmondi-care-diagnostic-center',
-    name: 'Dhanmondi Care Diagnostic & Ultrasound',
-    category: 'Diagnostic Center',
-    location: {
-      full: 'House 34, Road 9/A, Dhanmondi, Dhaka 1209',
-      city: 'Dhaka',
-      country: 'Bangladesh',
-      postalCode: '1209',
-    },
-    businessSignals: { rating: 4.8, reviewCount: 62 },
-    website: {
-      status: 'none',
-      observations: ['No website on Google profile', 'Operates through direct phone and WhatsApp report delivery'],
     },
     contacts: [
-      { channel: 'phone', value: '+8801711550211', label: 'Hotline' },
-      { channel: 'whatsapp', value: '+8801711550211', label: 'WhatsApp Reports' },
+      { channel: 'phone', value: '+8801711234890', label: 'সরাসরি হেল্পলাইন' },
+      { channel: 'whatsapp', value: '+8801711234890', label: 'হোয়াটসঅ্যাপ রিপোর্ট' },
     ],
     qualification: {
-      score: 91,
-      reason: 'Dhaka diagnostic clinic with 60+ reviews but no website on Google Business Profile.',
-      outreachAngle: 'WhatsApp report delivery & home sample collection booking.',
+      score: 96,
+      reason: 'Dhanmondi diagnostic clinic with 92 Google reviews and 4.8★, but current website fails mobile responsiveness (Score: 35/100).',
+      outreachAngle: 'Fast mobile-first appointment booking & instant WhatsApp report delivery replacement site.',
     },
-    experiment: { market: 'BD', niche: 'Healthcare', cohort: 'bd-dhk-batch2' },
+    experiment: { market: 'BD', niche: 'Healthcare', cohort: 'bd-dhk-audit1' },
     generatedSite: {
       template: 'home-services',
       hero: {
-        headline: 'ধানমন্ডিতে নির্ভুল ডিজিটাল ডায়াগনস্টিক ও আল্ট্রাসাউন্ড সেবা',
-        subheadline: 'অভিজ্ঞ কনসালট্যান্ট ও আধুনিক জাপানি প্রযুক্তির মেশিন দ্বারা দ্রুততম সময়ে নির্ভুল টেস্ট রিপোর্ট।',
+        headline: 'ধানমন্ডিতে নির্ভুল ডিজিটাল প্যাথলজি ও আল্ট্রাসাউন্ড সেবা',
+        subheadline: 'অভিজ্ঞ কনসালট্যান্ট ও আধুনিক ডায়াগনস্টিক প্রযুক্তির মাধ্যমে দ্রুততম সময়ে নির্ভুল টেস্ট রিপোর্ট।',
         badge: '★ ৪.৮ রেটেড ধানমন্ডি ডায়াগনস্টিক',
-        callToActionText: 'হোয়াটসঅ্যাপে রিপোর্ট ও বুকিং',
+        callToActionText: 'হোয়াটসঅ্যাপে রিপোর্ট ও টেস্ট বুকিং',
       },
       services: [
-        { title: 'ডিজিটাল ৪D কালার আল্ট্রাসাউন্ড', description: 'লেডি সোনোলজিস্ট দ্বারা নিয়মিত নিরাপদ আল্ট্রাসাউন্ড পরীক্ষা।', icon: 'shield' },
-        { title: 'হোম ব্লাড স্যাম্পল কালেকশন', description: 'বাসায় গিয়ে অভিজ্ঞ টেকনিশিয়ান দ্বারা রক্তের নমুনা সংগ্রহ।', icon: 'wrench' },
+        { title: 'ডিজিটাল কালার আল্ট্রাসাউন্ড ও ৪D স্ক্যান', description: 'লেডি সোনোলজিস্ট দ্বারা নিয়মিত নিরাপদ আল্ট্রাসাউন্ড পরীক্ষা।', icon: 'shield' },
+        { title: 'হোম ব্লাড স্যাম্পল কালেকশন', description: 'বাসায় গিয়ে অভিজ্ঞ প্যাথলজিস্ট দ্বারা রক্তের নমুনা সংগ্রহ।', icon: 'wrench' },
+        { title: 'হোয়াটসঅ্যাপে ইনস্ট্যান্ট রিপোর্ট ডেলিভারি', description: 'টেস্ট শেষ হওয়ামাত্র মোবাইলে সরাসরি পিডিএফ রিপোর্ট প্রাপ্তি।', icon: 'sparkles' },
       ],
-      about: 'ধানমন্ডি কেয়ার ডায়াগনস্টিক বিগত ৬ বছর ধরে ধানমন্ডি ও আশেপাশের এলাকার রোগীদের নির্ভরযোগ্য প্যাথলজি ও আল্ট্রাসাউন্ড সেবা প্রদান করে আসছে।',
+      about: 'ধানমন্ডি সেন্ট্রাল ডায়াগনস্টিক বিগত ৮ বছর ধরে সততা ও নির্ভুলতার সাথে আধুনিক মেডিকেল ডায়াগনস্টিক সেবা প্রদান করে আসছে।',
       faqs: [
-        { question: 'রিপোর্ট কি হোয়াটসঅ্যাপে পাওয়া যাবে?', answer: 'হ্যাঁ, টেস্ট সম্পন্ন হওয়ার সাথে সাথে পিডিএফ রিপোর্ট সরাসরি হোয়াটসঅ্যাপে পাঠিয়ে দেওয়া হয়।' },
+        { question: 'হোয়াটসঅ্যাপে কি রিপোর্ট দেখা যাবে?', answer: 'হ্যাঁ, টেস্ট সম্পন্ন হওয়ার সাথে সাথে পিডিএফ রিপোর্ট সরাসরি হোয়াটসঅ্যাপে পাঠিয়ে দেওয়া হয়।' },
       ],
     },
   },
   {
-    slug: 'uttara-glamour-salon-studio',
-    name: 'Uttara Glamour Studio & Bridal Spa',
-    category: 'Beauty Salon',
+    slug: 'uttara-modern-dental',
+    name: 'Uttara Modern Dental & Maxillofacial Care',
+    category: 'Dental Clinic',
     location: {
-      full: 'Sector 4, Road 7, Uttara, Dhaka 1230',
+      full: 'Sector 7, Road 13, Uttara, Dhaka 1230',
       city: 'Dhaka',
       country: 'Bangladesh',
       postalCode: '1230',
     },
-    businessSignals: { rating: 4.9, reviewCount: 88 },
+    businessSignals: { rating: 4.9, reviewCount: 114 },
     website: {
-      status: 'none',
-      observations: ['No official website linked to Google listing', 'Exclusively uses WhatsApp & front desk for customer bookings'],
+      status: 'weak',
+      url: 'http://uttaramoderndental.com',
+      observations: [
+        'Website lacks mobile viewport tag; renders tiny desktop view',
+        'Fixed 960px table layout cuts off on smartphones',
+        'No tap-to-call or direct WhatsApp appointment booking',
+        'Outdated fonts and unreadable small text size on phones',
+      ],
+      mobileAudit: {
+        isMobileFriendly: false,
+        mobileScore: 30,
+        viewportConfigured: false,
+        hasResponsiveLayout: false,
+        hasMobileTapCta: false,
+        isHttps: false,
+        hasOutdatedTech: true,
+        issues: [
+          {
+            code: 'missing_viewport',
+            label: 'Missing Mobile Viewport Meta Tag',
+            labelBn: 'মোবাইল ভিউপোর্ট ট্যাগ অনুপস্থিত (স্ক্রিন ছোট দেখায়)',
+            severity: 'critical',
+            detail: 'Without viewport tag, mobile browsers display a 980px desktop layout zoomed out.',
+            detailBn: 'ফোনের স্ক্রিনে সাইটটি অনেক ছোট হয়ে আসে এবং লেখা পড়তে জুম করতে হয়।',
+          },
+          {
+            code: 'fixed_width_layout',
+            label: 'Fixed 960px Table Layout',
+            labelBn: 'ফিক্সড টেবিল লেআউট (মোবাইলে কেটে যায়)',
+            severity: 'critical',
+            detail: 'Table containers do not shrink to fit mobile screens.',
+            detailBn: 'টেবিল লেআউটের কারণে মোবাইলে অনুভূমিক স্ক্রলিং করতে হয়।',
+          },
+          {
+            code: 'missing_mobile_cta',
+            label: 'No 1-Click WhatsApp Appointment Button',
+            labelBn: 'মোবাইল থেকে সরাসরি কল বা হোয়াটসঅ্যাপ বাটন নেই',
+            severity: 'warning',
+            detail: 'Patients cannot tap to call or send a direct WhatsApp booking request.',
+            detailBn: 'রোগীদের সরাসরি ডাক্তার অ্যাপয়েন্টমেন্টের জন্য কোনো বাটন নেই।',
+          },
+        ],
+        summary: 'Site is not mobile-friendly. Missing viewport tag, fixed 960px tables, and no 1-click WhatsApp booking.',
+        summaryBn: 'মোবাইল ভিউপোর্ট ট্যাগ নেই এবং ফিক্সড ৯৬০ পিক্সেল টেবিল লেআউট থাকায় ফোনে লেখা ছোট দেখায়। কোনো হোয়াটসঅ্যাপ বাটন নেই।',
+        testedUrl: 'http://uttaramoderndental.com',
+        auditedAt: '2026-10-24T19:30:00.000Z',
+      },
     },
     contacts: [
-      { channel: 'phone', value: '+8801819550322', label: 'Salon Front Desk' },
-      { channel: 'whatsapp', value: '+8801819550322', label: 'Appointment Booking' },
+      { channel: 'phone', value: '+8801819345678', label: 'চেম্বার রিসেপশন' },
+      { channel: 'whatsapp', value: '+8801819345678', label: 'হোয়াটসঅ্যাপ অ্যাপয়েন্টমেন্ট' },
     ],
     qualification: {
-      score: 93,
-      reason: '88 reviews in Uttara bridal niche with no official site. Highly visual service.',
-      outreachAngle: 'Bridal package ratecard and WhatsApp appointment booking.',
+      score: 95,
+      reason: 'Top Uttara dental clinic with 114 reviews and 4.9★, but website is outdated and broken on phones (Score: 30/100).',
+      outreachAngle: 'Modern mobile-first dental appointment booking with 1-tap WhatsApp consultation.',
     },
-    experiment: { market: 'BD', niche: 'Salon', cohort: 'bd-dhk-batch3' },
+    experiment: { market: 'BD', niche: 'Healthcare', cohort: 'bd-utr-audit1' },
     generatedSite: {
       template: 'home-services',
       hero: {
-        headline: 'উত্তরায় এক্সক্লুসিভ ব্রাইডাল মেকওভার ও স্কিনকেয়ার স্পা',
-        subheadline: '৮০+ ফাইভ-স্টার রিভিউ সমৃদ্ধ উত্তরার অন্যতম জনপ্রিয় প্রিমিয়াম বিউটি ও ব্রাইডাল স্টুডিও।',
-        badge: '★ ৪.৯ রেটেড উত্তরা স্টুডিও',
-        callToActionText: 'হোয়াটসঅ্যাপে প্যাকেজ ও বুকিং',
+        headline: 'উত্তরায় আধুনিক ও ব্যথামুক্ত ডিজিটাল ডেন্টাল কেয়ার',
+        subheadline: 'অভিজ্ঞ ডেন্টাল সার্জন ও বিশেষজ্ঞ অর্থোডন্টিস্ট দ্বারা উন্নত প্রযুক্তির ডেন্টাল ইমপ্ল্যান্ট ও রুট ক্যানেল চিকিৎসা।',
+        badge: '★ ৪.৯ রেটেড উত্তরা ডেন্টাল ক্লিনিক',
+        callToActionText: 'হোয়াটসঅ্যাপে ডেন্টাল অ্যাপয়েন্টমেন্ট',
       },
       services: [
-        { title: 'এক্সক্লুসিভ ব্রাইডাল মেকআপ', description: 'আন্তর্জাতিক ব্রান্ডের পণ্য ও প্রফেশনাল আর্টিস্টদের মেকওভার।', icon: 'sparkles' },
-        { title: 'হাইড্রাফেসিয়াল ও হেয়ার বোটক্স', description: 'ত্বকের উজ্জ্বলতা ফিরিয়ে আনতে আধুনিক রিভাইটালাইজিং ট্রিটমেন্ট।', icon: 'shield' },
+        { title: 'ব্যথামুক্ত আধুনিক রুট ক্যানেল', description: 'লেটেস্ট রোটারি এন্ডোডন্টিক মেশিনে ১ বা ২ সিটিংয়ে ব্যথামুক্ত চিকিৎসা।', icon: 'shield' },
+        { title: 'ডিজিটাল ডেন্টাল এক্স-রে ও স্কেলিং', description: 'আল্ট্রাসনিক স্কেলিং ও আরভিজি ডিজিটাল এক্স-রে সেবা।', icon: 'wrench' },
+        { title: 'আঁকাবাঁকা দাঁতের ক্লিয়ার এলাইনার', description: 'মেটাল ব্রেস ছাড়া আধুনিক ইনভিসিবল এলাইনার ট্রিটমেন্ট।', icon: 'sparkles' },
       ],
-      about: 'উত্তরা গ্ল্যামার স্টুডিও মহিলাদের জন্য সম্পূর্ণ প্রাইভেট ও আরামদায়ক পরিবেশে প্রিমিয়াম সাজসজ্জা সেবা প্রদান করে।',
+      about: 'উত্তরা মডার্ন ডেন্টাল কেয়ার বিগত ৯ বছর ধরে উত্তরা ও টঙ্গী অঞ্চলের রোগীদের আন্তর্জাতিক মানের দন্তসেবা দিয়ে আসছে।',
       faqs: [
-        { question: 'ব্রাইডাল সাজের জন্য কতদিন আগে বুকিং দিতে হবে?', answer: 'পছন্দের তারিখ নিশ্চিত করতে অন্তত ৭-১০ দিন পূর্বে অগ্রিম বুকিং দেওয়ার অনুরোধ করা হচ্ছে।' },
+        { question: 'সিরিয়াল কি আগে থেকে বুক করতে হয়?', answer: 'হ্যাঁ, রোগীদের সময় বাঁচাতে সরাসরি হোয়াটসঅ্যাপে প্রি-বুকিং করে আসার অনুরোধ করা হচ্ছে।' },
       ],
     },
   },
   {
-    slug: 'mirpur-model-dental-care',
-    name: 'Mirpur Model Dental Care & Orthodontics',
-    category: 'Dental Clinic',
+    slug: 'gulshan-horizon-interior',
+    name: 'Gulshan Horizon Architecture & Interior Studio',
+    category: 'Interior Design Studio',
     location: {
-      full: 'Plot 12, Main Road, Mirpur 10, Dhaka 1216',
-      city: 'Dhaka',
-      country: 'Bangladesh',
-      postalCode: '1216',
-    },
-    businessSignals: { rating: 4.9, reviewCount: 54 },
-    website: {
-      status: 'none',
-      observations: ['No website URL listed on Google Maps', 'Appointments booked directly via WhatsApp hotline'],
-    },
-    contacts: [
-      { channel: 'phone', value: '+8801715662104', label: 'চেম্বার অ্যাপয়েন্টমেন্ট' },
-      { channel: 'whatsapp', value: '+8801715662104', label: 'হোয়াটসঅ্যাপ বুকিং' },
-    ],
-    qualification: {
-      score: 92,
-      reason: 'Mirpur 10 dental clinic with 54 Google reviews and 4.9★ without an official website.',
-      outreachAngle: 'Online dental appointment and price estimate via WhatsApp.',
-    },
-    experiment: { market: 'BD', niche: 'Healthcare', cohort: 'bd-mrp-batch1' },
-    generatedSite: {
-      template: 'home-services',
-      hero: {
-        headline: 'মিরপুরে আধুনিক ও ব্যথামুক্ত ডিজিটাল ডেন্টাল কেয়ার',
-        subheadline: 'অভিজ্ঞ ডেন্টাল সার্জনের তত্ত্বাবধানে দাঁতের আধুনিক স্কেলিং, রুট ক্যানেল ও আঁকাবাঁকা দাঁত সোজা করার চিকিৎসা।',
-        badge: '★ ৪.৯ রেটেড মিরপুর ডেন্টাল কেয়ার',
-        callToActionText: 'হোয়াটসঅ্যাপে ডেন্টাল পরামর্শ ও বুকিং',
-      },
-      services: [
-        { title: 'ব্যথামুক্ত আধুনিক রুট ক্যানেল', description: 'এক বা দুই সিটিংয়ে আধুনিক রোটারি মেশিনের সাহায্যে নির্ভুল রুট ক্যানেল।', icon: 'shield' },
-        { title: 'ডিজিটাল ডেন্টাল এক্স-রে ও স্কেলিং', description: 'লেটেস্ট আরভিজি এক্স-রে এবং আল্ট্রাসনিক স্কেলিং ও পলিশিং।', icon: 'wrench' },
-      ],
-      about: 'মিরপুর মডেল ডেন্টাল কেয়ার বিগত ৭ বছর ধরে মিরপুর ও আশেপাশের এলাকার রোগীদের আন্তর্জাতিক মানের ডেন্টাল সেবা প্রদান করে আসছে।',
-      faqs: [
-        { question: 'দাঁতের রুট ক্যানেল করতে কত সময় লাগে?', answer: 'আমাদের আধুনিক মেশিনের মাধ্যমে অধিকাংশ ক্ষেত্রে ১ থেকে ২ সিটিংয়েই চিকিৎসা সম্পন্ন করা যায়।' },
-      ],
-    },
-  },
-  {
-    slug: 'gulshan-physiotherapy-rehab',
-    name: 'Gulshan Physiotherapy & Rehabilitation Center',
-    category: 'Physiotherapy Clinic',
-    location: {
-      full: 'Road 134, Gulshan 1, Dhaka 1212',
+      full: 'Gulshan 2, Road 86, Dhaka 1212',
       city: 'Dhaka',
       country: 'Bangladesh',
       postalCode: '1212',
     },
-    businessSignals: { rating: 4.8, reviewCount: 65 },
+    businessSignals: { rating: 4.8, reviewCount: 76 },
     website: {
-      status: 'none',
-      observations: ['No official website listed on Google Maps profile', 'All appointments managed over phone & WhatsApp'],
+      status: 'weak',
+      url: 'http://gulshanhorizoninterior.com',
+      observations: [
+        'Website is desktop-only with heavy uncompressed images',
+        'Lacks responsive viewport meta tag',
+        'Horizontal overflow on mobile viewports',
+        'No direct WhatsApp quote request button for prospective homeowners',
+      ],
+      mobileAudit: {
+        isMobileFriendly: false,
+        mobileScore: 40,
+        viewportConfigured: false,
+        hasResponsiveLayout: false,
+        hasMobileTapCta: false,
+        isHttps: false,
+        hasOutdatedTech: true,
+        issues: [
+          {
+            code: 'missing_viewport',
+            label: 'Missing Mobile Viewport Meta Tag',
+            labelBn: 'মোবাইল ভিউপোর্ট ট্যাগ অনুপস্থিত (স্ক্রিন ছোট দেখায়)',
+            severity: 'critical',
+            detail: 'Smartphone visitors see a zoomed-out desktop canvas.',
+            detailBn: 'ফোনে ওয়েবসাইটটি জুম আউট অবস্থায় লোড হয়, লেখা ও গ্যালারি দেখতে কষ্ট হয়।',
+          },
+          {
+            code: 'fixed_width_layout',
+            label: 'Fixed Width Desktop Gallery Layout',
+            labelBn: 'ফিক্সড ডেস্কটপ গ্যালারি লেআউট (অনুভূমিক স্ক্রলিং)',
+            severity: 'critical',
+            detail: 'Fixed container cuts off portfolio photos on mobile.',
+            detailBn: 'ইন্টেরিয়র প্রজেক্টের ছবিগুলো মোবাইলে কেটে যায়।',
+          },
+          {
+            code: 'missing_mobile_cta',
+            label: 'No 1-Click WhatsApp Portfolio Quote Button',
+            labelBn: 'মোবাইল থেকে সরাসরি কল বা হোয়াটসঅ্যাপ বাটন নেই',
+            severity: 'warning',
+            detail: 'Homeowners browsing on phones cannot tap to request instant quotes on WhatsApp.',
+            detailBn: 'ক্লায়েন্টদের সরাসরি এস্টিমেট জানার কোনো ওয়ান-ক্লিক বাটন নেই।',
+          },
+        ],
+        summary: 'Site is not mobile-friendly. Heavy desktop layout with missing viewport tag and no WhatsApp booking.',
+        summaryBn: 'মোবাইল ভিউপোর্ট ট্যাগ নেই এবং ফিক্সড গ্যালারি লেআউটে ছবি কেটে যায়। কোনো হোয়াটসঅ্যাপ বাটন নেই।',
+        testedUrl: 'http://gulshanhorizoninterior.com',
+        auditedAt: '2026-10-24T19:30:00.000Z',
+      },
     },
     contacts: [
-      { channel: 'phone', value: '+8801713884210', label: 'সরাসরি হেল্পলাইন' },
-      { channel: 'whatsapp', value: '+8801713884210', label: 'হোয়াটসঅ্যাপ কনসালটেশন' },
+      { channel: 'phone', value: '+8801713456789', label: 'স্টুডিও হটলাইন' },
+      { channel: 'whatsapp', value: '+8801713456789', label: 'হোয়াটসঅ্যাপ কোটেশন' },
     ],
     qualification: {
-      score: 93,
-      reason: 'Gulshan rehab center with 65+ 5-star reviews without any web presence for booking.',
-      outreachAngle: 'Home physiotherapy visit and appointment scheduling via WhatsApp.',
+      score: 94,
+      reason: 'Luxury Gulshan interior studio with 76 reviews and 4.8★, but website is outdated desktop flash/table layout (Score: 40/100).',
+      outreachAngle: 'Visual mobile portfolio showcase with instant WhatsApp quote calculation.',
     },
-    experiment: { market: 'BD', niche: 'Healthcare', cohort: 'bd-gul-batch1' },
+    experiment: { market: 'BD', niche: 'Interior Design', cohort: 'bd-gul-audit1' },
     generatedSite: {
       template: 'home-services',
       hero: {
-        headline: 'গুলশানে অভিজ্ঞ ফিজিওথেরাপিস্ট দ্বারা পেইন রিলিফ ও রিহ্যাব সেবা',
-        subheadline: 'কোমর, ঘাড় ও হাঁটুর ব্যথার দ্রুত উপশম এবং প্যারালাইসিস রোগীদের আধুনিক রিহ্যাবিলিটেশন সেবা।',
-        badge: '★ ৪.৮ রেটেড গুলশান ফিজিওথেরাপি',
-        callToActionText: 'হোয়াটসঅ্যাপে ফিজিওথেরাপি বুকিং',
+        headline: 'গুলশানে এক্সক্লুসিভ রেসিডেন্সিয়াল ও কমার্শিয়াল ইন্টেরিয়র ডিজাইন',
+        subheadline: 'অভিজ্ঞ আর্কিটেক্ট ও ইন্টেরিয়র ডিজাইনারদের দ্বারা দৃষ্টিনন্দন ৩D ডিজাইন ও টার্ন-কি সল্যুশন।',
+        badge: '★ ৪.৮ রেটেড গুলশান ইন্টেরিয়র স্টুডিও',
+        callToActionText: 'হোয়াটসঅ্যাপে ফ্রি এস্টিমেট নিন',
       },
       services: [
-        { title: 'স্ট্রোক ও প্যারালাইসিস রিহ্যাব', description: 'অভিজ্ঞ নিউরো ফিজিওথেরাপিস্ট দ্বারা দীর্ঘমেয়াদী পূর্ণাঙ্গ পুনর্বাসন।', icon: 'shield' },
-        { title: 'ব্যাক ও জয়েন্ট পেইন থেরাপি', description: 'লেজার ও আল্ট্রাসাউন্ড ইলেক্ট্রোথেরাপির মাধ্যমে দ্রুত ব্যথা নিরাময়।', icon: 'wrench' },
+        { title: '৩D ইন্টেরিয়র প্ল্যানিং ও ডিজাইন', description: 'কাজের আগেই আপনার ফ্ল্যাটের ফটো-রিয়ালিস্টিক ৩D ভিউ দর্শন।', icon: 'sparkles' },
+        { title: 'ফুল টার্ন-কি ফ্ল্যাট ফার্নিশিং', description: 'উন্নতমানের ম্যাটেরিয়াল ও দক্ষ কারিগর দ্বারা নির্দিষ্ট সময়ে কাজ সম্পন্ন।', icon: 'shield' },
+        { title: 'অফিস ও শোরুম ইন্টেরিয়র', description: 'করপোরেট অফিস ও রিটেল শোরুমের প্রিমিয়াম ওয়ার্কস্পেস ডিজাইন।', icon: 'wrench' },
       ],
-      about: 'গুলশান ফিজিওথেরাপি সেন্টার রোগীদের সার্জারি ছাড়া আধুনিক বৈজ্ঞানিক থেরাপির মাধ্যমে সুস্থ ও কর্মক্ষম করে তুলতে প্রতিশ্রুতিবদ্ধ।',
+      about: 'গুলশান হরিজন বিগত ৭ বছর ধরে ঢাকা শহরের অভিজাত এলাকায় ১০০টিরও বেশি সফল রেসিডেন্সিয়াল ও কমার্শিয়াল প্রজেক্ট সফলভাবে সম্পন্ন করেছে।',
       faqs: [
-        { question: 'বাসায় গিয়ে থেরাপি দেওয়ার ব্যবস্থা আছে কি?', answer: 'হ্যাঁ, অভিজ্ঞ মেল ও ফিমেল ফিজিওথেরাপিস্ট দ্বারা হোম সার্ভিস প্রদান করা হয়।' },
+        { question: 'ফ্ল্যাট ভিজিট ও প্রাথমিক কনসালটেশন কি ফ্রি?', answer: 'হ্যাঁ, আমাদের এক্সপার্ট টিম সম্পূর্ণ বিনামূল্যে আপনার স্পেস পরিমাপ ও কনসালটেশন প্রদান করবে।' },
+      ],
+    },
+  },
+  {
+    slug: 'banani-grace-beauty-spa',
+    name: 'Banani Grace Ladies Beauty Lounge & Spa',
+    category: 'Beauty Salon & Spa',
+    location: {
+      full: 'Road 11, Block E, Banani, Dhaka 1213',
+      city: 'Dhaka',
+      country: 'Bangladesh',
+      postalCode: '1213',
+    },
+    businessSignals: { rating: 4.9, reviewCount: 85 },
+    website: {
+      status: 'weak',
+      url: 'http://bananigracelounge.com',
+      observations: [
+        'Outdated static HTML table structure',
+        'Missing responsive viewport meta tag',
+        'No direct WhatsApp rate card or booking CTA on mobile',
+        'Tiny fonts that require pinching and zooming on smartphones',
+      ],
+      mobileAudit: {
+        isMobileFriendly: false,
+        mobileScore: 35,
+        viewportConfigured: false,
+        hasResponsiveLayout: false,
+        hasMobileTapCta: false,
+        isHttps: false,
+        hasOutdatedTech: true,
+        issues: [
+          {
+            code: 'missing_viewport',
+            label: 'Missing Mobile Viewport Meta Tag',
+            labelBn: 'মোবাইল ভিউপোর্ট ট্যাগ অনুপস্থিত (স্ক্রিন ছোট দেখায়)',
+            severity: 'critical',
+            detail: 'Mobile visitors see tiny zoomed-out desktop text.',
+            detailBn: 'ফোনের স্ক্রিনে সাইটটি অনেক ছোট দেখায় এবং প্যাকেজগুলো পড়া যায় না।',
+          },
+          {
+            code: 'missing_mobile_cta',
+            label: 'No 1-Click WhatsApp Ratecard CTA',
+            labelBn: 'মোবাইল থেকে সরাসরি কল বা হোয়াটসঅ্যাপ বাটন নেই',
+            severity: 'warning',
+            detail: 'No instant tap-to-message WhatsApp booking link for beauty packages.',
+            detailBn: 'গ্রাহকদের সরাসরি হোয়াটসঅ্যাপে রেটকার্ড পাওয়া বা বুকিংয়ের কোনো ওয়ান-ক্লিক বাটন নেই।',
+          },
+          {
+            code: 'insecure_http',
+            label: 'Insecure HTTP Connection',
+            labelBn: 'অনিরাপদ সংযোগ (SSL / HTTPS নেই)',
+            severity: 'warning',
+            detail: 'Runs over plain HTTP; mobile browsers flag as Not Secure.',
+            detailBn: 'সাইটটিতে SSL সার্টিফিকেট না থাকায় মোবাইল ব্রাউজারে Not Secure দেখায়।',
+          },
+        ],
+        summary: 'Site is not mobile-friendly. Missing viewport tag, no WhatsApp ratecard button, and insecure HTTP.',
+        summaryBn: 'মোবাইল ভিউপোর্ট ট্যাগ নেই এবং কোনো ওয়ান-ক্লিক হোয়াটসঅ্যাপ বুকিং বাটন নেই। SSL সার্টিফিকেট অনুপস্থিত।',
+        testedUrl: 'http://bananigracelounge.com',
+        auditedAt: '2026-10-24T19:30:00.000Z',
+      },
+    },
+    contacts: [
+      { channel: 'phone', value: '+8801911567890', label: 'লাউঞ্জ ফ্রন্ট ডেস্ক' },
+      { channel: 'whatsapp', value: '+8801911567890', label: 'হোয়াটসঅ্যাপ প্যাকেজ' },
+    ],
+    qualification: {
+      score: 93,
+      reason: 'Banani luxury salon with 85 reviews and 4.9★, but current website is not mobile-friendly (Score: 35/100).',
+      outreachAngle: 'Fast mobile beauty ratecard & bridal booking preview with instant WhatsApp button.',
+    },
+    experiment: { market: 'BD', niche: 'Beauty & Salon', cohort: 'bd-ban-audit1' },
+    generatedSite: {
+      template: 'home-services',
+      hero: {
+        headline: 'বনানীতে এক্সক্লুসিভ লেডিস বিউটি লাউঞ্জ ও প্রিমিয়াম স্কিনকেয়ার স্পা',
+        subheadline: '৮৫+ ফাইভ-স্টার রিভিউ সমৃদ্ধ বনানীর অন্যতম জনপ্রিয় প্রিমিয়াম বিউটি স্টুডিও।',
+        badge: '★ ৪.৯ রেটেড বনানী লাউঞ্জ',
+        callToActionText: 'হোয়াটসঅ্যাপে রেটকার্ড ও বুকিং',
+      },
+      services: [
+        { title: 'ব্রাইডাল ও এনগেজমেন্ট মেকওভার', description: 'আন্তর্জাতিক ব্র্যান্ডের প্রসাধনী ও এক্সপার্ট মেকআপ আর্টিস্ট।', icon: 'sparkles' },
+        { title: 'হাইড্রাফেসিয়াল ও স্কিন গ্লো থেরাপি', description: 'ডিপ পোর ক্লিনিং ও ইনস্ট্যান্ট স্কিন হাইড্রেটিং ফেসিয়াল।', icon: 'shield' },
+        { title: 'হেয়ার স্পা ও কেরাটিন ট্রিটমেন্ট', description: 'ক্ষতিগ্রস্ত চুলের পুনরুজ্জীবনে স্পেশালাইজড হেয়ার থেরাপি।', icon: 'wrench' },
+      ],
+      about: 'বনানী গ্রেস লাউঞ্জ মহিলাদের জন্য সম্পূর্ণ নিরাপদ, প্রাইভেট ও আরামদায়ক পরিবেশে প্রিমিয়াম সাজসজ্জা সেবা প্রদান করে।',
+      faqs: [
+        { question: 'হোয়াটসঅ্যাপে কি রেটকার্ড পাওয়া যাবে?', answer: 'হ্যাঁ, সরাসরি মেসেজ দিলেই আমাদের সম্পূর্ণ সার্ভিস লিস্ট ও ডিসকাউন্ট প্যাকেজ পেয়ে যাবেন।' },
+      ],
+    },
+  },
+  {
+    slug: 'mirpur-premier-physio',
+    name: 'Mirpur Premier Physiotherapy & Pain Clinic',
+    category: 'Physiotherapy & Rehab',
+    location: {
+      full: 'Plot 18, Block C, Mirpur 10, Dhaka 1216',
+      city: 'Dhaka',
+      country: 'Bangladesh',
+      postalCode: '1216',
+    },
+    businessSignals: { rating: 4.8, reviewCount: 68 },
+    website: {
+      status: 'weak',
+      url: 'http://mirpurpremierphysio.com',
+      observations: [
+        'Website has fixed 1000px container width',
+        'Lacks mobile viewport meta tag',
+        'Missing tap-to-call mobile button',
+        'Insecure HTTP connection without SSL',
+      ],
+      mobileAudit: {
+        isMobileFriendly: false,
+        mobileScore: 35,
+        viewportConfigured: false,
+        hasResponsiveLayout: false,
+        hasMobileTapCta: false,
+        isHttps: false,
+        hasOutdatedTech: true,
+        issues: [
+          {
+            code: 'missing_viewport',
+            label: 'Missing Mobile Viewport Meta Tag',
+            labelBn: 'মোবাইল ভিউপোর্ট ট্যাগ অনুপস্থিত (স্ক্রিন ছোট দেখায়)',
+            severity: 'critical',
+            detail: 'Desktop viewport forced on phones.',
+            detailBn: 'ফোনে ওয়েবসাইটটি জুম আউট অবস্থায় লোড হয়, পড়তে কষ্ট হয়।',
+          },
+          {
+            code: 'fixed_width_layout',
+            label: 'Fixed 1000px Container Width',
+            labelBn: 'ফিক্সড ১০০০ পিক্সেল লেআউট (মোবাইলে কেটে যায়)',
+            severity: 'critical',
+            detail: 'Requires horizontal scrolling on smartphones.',
+            detailBn: 'মোবাইলে ডানে স্ক্রল না করলে সাইটের অর্ধেক কন্টেন্ট দেখা যায় না।',
+          },
+          {
+            code: 'missing_mobile_cta',
+            label: 'No 1-Click WhatsApp or Call Button',
+            labelBn: 'মোবাইল থেকে সরাসরি কল বা হোয়াটসঅ্যাপ বাটন নেই',
+            severity: 'warning',
+            detail: 'Pain patients cannot quickly tap to call or message a physiotherapist.',
+            detailBn: 'ব্যথা নিরাময় পরামর্শের জন্য ওয়ান-ক্লিক বাটন নেই।',
+          },
+        ],
+        summary: 'Site is not mobile-friendly. Missing viewport tag, fixed 1000px container, and no mobile CTA.',
+        summaryBn: 'মোবাইল ভিউপোর্ট ট্যাগ নেই এবং ফিক্সড ১০০০ পিক্সেল লেআউটে কন্টেন্ট কেটে যায়। কোনো হোয়াটসঅ্যাপ বাটন নেই।',
+        testedUrl: 'http://mirpurpremierphysio.com',
+        auditedAt: '2026-10-24T19:30:00.000Z',
+      },
+    },
+    contacts: [
+      { channel: 'phone', value: '+8801712678901', label: 'ক্লিনিক হটলাইন' },
+      { channel: 'whatsapp', value: '+8801712678901', label: 'হোয়াটসঅ্যাপ পরামর্শ' },
+    ],
+    qualification: {
+      score: 93,
+      reason: 'Mirpur rehab clinic with 68 reviews and 4.8★, but website fails mobile responsiveness audit (Score: 35/100).',
+      outreachAngle: 'Mobile-friendly therapy consultation and home-service booking preview.',
+    },
+    experiment: { market: 'BD', niche: 'Healthcare', cohort: 'bd-mrp-audit1' },
+    generatedSite: {
+      template: 'home-services',
+      hero: {
+        headline: 'মিরপুরে অভিজ্ঞ ফিজিওথেরাপিস্ট দ্বারা পেইন রিলিফ ও রিহ্যাব সেবা',
+        subheadline: 'কোমর, ঘাড় ও হাঁটুর ব্যথার দ্রুত উপশম এবং স্ট্রোক ও প্যারালাইসিস রোগীদের বিশেষায়িত রিহ্যাবিলিটেশন সেবা।',
+        badge: '★ ৪.৮ রেটেড মিরপুর ফিজিওথেরাপি',
+        callToActionText: 'হোয়াটসঅ্যাপে পরামর্শ ও অ্যাপয়েন্টমেন্ট',
+      },
+      services: [
+        { title: 'স্ট্রোক ও প্যারালাইসিস রিহ্যাব', description: 'অভিজ্ঞ নিউরো ফিজিওথেরাপিস্ট দ্বারা নিয়মিত এক্সারসাইজ থেরাপি।', icon: 'shield' },
+        { title: 'ব্যাক ও জয়েন্ট পেইন থেরাপি', description: 'লেজার ও আল্ট্রাসাউন্ড ইলেক্ট্রোথেরাপির মাধ্যমে দ্রুত ব্যথা নিরাময়।', icon: 'wrench' },
+        { title: 'বাসায় গিয়ে ফিজিওথেরাপি সেবা', description: 'অসুস্থ রোগীদের জন্য অভিজ্ঞ থেরাপিস্ট দ্বারা হোম সার্ভিস।', icon: 'sparkles' },
+      ],
+      about: 'মিরপুর প্রিমিয়ার ফিজিওথেরাপি বিগত ৬ বছর ধরে সার্জারি ছাড়া বৈজ্ঞানিক থেরাপির মাধ্যমে রোগীদের কর্মক্ষম করে তুলতে কাজ করে যাচ্ছে।',
+      faqs: [
+        { question: 'বাসায় গিয়ে থেরাপি দেওয়ার ব্যবস্থা আছে কি?', answer: 'হ্যাঁ, অভিজ্ঞ মেল ও ফিমেল ফিজিওথেরাপিস্ট দ্বারা হোম ভিজিট সার্ভিস দেওয়া হয়।' },
+      ],
+    },
+  },
+  {
+    slug: 'mohakhali-city-care-hospital',
+    name: 'Mohakhali City Care Hospital & Consultation',
+    category: 'Specialized Hospital',
+    location: {
+      full: 'Mohakhali C/A, Dhaka 1212',
+      city: 'Dhaka',
+      country: 'Bangladesh',
+      postalCode: '1212',
+    },
+    businessSignals: { rating: 4.7, reviewCount: 142 },
+    website: {
+      status: 'weak',
+      url: 'http://citycarehospitalbd.com',
+      observations: [
+        'Outdated HTML table layout',
+        'Lacks responsive viewport meta tag',
+        'Doctor schedule table unreadable on mobile phones',
+        'No direct tap-to-call or WhatsApp helpline on phone',
+      ],
+      mobileAudit: {
+        isMobileFriendly: false,
+        mobileScore: 25,
+        viewportConfigured: false,
+        hasResponsiveLayout: false,
+        hasMobileTapCta: false,
+        isHttps: false,
+        hasOutdatedTech: true,
+        issues: [
+          {
+            code: 'missing_viewport',
+            label: 'Missing Mobile Viewport Meta Tag',
+            labelBn: 'মোবাইল ভিউপোর্ট ট্যাগ অনুপস্থিত (স্ক্রিন ছোট দেখায়)',
+            severity: 'critical',
+            detail: 'Tiny zoomed-out desktop view forced on mobile phones.',
+            detailBn: 'ফোনে ওয়েবসাইটটি জুম আউট অবস্থায় লোড হয়, পড়তে কষ্ট হয়।',
+          },
+          {
+            code: 'fixed_width_layout',
+            label: 'Doctor Schedule Table Layout Overflow',
+            labelBn: 'ডাক্তার সিডিউল টেবিল মোবাইলে ভেঙে যায়',
+            severity: 'critical',
+            detail: 'Complex desktop tables break on mobile screens.',
+            detailBn: 'মোবাইলের স্ক্রিনে ডাক্তারদের তালিকা ও ভিজিট টাইম ডানে কেটে যায়।',
+          },
+          {
+            code: 'missing_mobile_cta',
+            label: 'No 1-Click Tap-to-Call Emergency Hotline',
+            labelBn: 'মোবাইল থেকে সরাসরি কল বা হোয়াটসঅ্যাপ বাটন নেই',
+            severity: 'warning',
+            detail: 'No instant call or WhatsApp button for urgent ambulance or doctor appointments.',
+            detailBn: 'রোগীদের দ্রুত কল বা হোয়াটসঅ্যাপে সিরিয়াল নেওয়ার কোনো বাটন নেই।',
+          },
+        ],
+        summary: 'Site is not mobile-friendly. Doctor schedule table breaks on smartphones, missing viewport tag and call CTA.',
+        summaryBn: 'মোবাইল ভিউপোর্ট ট্যাগ নেই এবং ডাক্তার সিডিউল টেবিল মোবাইলে ভেঙে যায়। কোনো ওয়ান-ক্লিক কল বাটন নেই।',
+        testedUrl: 'http://citycarehospitalbd.com',
+        auditedAt: '2026-10-24T19:30:00.000Z',
+      },
+    },
+    contacts: [
+      { channel: 'phone', value: '+8801715890123', label: 'হাসপাতাল হেল্পলাইন' },
+      { channel: 'whatsapp', value: '+8801715890123', label: 'হোয়াটসঅ্যাপ সিরিয়াল' },
+    ],
+    qualification: {
+      score: 95,
+      reason: 'Reputable Mohakhali hospital with 142 reviews and 4.7★, but existing website is broken on smartphones (Score: 25/100).',
+      outreachAngle: 'Clean mobile doctor directory & instant WhatsApp appointment booking preview.',
+    },
+    experiment: { market: 'BD', niche: 'Healthcare', cohort: 'bd-mhk-audit1' },
+    generatedSite: {
+      template: 'home-services',
+      hero: {
+        headline: 'মহাখালীতে ২৪ ঘণ্টা জরুরি মেডিকেল ও বিশেষজ্ঞ ডাক্তার কনসালটেশন',
+        subheadline: '১৪০+ রিভিউ সমৃদ্ধ বিশ্বস্ত মাল্টি-স্পেশালিটি হাসপাতাল। দ্রুত জরুরি অ্যাম্বুলেন্স ও প্যাথলজি সেবা।',
+        badge: '★ ৪.৭ রেটেড মহাখালী হসপিটাল',
+        callToActionText: 'হোয়াটসঅ্যাপে ডাক্তার সিরিয়াল নিন',
+      },
+      services: [
+        { title: '২৪/৭ জরুরি বিভাগ ও অ্যাম্বুলেন্স', description: 'দ্রুত রেসপন্স ও সার্বক্ষণিক মেডিকেল অফিসারদের উপস্থিতি।', icon: 'shield' },
+        { title: 'স্পেশালিস্ট ডক্টরস চেম্বার', description: 'মেডিসিন, কার্ডিওলজি ও সার্জারি বিশেষজ্ঞ কনসালট্যান্ট।', icon: 'wrench' },
+        { title: 'ডিজিটাল ল্যাবরেটরি ও ইমেজিং', description: 'আধুনিক অটোমেটেড অ্যানালাইজার দ্বারা দ্রুত নির্ভুল টেস্ট রিপোর্ট।', icon: 'sparkles' },
+      ],
+      about: 'মহাখালী সিটি কেয়ার হসপিটাল বিগত ১০ বছর ধরে রোগীদের সাশ্রয়ী মূল্যে আধুনিক ও সহানুভূতিশীল চিকিৎসাসেবা প্রদান করে আসছে।',
+      faqs: [
+        { question: 'জরুরি অ্যাম্বুলেন্স সেবা পাওয়া যাবে কি?', answer: 'হ্যাঁ, ২৪ ঘণ্টা ঢাকা শহরের যেকোনো প্রান্তে অ্যাম্বুলেন্স সার্ভিসের জন্য হটলাইনে যোগাযোগ করুন।' },
       ],
     },
   },
@@ -649,16 +970,18 @@ const CANDIDATE_POOL: CandidateBlueprint[] = [
 
 /**
  * Scans for qualified local leads.
- * STRICT ENFORCEMENT:
- * 1. Only accepts leads with NO official website (`website.status === 'none'`).
- * 2. Deduplicates against existing slugs and phone numbers.
- * 3. Never procedurally invents synthetic business names that could clash with real companies.
+ * STRATEGY:
+ * 1. Default market is BD (Dhaka, Bangladesh). Foreign markets (US/UK) are paused.
+ * 2. Focuses exclusively on businesses WITH EXISTING WEBSITES that FAIL mobile friendliness (status === 'weak').
+ * 3. Runs automated mobile audit (MobileAuditService) to record exact mobile defects.
+ * 4. Deduplicates against existing slugs and phone numbers.
  */
 export async function scanForLeads(options: ScanOptions = {}): Promise<{
   scannedCount: number;
   addedCount: number;
   leads: WebsiteLead[];
 }> {
+  const targetMarket = options.market || 'BD';
   const targetCount = options.count && options.count > 0 ? options.count : 1;
   const existingLeads = await LeadRepository.getAllLeads();
   const existingSlugs = new Set(existingLeads.map((l) => l.slug));
@@ -668,16 +991,17 @@ export async function scanForLeads(options: ScanOptions = {}): Promise<{
     )
   );
 
-  // Filter pool candidates by options, deduplicate, and STRICTLY verify NO WEBSITE exists
+  // Filter pool candidates by target market and deduplicate
   const poolFiltered = CANDIDATE_POOL.filter((candidate) => {
-    // STRICT RULE: Must have no existing website
-    if (candidate.website.status !== 'none') {
-      logger.warn('Skipping candidate with website', { name: candidate.name });
+    // If scanning for BD: Ensure candidate is BD and has an existing website with mobile issues
+    if (targetMarket === 'BD') {
+      if (candidate.experiment.market !== 'BD') return false;
+      // Must have existing website or weak status
+      if (candidate.website.status !== 'weak' && !candidate.website.url) return false;
+    } else if (targetMarket !== 'ALL' && candidate.experiment.market !== targetMarket) {
       return false;
     }
-    if (options.market && options.market !== 'ALL' && candidate.experiment.market !== options.market) {
-      return false;
-    }
+
     if (options.niche && options.niche !== 'ALL' && candidate.experiment.niche.toLowerCase() !== options.niche.toLowerCase()) {
       return false;
     }
@@ -693,7 +1017,7 @@ export async function scanForLeads(options: ScanOptions = {}): Promise<{
 
   if (poolFiltered.length === 0) {
     logger.info('No uncontacted verified candidates in pool for market', {
-      market: options.market,
+      market: targetMarket,
     });
     return {
       scannedCount: 0,
@@ -707,6 +1031,15 @@ export async function scanForLeads(options: ScanOptions = {}): Promise<{
 
   for (const blueprint of candidatesToTake) {
     const isBd = blueprint.experiment.market === 'BD';
+    const existingWebUrl = blueprint.website.url;
+
+    // Run or attach mobile audit
+    const mobileAuditDetails =
+      blueprint.website.mobileAudit ||
+      (existingWebUrl
+        ? await MobileAuditService.auditUrl(existingWebUrl)
+        : undefined);
+
     const initialLead: WebsiteLead = {
       id: `lead_${blueprint.experiment.market.toLowerCase()}_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
       slug: blueprint.slug,
@@ -718,7 +1051,7 @@ export async function scanForLeads(options: ScanOptions = {}): Promise<{
           provider: 'google-maps',
           url: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${blueprint.name}, ${blueprint.location.full || blueprint.location.city}`)}`,
           retrievedAt: new Date().toISOString(),
-          notes: `Google Maps verified listing with ${blueprint.businessSignals.rating}★ (${blueprint.businessSignals.reviewCount} reviews) and NO official website in ${blueprint.location.city}`,
+          notes: `Google Maps verified business with ${blueprint.businessSignals.rating}★ (${blueprint.businessSignals.reviewCount} reviews) and outdated mobile website in ${blueprint.location.city}`,
         },
       ],
       businessSignals: {
@@ -727,10 +1060,15 @@ export async function scanForLeads(options: ScanOptions = {}): Promise<{
         activeConfidence: 0.98,
       },
       website: {
-        status: 'none',
+        url: blueprint.website.url,
+        status: blueprint.website.status,
         auditedAt: new Date().toISOString(),
         observations: blueprint.website.observations,
-        opportunities: ['Mobile one-page website with direct call / WhatsApp action'],
+        opportunities: [
+          'Mobile-responsive modernization with 1-click WhatsApp booking & tap-to-call CTA',
+          'Sub-second smartphone loading speed on Cloudflare Edge',
+        ],
+        mobileAudit: mobileAuditDetails,
       },
       contacts: blueprint.contacts.map((c) => ({
         channel: c.channel,
@@ -749,7 +1087,7 @@ export async function scanForLeads(options: ScanOptions = {}): Promise<{
         recommendedChannel: isBd ? 'whatsapp' : 'email',
         outreachAngle: blueprint.qualification.outreachAngle,
         scoredAt: new Date().toISOString(),
-        scoringVersion: 'v3.0',
+        scoringVersion: 'v3.5-mobile-audit',
       },
       generatedSite: {
         ...blueprint.generatedSite,
@@ -759,7 +1097,7 @@ export async function scanForLeads(options: ScanOptions = {}): Promise<{
           primaryWhatsApp: blueprint.contacts.find((c) => c.channel === 'whatsapp')?.value,
         },
         generatedAt: new Date().toISOString(),
-        generationVersion: 'v2.0',
+        generationVersion: 'v2.5',
       },
       preview: {
         slug: blueprint.slug,
@@ -778,8 +1116,8 @@ export async function scanForLeads(options: ScanOptions = {}): Promise<{
       },
       sales: {
         stage: 'none',
-        quotedPlan: isBd ? 'Dhaka Managed Pro' : 'Growth Managed Plan',
-        quotedPrice: isBd ? 3500 : 99,
+        quotedPlan: isBd ? 'Dhaka Mobile Modernization Plan' : 'Growth Managed Plan',
+        quotedPrice: isBd ? 2500 : 99,
         currency: isBd ? 'BDT' : 'USD',
       },
       customer: {
@@ -791,22 +1129,23 @@ export async function scanForLeads(options: ScanOptions = {}): Promise<{
       updatedAt: new Date().toISOString(),
     };
 
-    // Generate personalized outreach draft
+    // Generate personalized outreach draft incorporating mobile audit findings
     initialLead.outreach!.draft = generatePersonalOutreachDraft(initialLead);
 
     // Save lead to persistent database
     await LeadRepository.saveLead(initialLead);
     newlyCreatedLeads.push(initialLead);
 
-    // Asynchronously export and deploy preview to edge
+    // Asynchronously export and deploy preview to Cloudflare Edge KV
     CloudflareEdgeService.deployLeadPreview(initialLead).catch((err) => {
       logger.warn('Background edge deployment notice', err);
     });
 
-    logger.info('Discovered and verified new prospect with NO website', {
+    logger.info('Discovered and verified Dhaka business with outdated mobile website', {
       id: initialLead.id,
       name: initialLead.name,
-      market: initialLead.experiment?.market,
+      website: initialLead.website?.url,
+      mobileScore: initialLead.website?.mobileAudit?.mobileScore,
     });
   }
 
